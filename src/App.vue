@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="{ 'menu-open': isMenuOpen }" data-app>
-    <Navbar v-if="showNavbar" @toggle-menu="toggleMenu" />
-    <Menu :isMenuOpen="isMenuOpen" />
+    <Navbar v-if="showNavbar" @toggle-menu="toggleMenu"  />
+    <Menu :isMenuOpen="isMenuOpen" @handle-logout="handleLogout" />
     <router-view />
     <Footer />
   </div>
@@ -32,6 +32,10 @@ export default {
   methods: {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
+    },
+    handleLogout() {
+      this.isMenuOpen = false;
+      this.$router.push('/login');
     },
   },
   };

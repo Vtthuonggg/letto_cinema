@@ -27,12 +27,9 @@
         exact-active-class="exact-active-link">
         <span class="fa-solid fa-coins"></span>Thông tin giá vé</router-link></li>
             <hr class="dash-lined" style="margin-top: 20px; margin-bottom: 20px;">
-        <li><router-link
-        to="/login"
-        active-class="active-link"
-        exact-active-class="exact-active-link"
-        style="color: red;">
-        <span class="fa-solid fa-arrow-right-from-bracket"></span>Đăng xuất</router-link></li>
+        <li class="nav-logout">
+        <button class="icon-button" style="color: red; justify-content: left; white-space: nowrap;" @click="$emit('handle-logout')"><span class="fa-solid fa-sign-out-alt"></span>Đăng xuất</button>
+      </li>
     </ul>
   </div>
 </template>

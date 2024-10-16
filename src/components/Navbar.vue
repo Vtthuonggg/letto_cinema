@@ -2,25 +2,27 @@
     <nav class="navbar">
       <ul class="navbar-list">
         <li class="nav-image">
-        <img src="../assets/logo.png" alt="Letto logo" class="logo" />
+        <router-link to="/home-page"><img src="../assets/logo.png" alt="Letto logo" class="logo" /></router-link> 
       </li>
-      
-      <li class="nav-film">
+
+      <li class="nav-block">
+        <div class="nav-film">
         <router-link
           to="/film"
           active-class="active-link"
           exact-active-class="exact-active-link">
         <span class="fa-solid fa-film"></span>Phim
         </router-link>
-      </li>
+      </div>
       
-      <li class="nav-cine">
+      <div class="nav-cine">
         <router-link
           to="/cinema"
           active-class="active-link"
           exact-active-class="exact-active-link">
-        <span class="fa-solid fa-video"></span>Rạp
+          <span class="fa-solid fa-video"></span>Rạp
         </router-link>
+      </div>
       </li>
       
       <li class="nav-toggle">
@@ -50,6 +52,7 @@
   padding: 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .logo {
   margin-left: 10px;
@@ -58,7 +61,6 @@
   padding-right: 20px;
 }
 .nav-toggle {
-  margin-left: auto;
   margin-right: 20px;
   }
   .icon-button {
@@ -95,13 +97,36 @@
   height: 40px; 
 }
 .nav-film {
-  margin-left: 30px;
+  margin-right: 30px;
 }
 .navbar ul li a{
   text-decoration: none;
   font-size: 20px;
+  color: black;
 }
 .navbar ul li span{
-  margin-right: 10px;
+  margin-right: 5px;
+}
+.nav-block .active-link {
+  font-weight: bold;
+  text-decoration: underline !important;
+}
+
+.nav-block .exact-active-link {
+  font-weight: bold;
+  text-decoration: underline !important;
+}
+.nav-block .active-link span,
+.nav-block .exact-active-link span {
+  font-weight: bold;
+  text-decoration: underline !important;
+}
+.nav-block{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar ul li a:hover{
+  color: #DC0004;
 }
 </style>
