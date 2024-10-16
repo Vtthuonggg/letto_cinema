@@ -4,6 +4,7 @@
         <li class="nav-image">
         <img src="../assets/logo.png" alt="Letto logo" class="logo" />
       </li>
+      
       <li class="nav-film">
         <router-link
           to="/film"
@@ -12,9 +13,16 @@
         <span class="fa-solid fa-film"></span>Phim
         </router-link>
       </li>
-      <li>
-
+      
+      <li class="nav-cine">
+        <router-link
+          to="/cinema"
+          active-class="active-link"
+          exact-active-class="exact-active-link">
+        <span class="fa-solid fa-video"></span>Rạp
+        </router-link>
       </li>
+      
       <li class="nav-toggle">
         <button class="icon-button" @click="$emit('toggle-menu')"><i class="fa-solid fa-bars"></i></button>
       </li>
