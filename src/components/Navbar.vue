@@ -4,6 +4,17 @@
         <li class="nav-image">
         <img src="../assets/logo.png" alt="Letto logo" class="logo" />
       </li>
+      <li class="nav-film">
+        <router-link
+          to="/film"
+          active-class="active-link"
+          exact-active-class="exact-active-link">
+        <span class="fa-solid fa-film"></span>Phim
+        </router-link>
+      </li>
+      <li>
+
+      </li>
       <li class="nav-toggle">
         <button class="icon-button" @click="$emit('toggle-menu')"><i class="fa-solid fa-bars"></i></button>
       </li>
@@ -74,5 +85,15 @@
  .icon-button:active::after {
   width: 40px; 
   height: 40px; 
+}
+.nav-film {
+  margin-left: 30px;
+}
+.navbar ul li a{
+  text-decoration: none;
+  font-size: 20px;
+}
+.navbar ul li span{
+  margin-right: 10px;
 }
 </style>

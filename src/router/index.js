@@ -6,6 +6,8 @@ import RegisterPage from "@/components/Register.vue";
 import FavoriteFilm from "@/components/Favorite_film.vue";
 import InforTicket from "@/components/Infor_ticket.vue";
 import TicketPage from "@/components/Ticket.vue";
+import FilmPage from "@/components/Film.vue";
+import CinemaPage from "@/components/Cinema.vue";
 Vue.use(Router);
 
 const routes =
@@ -45,6 +47,16 @@ const routes =
             path: "/ticket",
             name: "Ticket",
             component: TicketPage
+        },
+        {
+            path: "/film",
+            name: "Film",
+            component: FilmPage
+        },
+        {
+            path: "/cinema",
+            name: "Cinema",
+            component: CinemaPage
         },
 
 
