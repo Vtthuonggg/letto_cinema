@@ -1,7 +1,6 @@
 import axios from "axios";
+import { API_BASE_URL, API_KEY } from "../../../BASE_URL.js";
 
-const API_BASE_URL = process.env.API_BASE_URL;
-const API_KEY = process.env.API_KEY;
 const movieApi = axios.create({
   baseURL: API_BASE_URL,
   params: {
@@ -14,7 +13,7 @@ export const getNowShowingMovies = async () => {
     const response = await movieApi.get("/now_playing");
     return response.data.results;
   } catch (error) {
-    console.error("Error fetching now showing movies:", error);
+    console.error("Có lỗi xảy ra");
     throw error;
   }
 };
