@@ -20,26 +20,31 @@ const routes = [
   {
     path: "/login",
     name: "Login",
+    meta: { title: "Đăng nhập" },
     component: LoginPage,
   },
   {
     path: "/register",
     name: "Register",
+    meta: { title: "Đăng ký" },
     component: RegisterPage,
   },
   {
     path: "/favorite-film",
     name: "FavoriteFilm",
+    meta: { title: "Phim yêu thích" },
     component: FavoriteFilm,
   },
   {
     path: "/infor-tiket",
     name: "InforTicket",
+    meta: { title: "Chi tiết vé" },
     component: InforTicket,
   },
   {
     path: "/ticket",
     name: "Ticket",
+    meta: { title: "Vé" },
     component: TicketPage,
   },
   {
@@ -50,11 +55,13 @@ const routes = [
       {
         path: "now-showing",
         name: "NowShowing",
+        meta: { title: "Phim đang chiếu" },
         component: NowShowing,
       },
       {
         path: "upcoming",
         name: "UpcomingFilm",
+        meta: { title: "Phim sắp chiếu" },
         component: UpcomingFilm,
       },
     ],
@@ -62,6 +69,7 @@ const routes = [
   {
     path: "/cinema",
     name: "Cinema",
+    meta: { title: "Rạp" },
     component: CinemaPage,
   },
 ];
@@ -70,5 +78,9 @@ const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || "Letto Cinema ";
+  next();
 });
 export default router;
