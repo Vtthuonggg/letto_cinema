@@ -2,7 +2,9 @@
   <div id="app" :class="{ 'menu-open': isMenuOpen }" data-app>
     <Navbar v-if="showNavbar" @toggle-menu="toggleMenu"  />
     <Menu :isMenuOpen="isMenuOpen" @handle-logout="handleLogout" />
-    <router-view />
+    <div class="main-content">
+      <router-view />
+    </div>
     <Footer />
   </div>
 </template>
@@ -15,8 +17,9 @@ export default {
   name: "App" , 
   components: {
     Navbar,
-    Footer,
     Menu,
+    Footer,
+
 
   },
   data() {
@@ -48,7 +51,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* transition: margin-right 0.3s; */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main-content {
+  flex: 1;
 }
 .menu-open {
   margin-right: 20%; /* Đẩy phần tử chính sang trái khi menu mở */
