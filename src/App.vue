@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="{ 'menu-open': isMenuOpen }" data-app>
-    <Navbar v-if="showNavbar" @toggle-menu="toggleMenu"  />
+    <Navbar v-if="showNavbar" @toggle-menu="toggleMenu" />
     <Menu :isMenuOpen="isMenuOpen" @handle-logout="handleLogout" />
     <div class="main-content">
       <router-view />
@@ -10,17 +10,15 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue';
-import Footer from './components/Footer.vue';
-import Menu from './components/Menu.vue';
-export default { 
-  name: "App" , 
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
+import Menu from "./components/Menu.vue";
+export default {
+  name: "App",
   components: {
     Navbar,
     Menu,
     Footer,
-
-
   },
   data() {
     return {
@@ -29,7 +27,7 @@ export default {
   },
   computed: {
     showNavbar() {
-      return this.$route.path !== '/login' && this.$route.path !== '/register';
+      return this.$route.path !== "/login" && this.$route.path !== "/register";
     },
   },
   methods: {
@@ -38,10 +36,10 @@ export default {
     },
     handleLogout() {
       this.isMenuOpen = false;
-      this.$router.push('/login');
+      this.$router.push("/login");
     },
   },
-  };
+};
 </script>
 
 <style>
