@@ -9,6 +9,7 @@ import FilmPage from "@/components/Film.vue";
 import CinemaPage from "@/components/Cinema.vue";
 import NowShowing from "@/components/NowShowingFilm.vue";
 import UpcomingFilm from "@/components/UpcomingFilm.vue";
+import DetailFilm from "@/components/DetailFilm.vue";
 Vue.use(Router);
 
 const routes = [
@@ -71,6 +72,12 @@ const routes = [
     name: "Cinema",
     meta: { title: "Rạp" },
     component: CinemaPage,
+  },
+  {
+    path: "/film/:id",
+    name: "DetailFilm",
+    meta: { title: "Chi tiết phim" },
+    component: DetailFilm,
   },
 ];
 

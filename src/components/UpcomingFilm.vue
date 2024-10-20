@@ -5,11 +5,16 @@
     </div>
     <div v-else class="film-grid">
       <div v-for="film in films" :key="film.id" class="film-card">
-        <img
-          :src="'https://image.tmdb.org/t/p/w500' + film.poster_path"
-          :alt="film.title"
-          class="film-poster"
-        />
+        <div class="film-poster-container">
+          <img
+            :src="'https://image.tmdb.org/t/p/w500' + film.poster_path"
+            :alt="film.title"
+            class="film-poster"
+          />
+          <div class="overlay">
+            <button class="overlay-button">Chi tiết</button>
+          </div>
+        </div>
         <h3 class="film-title">{{ film.title }}</h3>
         <p class="film-vote-average">Rating: {{ film.vote_average }}</p>
       </div>
@@ -52,12 +57,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Chiều cao toàn màn hình */
+  height: 100vh;
 }
 
 .loading-spinner {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #dc0004; /* Blue */
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #dc0004;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -114,5 +119,46 @@ export default {
   font-size: 0.8em;
   margin: 10px;
   color: #555;
+}
+.film-poster-container {
+  position: relative;
+}
+
+.film-poster {
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.film-poster-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay-button {
+  background-color: #dc0004;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.overlay-button:hover {
+  background-color: #a30003;
 }
 </style>
