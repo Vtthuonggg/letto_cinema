@@ -14,20 +14,32 @@
           class="trailer-video"
         ></iframe>
       </div>
+      <div v-else>
+        <img class="trailer-video"
+        :src="'https://image.tmdb.org/t/p/original' + film.backdrop_path"
+        :alt="film.title"
+      />
+      </div>
       <div class="title-container">
         <img
-        :src="'https://image.tmdb.org/t/p/w500' + film.poster_path"
+        :src="'https://image.tmdb.org/t/p/original' + film.poster_path"
         :alt="film.title"
       />
       <div class="infor">
       <h2>{{ film.title }}</h2>
-      <p style="padding-top: 10px;"><b>Ngày phát hành: </b>{{ film.release_date }}</p>
-      <p style="padding-top: 10px;"><b>Đánh giá: </b>{{ film.vote_average }}</p>
-      <p style="padding-top: 10px;"><b>Thời lượng: </b>{{ film.runtime }} phút</p>
-      <p style="padding-top: 10px;"><b>Thể loại: </b>{{ film.genres && film.genres.map((genre) => genre.name).join(", ") }}</p>
+      <p style="margin-top: 10px;"><b>Ngày phát hành: </b>{{formatDate(film.release_date) }}</p>
+      <div class="rate-movie">
+      <p style="margin-top: 10px;"><b>Đánh giá: </b></p>
+            <span style="margin-top: 10px;margin-left: 5px" v-for="star in fullStars" :key="star" class="fa fa-star checked"></span>
+            <span style="margin-top: 10px;margin-left: 5px" v-for="star in emptyStars" :key="star" class="fa fa-star"></span>
+        </div>
+      <p style="margin-top: 10px;"><b>Thời lượng: </b>{{ film.runtime }} phút</p>
+      <p style="margin-top: 10px;"><b>Thể loại: </b>{{ film.genres && film.genres.map((genre) => genre.name).join(", ") }}</p>
+        <button class="book-ticket" @click="bookTicket"><span style="margin-right: 5px;" class="fa-solid fa-ticket"></span>Đặt vé</button>
       </div>
       </div>
-      <div class="overview"><h2>Tóm tắt</h2><br><p>{{ film.overview }}</p></div>
+      <div v-if ="film.overview" class="overview"><h2>Tóm tắt</h2><br><p>{{ film.overview }}</p></div>
+      <div v-else class="overview"><h2>Tóm tắt</h2><br><p>Tạm thời chưa cập nhật</p></div>
     </div>
   </div>
 </template>
@@ -44,10 +56,19 @@ export default {
      
     };
   },
+  computed: {
+    fullStars() {
+      return Math.floor((this.film.vote_average / 10) * 5);
+    },
+    emptyStars() {
+      return 5 - this.fullStars;
+    },
+  },
   async created() {
     const id = this.$route.params.id;
     await this.fetchDetailFilm(id);
     await this.fetchTrailerFilm(id);
+    window.scrollTo(0, 0);
   },
   methods: {
     async fetchDetailFilm(id) {
@@ -65,12 +86,23 @@ export default {
       this.loading = true;
       try {
         const res = await getTrailerMovie(id);
-        this.videos = res.results[0];
+        if(res.results.length > 0){
+          this.videos = res.results[0];
+        }
+        else{
+          this.videos = {};
+        }
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
       } finally {
         this.loading = false;
       }
+    },
+    formatDate(dateString) {
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      return new Date(dateString).toLocaleDateString('vi-VN', options);
+    },
+    bookTicket() {
     },
   },
 };
@@ -96,8 +128,9 @@ export default {
   display: flex;
   justify-content: left;
   align-items: left;
-  margin-left: 10% ;
+  margin: 20px auto;
   height: auto;
+  width: 80vw;
 }
 .title-container img {
   width: 20%;
@@ -114,8 +147,32 @@ export default {
   margin-right: 20px;
 }
 .trailer-video{
-  width: 100%;
-  height: 500px;
+  width: 80vw;
+  height: 35vw;
+}
+.rate-movie {
+  display: flex;
+  align-items: center;
+}
+.checked {
+  color: orange;
+}
+.book-ticket {
+  background-color: #dc0004;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px 2px;
+  cursor: pointer;
+  min-width: 150px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.book-ticket:hover {
+  background-color:#ff3c3f;
 }
 
 @keyframes spin {

@@ -4,7 +4,7 @@
             <h1>Thông tin giá vé</h1>
             <img src="../assets/giave.jpg" alt="Ticket Price" class="ticket-price-image" />
             <p>Chính thức cập nhật giá vé xem phim dành riêng các cán bộ, công chức, viên chức Nhà nước khi đến xem phim
-                tại LOTTE Cinema WestLake, cụ thể</p>
+                tại LETTO Cinema Đống Đa, cụ thể</p>
             <p style="font-weight: bold;">* 85.000 VNĐ/vé từ T2-T6</p>
             <p style="font-weight: bold;">* 105.000đ VNĐ/vé cho T7 & CN</p>
             <p>*Ghi chú:</p>
@@ -32,12 +32,12 @@ p {
 
 .background {
     background-color: #F9F6EC;
-    padding: 20px;
+    padding: 20px ;
     text-align: center;
 }
 
 .ticket-price-image {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
     display: block;
     margin: 20px auto;
@@ -45,7 +45,7 @@ p {
 }
 
 .container {
-    width: 70%;
+    width: 50%;
     padding: 10px;
     background-color: white;
 }

@@ -41,6 +41,9 @@ export default {
     this.fetchNowShowing();
   },
   methods: {
+    toDetailFilm(id) {
+      this.$router.push(`/film/${id}`);
+    },
     async fetchNowShowing() {
       this.loading = true;
 

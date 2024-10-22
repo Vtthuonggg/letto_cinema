@@ -111,6 +111,7 @@ export default {
 
 .film-card:hover {
   transform: translateY(-10px);
+  color: #dc0004;
 }
 
 .film-poster-container {
@@ -170,9 +171,8 @@ export default {
 }
 
 .film-date {
-  font-size: 1.2em;
+  font-size: 1em;
   margin: 10px auto;
-  color: #555;
 }
 
 .film-date i {
