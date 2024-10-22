@@ -2,7 +2,7 @@
   <nav class="navbar">
     <ul class="navbar-list">
       <li class="nav-image">
-        <router-link to="/home-page"
+        <router-link to="/film"
           ><img src="../assets/logo.png" alt="Letto logo" class="logo"
         /></router-link>
       </li>
