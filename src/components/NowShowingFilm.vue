@@ -6,11 +6,7 @@
     <div v-else class="film-grid">
       <div v-for="film in films" :key="film.id" class="film-card">
         <div class="film-poster-container">
-          <img
-            :src="'https://image.tmdb.org/t/p/w500' + film.poster_path"
-            :alt="film.title"
-            class="film-poster"
-          />
+          <img :src="'https://image.tmdb.org/t/p/w500' + film.poster_path" :alt="film.title" class="film-poster" />
           <div class="overlay">
             <button class="overlay-button" @click="toDetailFilm(film.id)">
               Chi tiết
@@ -19,7 +15,13 @@
           </div>
         </div>
         <h3 class="film-title">{{ film.title }}</h3>
-        <p class="film-vote-average">Rating: {{ film.vote_average }}</p>
+        <div class="film-details">
+
+          <p class="film-date">
+            <i class="fas fa-calendar-alt"></i>{{ formatDate(film.release_date) }}
+
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -53,6 +55,10 @@ export default {
         this.loading = false;
       }
     },
+    formatDate(dateString) {
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      return new Date(dateString).toLocaleDateString('vi-VN', options);
+    },
   },
 };
 </script>
@@ -78,6 +84,7 @@ export default {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -113,6 +120,7 @@ export default {
 .film-poster {
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
 .overlay {
@@ -156,11 +164,24 @@ export default {
 .film-title {
   font-size: 1.2em;
   margin: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.film-vote-average {
-  font-size: 0.9em;
-  margin: 10px;
+.film-date {
+  font-size: 1.2em;
+  margin: 10px auto;
   color: #555;
+}
+
+.film-date i {
+  margin-right: 10px;
+}
+
+.film-details {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
 }
 </style>
