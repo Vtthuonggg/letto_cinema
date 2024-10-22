@@ -38,3 +38,12 @@ export const getDetailMovie = async (id) => {
     throw error;
   }
 };
+export const getTrailerMovie = async (id) => {
+  try {
+    const response = await movieApi.get(`/movie/${id}/videos`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching upcoming movies:", error);
+    throw error;
+  }
+};
