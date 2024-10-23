@@ -1,5 +1,6 @@
 import Router from "vue-router";
 import Vue from "vue";
+import Cookies from "js-cookie";
 import LoginPage from "@/components/Login.vue";
 import RegisterPage from "@/components/Register.vue";
 import FavoriteFilm from "@/components/Favorite_film.vue";
@@ -10,6 +11,9 @@ import CinemaPage from "@/components/Cinema.vue";
 import NowShowing from "@/components/NowShowingFilm.vue";
 import UpcomingFilm from "@/components/UpcomingFilm.vue";
 import DetailFilm from "@/components/DetailFilm.vue";
+import AdminPage from "@/components/Admin.vue";
+
+
 Vue.use(Router);
 
 const routes = [
@@ -29,6 +33,12 @@ const routes = [
     name: "Register",
     meta: { title: "Đăng ký" },
     component: RegisterPage,
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    meta: { title: "Admin" },
+    component: AdminPage,
   },
   {
     path: "/favorite-film",
@@ -89,5 +99,14 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || "Letto Cinema ";
   next();
+});
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = Cookies.get("accountId");
+  if (!isLoggedIn && to.path !== "/login" && to.path !== "/register") {
+    Vue.prototype.$toast.error("Vui lòng đăng nhập");
+    next("/login");
+  } else {
+    next();
+  }
 });
 export default router;

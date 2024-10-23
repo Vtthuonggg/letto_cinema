@@ -13,6 +13,7 @@
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 import Menu from "./components/Menu.vue";
+import Cookies from "js-cookie";
 export default {
   name: "App",
   components: {
@@ -37,6 +38,7 @@ export default {
     handleLogout() {
       this.isMenuOpen = false;
       this.$router.push("/login");
+      Cookies.remove("accountId");
     },
   },
 };
