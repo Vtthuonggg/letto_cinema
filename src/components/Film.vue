@@ -76,7 +76,7 @@ export default {
   background-color: white;
   color: #dc0004;
   text-decoration: none;
-  border: 2px solid #f5dc99;
+  border: 2px solid #a87b01;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
 }
