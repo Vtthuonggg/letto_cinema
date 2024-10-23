@@ -11,7 +11,7 @@ import CinemaPage from "@/components/Cinema.vue";
 import NowShowing from "@/components/NowShowingFilm.vue";
 import UpcomingFilm from "@/components/UpcomingFilm.vue";
 import DetailFilm from "@/components/DetailFilm.vue";
-import AdminPage from "@/components/Admin.vue";
+import AdminPage from "@/components/Admin/Admin.vue";
 
 
 Vue.use(Router);
