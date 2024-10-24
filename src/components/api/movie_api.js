@@ -1,17 +1,9 @@
 import axios from "axios";
-import { API_BASE_URL, API_KEY } from "../../../BASE_URL.js";
-
-const movieApi = axios.create({
-  baseURL: API_BASE_URL,
-  params: {
-    api_key: API_KEY,
-    language: "vi",
-  },
-});
+import { API_BASE_URL } from "../../../BASE_URL.js";
 
 export const getNowShowingMovies = async () => {
   try {
-    const response = await movieApi.get("/movie/now_playing");
+    const response = await axios.get(`${API_BASE_URL}/movie/now_playing`);
     return response.data.results;
   } catch (error) {
     console.error("Có lỗi xảy ra");
@@ -21,7 +13,11 @@ export const getNowShowingMovies = async () => {
 
 export const getUpcomingMovies = async () => {
   try {
-    const response = await movieApi.get("/movie/upcoming");
+    const response = await axios.get(`${API_BASE_URL}/movie/upcoming`, {
+      headers: {
+        "ngrok-skip-browser-warning": "true",
+      },
+    });
     return response.data.results;
   } catch (error) {
     console.error("Error fetching upcoming movies:", error);
@@ -30,7 +26,11 @@ export const getUpcomingMovies = async () => {
 };
 export const getDetailMovie = async (id) => {
   try {
-    const response = await movieApi.get(`/movie/${id}`);
+    const response = await axios.get(`/movie/${id}`, {
+      headers: {
+        "ngrok-skip-browser-warning": "true",
+      },
+    });
     console.log("response", response);
     return response.data;
   } catch (error) {
@@ -40,7 +40,11 @@ export const getDetailMovie = async (id) => {
 };
 export const getTrailerMovie = async (id) => {
   try {
-    const response = await movieApi.get(`/movie/${id}/videos`);
+    const response = await axios.get(`${API_BASE_URL}/movie/${id}/videos`, {
+      headers: {
+        "ngrok-skip-browser-warning": "true",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching upcoming movies:", error);

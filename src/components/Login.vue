@@ -39,8 +39,8 @@
 </template>
 
 <script>
-  import Cookies from "js-cookie";
-//   import { login } from "../api/login_api.js";
+import Cookies from "js-cookie";
+import { login } from "@/components/api/account_api.js";
 export default {
   name: "LoginPage",
   data() {
@@ -54,22 +54,21 @@ export default {
 
   methods: {
     async handleLogin() {
-      // this.loading = true;
-      // try {
-      //   var res = await login(this.username, this.password);
-        Cookies.set("accountId", 1, {
+      this.loading = true;
+      try {
+        var res = await login(this.username, this.password);
+        Cookies.set("accountId", res.idAccount, {
           expires: 7,
           secure: true,
           sameSite: "Lax",
         });
-      //   this.$toast.success("Đăng nhập thành công");
-      //   this.$router.push("/dashboard");
-      // } catch (error) {
-      //   this.$toast.error("Tài khoản mật khẩu không chính xác");
-      // } finally {
-      //   this.loading = false;
-      // }
-      this.$router.push("/film");
+        this.$toast.success("Đăng nhập thành công");
+        this.$router.push("/film");
+      } catch (error) {
+        this.$toast.error("Tài khoản mật khẩu không chính xác");
+      } finally {
+        this.loading = false;
+      }
     },
 
     togglePasswordVisibility() {
