@@ -39,7 +39,7 @@
 </template>
 
 <script>
-//   import Cookies from "js-cookie";
+  import Cookies from "js-cookie";
 //   import { login } from "../api/login_api.js";
 export default {
   name: "LoginPage",
@@ -57,11 +57,11 @@ export default {
       // this.loading = true;
       // try {
       //   var res = await login(this.username, this.password);
-      //   Cookies.set("accountId", res.accountId, {
-      //     expires: 7,
-      //     secure: true,
-      //     sameSite: "Lax",
-      //   });
+        Cookies.set("accountId", 1, {
+          expires: 7,
+          secure: true,
+          sameSite: "Lax",
+        });
       //   this.$toast.success("Đăng nhập thành công");
       //   this.$router.push("/dashboard");
       // } catch (error) {

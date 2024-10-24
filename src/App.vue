@@ -5,7 +5,7 @@
     <div class="main-content">
       <router-view />
     </div>
-    <Footer />
+    <Footer v-if="showFooter" />
   </div>
 </template>
 
@@ -13,6 +13,7 @@
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 import Menu from "./components/Menu.vue";
+import Cookies from "js-cookie";
 export default {
   name: "App",
   components: {
@@ -27,7 +28,10 @@ export default {
   },
   computed: {
     showNavbar() {
-      return this.$route.path !== "/login" && this.$route.path !== "/register";
+      return this.$route.path !== "/login" && this.$route.path !== "/register" && this.$route.path !== "/admin";
+    },
+    showFooter() {
+      return this.$route.path !== "/admin";
     },
   },
   methods: {
@@ -37,6 +41,7 @@ export default {
     handleLogout() {
       this.isMenuOpen = false;
       this.$router.push("/login");
+      Cookies.remove("accountId");
     },
   },
 };
