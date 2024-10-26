@@ -6,7 +6,7 @@
     <div v-else class="film-grid">
       <div v-for="film in films" :key="film.id" class="film-card">
         <div class="film-poster-container">
-          <img :src="'https://image.tmdb.org/t/p/w500' + film.poster_path" :alt="film.title" class="film-poster" />
+          <img :src="'https://image.tmdb.org/t/p/w500' + film.poster_path" :alt="film.title" class="film-poster"/>
           <div class="overlay">
             <button class="overlay-button" @click="toDetailFilm(film.id)">
               Chi tiết
@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import { getUpcomingMovies } from "@/components/api/movie_api.js";
+import {getUpcomingMovies} from "@/components/api/movie_api.js";
+
 export default {
   name: "UpcomingFilm",
   data() {
@@ -57,7 +58,7 @@ export default {
       }
     },
     formatDate(dateString) {
-      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      const options = {day: '2-digit', month: '2-digit', year: 'numeric'};
       return new Date(dateString).toLocaleDateString('vi-VN', options);
     },
   },

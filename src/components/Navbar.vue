@@ -3,16 +3,16 @@
     <ul class="navbar-list">
       <li class="nav-image">
         <router-link to="/film"
-          ><img src="../assets/logo.png" alt="Letto logo" class="logo"
+        ><img src="../assets/logo.png" alt="Letto logo" class="logo"
         /></router-link>
       </li>
 
       <li class="nav-block">
         <div class="nav-film">
           <router-link
-            to="/film"
-            active-class="active-link"
-            exact-active-class="exact-active-link"
+              to="/film"
+              active-class="active-link"
+              exact-active-class="exact-active-link"
           >
             <span class="fa-solid fa-film"></span>Phim
           </router-link>
@@ -20,9 +20,9 @@
 
         <div class="nav-cine">
           <router-link
-            to="/cinema"
-            active-class="active-link"
-            exact-active-class="exact-active-link"
+              to="/cinema"
+              active-class="active-link"
+              exact-active-class="exact-active-link"
           >
             <span class="fa-solid fa-video"></span>Rạp
           </router-link>
@@ -52,6 +52,7 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
 }
+
 .navbar-list {
   list-style-type: none;
   margin: 0;
@@ -60,15 +61,18 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
+
 .logo {
   margin-left: 10px;
   width: 150px;
   height: auto;
   padding-right: 20px;
 }
+
 .nav-toggle {
   margin-right: 20px;
 }
+
 .icon-button {
   background: none;
   border: none;
@@ -83,9 +87,11 @@ export default {
   justify-content: center;
   position: relative;
 }
+
 .icon-button i {
   color: #2c3e50;
 }
+
 .icon-button::after {
   content: "";
   position: absolute;
@@ -98,21 +104,26 @@ export default {
   transform: translate(-50%, -50%);
   transition: width 0.3s, height 0.3s;
 }
+
 .icon-button:active::after {
   width: 40px;
   height: 40px;
 }
+
 .nav-film {
   margin-right: 30px;
 }
+
 .navbar ul li a {
   text-decoration: none;
   font-size: 20px;
   color: black;
 }
+
 .navbar ul li span {
   margin-right: 5px;
 }
+
 .nav-block .active-link {
   color: #dc0004;
   font-weight: bold;
@@ -123,15 +134,18 @@ export default {
 .nav-block .exact-active-link {
   font-weight: bold;
 }
+
 .nav-block .active-link span,
 .nav-block .exact-active-link span {
   font-weight: bold;
 }
+
 .nav-block {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .navbar ul li a:hover {
   color: #dc0004;
 }

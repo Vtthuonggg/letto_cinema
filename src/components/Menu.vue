@@ -1,23 +1,36 @@
 <template>
   <div class="menu" v-if="isMenuOpen">
-    <img src="../assets/logomenu.png" alt="Logo" class="menu-logo" />
+    <img src="../assets/logomenu.png" alt="Logo" class="menu-logo"/>
     <v-divider style="margin-bottom: 20px;"></v-divider>
     <ul>
-      <li><router-link to="/film" active-class="active-link" exact-active-class="exact-active-link">
-          <span class="fa-solid fa-house"></span>Trang chủ</router-link></li>
+      <li>
+        <router-link to="/film" active-class="active-link" exact-active-class="exact-active-link">
+          <span class="fa-solid fa-house"></span>Trang chủ
+        </router-link>
+      </li>
       <hr class="dash-lined" style="margin-top: 20px; margin-bottom: 20px; color: grey;">
-      <li><router-link to="/ticket" active-class="active-link" exact-active-class="exact-active-link">
-          <span class="fa-solid fa-ticket"></span>Vé đã mua</router-link></li>
+      <li>
+        <router-link to="/ticket" active-class="active-link" exact-active-class="exact-active-link">
+          <span class="fa-solid fa-ticket"></span>Vé đã mua
+        </router-link>
+      </li>
       <hr class="dash-lined" style="margin-top: 20px; margin-bottom: 20px;">
-      <li><router-link to="/infor-tiket" active-class="active-link" exact-active-class="exact-active-link">
-          <span class="fa-solid fa-coins"></span>Thông tin giá vé</router-link></li>
+      <li>
+        <router-link to="/infor-tiket" active-class="active-link" exact-active-class="exact-active-link">
+          <span class="fa-solid fa-coins"></span>Thông tin giá vé
+        </router-link>
+      </li>
       <hr class="dash-lined" style="margin-top: 20px; margin-bottom: 20px;">
-      <li><router-link to="/admin" active-class="active-link" exact-active-class="exact-active-link">
-        <span class="fa-solid fa-wrench"></span>Admin</router-link></li>
+      <li>
+        <router-link to="/admin" active-class="active-link" exact-active-class="exact-active-link">
+          <span class="fa-solid fa-wrench"></span>Admin
+        </router-link>
+      </li>
       <hr class="dash-lined" style="margin-top: 20px; margin-bottom: 20px;">
       <li class="nav-logout">
         <button class="icon-button" style="color: red; justify-content: left; white-space: nowrap;"
-          @click="$emit('handle-logout')"><span class="fa-solid fa-sign-out-alt"></span>Đăng xuất</button>
+                @click="$emit('handle-logout')"><span class="fa-solid fa-sign-out-alt"></span>Đăng xuất
+        </button>
       </li>
     </ul>
   </div>

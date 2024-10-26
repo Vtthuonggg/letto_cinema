@@ -3,7 +3,7 @@
     <v-divider></v-divider>
     <div class="footer-content">
       <div class="footer-left">
-        <img alt="Footer logo" src="../assets/logofooter.png" class="footer-logo" />
+        <img alt="Footer logo" src="../assets/logofooter.png" class="footer-logo"/>
         <ul>
           <li>
             <i class="fa fa-angle-right"></i>

@@ -3,7 +3,6 @@ import Vue from "vue";
 import Cookies from "js-cookie";
 import LoginPage from "@/components/Login.vue";
 import RegisterPage from "@/components/Register.vue";
-import FavoriteFilm from "@/components/Favorite_film.vue";
 import InforTicket from "@/components/Infor_ticket.vue";
 import TicketPage from "@/components/Ticket.vue";
 import FilmPage from "@/components/Film.vue";
@@ -39,12 +38,6 @@ const routes = [
     name: "Admin",
     meta: { title: "Admin" },
     component: AdminPage,
-  },
-  {
-    path: "/favorite-film",
-    name: "FavoriteFilm",
-    meta: { title: "Phim yêu thích" },
-    component: FavoriteFilm,
   },
   {
     path: "/infor-tiket",

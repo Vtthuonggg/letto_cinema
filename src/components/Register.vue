@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img alt="Vue logo" src="../assets/logo.png" class="logo" />
+    <img alt="Vue logo" src="../assets/logo.png" class="logo"/>
     <h3 class="name-group">Đặt vé xem phim</h3>
 
     <div class="register-container">
@@ -8,46 +8,46 @@
       <form @submit.prevent="checkConfirmPassword">
         <div class="form-group">
           <label for="email">Tài khoản:</label>
-          <input type="email" id="email" v-model="email" required />
+          <input type="email" id="email" v-model="email" required/>
         </div>
         <div class="form-group">
           <label for="username">Tên khách sạn:</label>
-          <input type="text" id="username" v-model="name" required />
+          <input type="text" id="username" v-model="name" required/>
         </div>
         <div class="form-group">
           <label for="phone">Hotline:</label>
-          <input type="text" id="phone" v-model="phone" required />
+          <input type="text" id="phone" v-model="phone" required/>
         </div>
         <div class="form-group">
           <label for="address">Địa chỉ:</label>
-          <input type="text" id="address" v-model="address" required />
+          <input type="text" id="address" v-model="address" required/>
         </div>
         <div class="form-group">
           <label for="password">Mật khẩu:</label>
           <v-text-field
-            outlined
-            :type="showPassword ? 'text' : 'password'"
-            id="password"
-            v-model="password"
-            required
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="togglePasswordVisibility"
-            dense
-            class="password-field"
+              outlined
+              :type="showPassword ? 'text' : 'password'"
+              id="password"
+              v-model="password"
+              required
+              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="togglePasswordVisibility"
+              dense
+              class="password-field"
           ></v-text-field>
         </div>
         <div class="form-group">
           <label for="confirm-password">Nhập lại mật khẩu:</label>
           <v-text-field
-            outlined
-            :type="showPassword ? 'text' : 'password'"
-            id="confirm-password"
-            v-model="confirmPassword"
-            required
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="togglePasswordVisibility"
-            dense
-            class="password-field"
+              outlined
+              :type="showPassword ? 'text' : 'password'"
+              id="confirm-password"
+              v-model="confirmPassword"
+              required
+              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="togglePasswordVisibility"
+              dense
+              class="password-field"
           ></v-text-field>
         </div>
         <button type="submit" class="gradient-button">Đăng ký</button>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { register } from "@/components/api/account_api.js";
+import {register} from "@/components/api/account_api.js";
 
 export default {
   name: "RegisterPage",
@@ -127,6 +127,7 @@ export default {
 .name-group {
   margin-top: 10px;
 }
+
 .register-container {
   max-width: 400px;
   margin: 0 auto;
@@ -137,11 +138,13 @@ export default {
   margin-top: 2%;
   border-radius: 12px;
 }
+
 input:focus {
   border-color: #0056b3;
   outline: none;
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
 }
+
 .login-link {
   max-width: 400px;
   margin: 0 auto;
@@ -149,14 +152,17 @@ input:focus {
   margin-top: 10px;
   margin-bottom: 50px;
 }
+
 .login-link a {
   color: rgb(0, 123, 255);
 }
+
 .form-group {
   text-align: left;
   margin-bottom: 15px;
   width: 100%;
 }
+
 .gradient-button {
   width: 100%;
   background: linear-gradient(45deg, #ed2775, #fb6452);
@@ -176,6 +182,7 @@ input:focus {
 .gradient-button:hover {
   background: linear-gradient(45deg, #ff0044, #ff7070);
 }
+
 input {
   border-radius: 12px;
 
@@ -184,10 +191,12 @@ input {
   box-sizing: border-box;
   border: 1px solid #ccc;
 }
+
 label {
   display: block;
   margin-bottom: 5px;
 }
+
 .password-group {
   position: relative;
 }
