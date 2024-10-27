@@ -8,7 +8,6 @@
       <div v-if="videos.key">
         <iframe
             :src="'https://www.youtube.com/embed/' + videos.key + '?autoplay=1'"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
             class="trailer-video"
@@ -135,7 +134,7 @@ export default {
 .title-container {
   display: flex;
   justify-content: left;
-  align-items: left;
+  align-items: flex-start;
   margin: 20px auto;
   height: auto;
   width: 80vw;
