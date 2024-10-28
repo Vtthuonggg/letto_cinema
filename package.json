@@ -13,6 +13,7 @@
     "core-js": "^3.8.3",
     "js-cookie": "^3.0.5",
     "js-cookies": "^1.0.4",
+    "jsbarcode": "^3.11.6",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "swiper": "^11.1.14",

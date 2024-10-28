@@ -1,6 +1,6 @@
 import Router from "vue-router";
 import Vue from "vue";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import LoginPage from "@/components/Login.vue";
 import RegisterPage from "@/components/Register.vue";
 import InforTicket from "@/components/Infor_ticket.vue";
@@ -93,13 +93,13 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title || "Letto Cinema ";
   next();
 });
-router.beforeEach((to, from, next) => {
-  const isLoggedIn = Cookies.get("accountId");
-  if (!isLoggedIn && to.path !== "/login" && to.path !== "/register") {
-    Vue.prototype.$toast.error("Vui lòng đăng nhập");
-    next("/login");
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   const isLoggedIn = Cookies.get("accountId");
+//   if (!isLoggedIn && to.path !== "/login" && to.path !== "/register") {
+//     Vue.prototype.$toast.error("Vui lòng đăng nhập");
+//     next("/login");
+//   } else {
+//     next();
+//   }
+// });
 export default router;

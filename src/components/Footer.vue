@@ -115,7 +115,7 @@ export default {
   position: relative;
   bottom: 0;
   width: 100%;
-  z-index: 500;
+  z-index: 300;
 }
 
 .footer-right {

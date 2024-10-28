@@ -18,6 +18,11 @@
       </slide>
     </carousel>
     <div class="button-group">
+      <button @click="showBill">
+        Hóa đơn
+      </button>
+    </div>
+    <div class="button-group">
       <router-link
           to="/film/now-showing"
           class="button"
@@ -34,17 +39,21 @@
       >
     </div>
     <router-view></router-view>
+    <div v-if="isBill">
+      <bill @closeBill="closeBill"/>
+    </div>
   </div>
 </template>
 
 <script>
 import {Carousel, Slide} from "vue-carousel";
-
+import Bill from "./BillPage.vue";
 export default {
   name: "FilmPage",
   components: {
     Carousel,
     Slide,
+    Bill,
   },
   mounted() {
     if (this.$route.path === "/film") {
@@ -52,7 +61,15 @@ export default {
     }
   },
   data() {
-    return {};
+    return {isBill: false};
+  },
+  methods: {
+    showBill() {
+      this.isBill =true;
+    },
+    closeBill() {
+      this.isBill = false;
+    },
   },
 };
 </script>
