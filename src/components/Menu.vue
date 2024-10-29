@@ -1,35 +1,49 @@
 <template>
   <div class="menu" v-if="isMenuOpen">
-    <img src="../assets/logomenu.png" alt="Logo" class="menu-logo"/>
+    <img src="../assets/logomenu.png" alt="Logo" class="menu-logo" />
     <v-divider style="margin-bottom: 20px;"></v-divider>
     <ul>
+
+
+
+
+
+
       <li>
-        <router-link to="/film" active-class="active-link" exact-active-class="exact-active-link">
-          <span class="fa-solid fa-house"></span>Trang chủ
-        </router-link>
+        <button class="icon-button" :class="{ 'active-link': isActive('/film') }"
+          style=" justify-content: left; white-space: nowrap;" @click="handleEvent('film')"><span
+            class="fa-solid fa-house"></span>Trang chủ
+        </button>
       </li>
+
+
       <hr class="dash-lined" style="margin-top: 20px; margin-bottom: 20px; color: grey;">
+
+
+
+
+
       <li>
-        <router-link to="/ticket" active-class="active-link" exact-active-class="exact-active-link">
-          <span class="fa-solid fa-ticket"></span>Vé đã mua
-        </router-link>
+        <button class="icon-button" :class="{ 'active-link': isActive('/ticket') }"
+          style=" justify-content: left; white-space: nowrap;" @click="handleEvent('ticket')"><span
+            class="fa-solid fa-ticket"></span>Vé đã mua
+        </button>
       </li>
+
       <hr class="dash-lined" style="margin-top: 20px; margin-bottom: 20px;">
+
       <li>
-        <router-link to="/infor-tiket" active-class="active-link" exact-active-class="exact-active-link">
-          <span class="fa-solid fa-coins"></span>Thông tin giá vé
-        </router-link>
+        <button class="icon-button" :class="{ 'active-link': isActive('/infor-ticket') }"
+          style=" justify-content: left; white-space: nowrap;" @click="handleEvent('infor-ticket')"><span
+            class="fa-solid fa-coins"></span>Thông tin giá vé
+        </button>
       </li>
-      <hr class="dash-lined" style="margin-top: 20px; margin-bottom: 20px;">
-      <li>
-        <router-link to="/admin" active-class="active-link" exact-active-class="exact-active-link">
-          <span class="fa-solid fa-wrench"></span>Admin
-        </router-link>
-      </li>
+
+
       <hr class="dash-lined" style="margin-top: 20px; margin-bottom: 20px;">
       <li class="nav-logout">
         <button class="icon-button" style="color: red; justify-content: left; white-space: nowrap;"
-                @click="$emit('handle-logout')"><span class="fa-solid fa-sign-out-alt"></span>Đăng xuất
+          @click="handleEvent('logout')"><span class="fa-solid fa-sign-out-alt"></span>Đăng xuất
         </button>
       </li>
     </ul>
@@ -37,6 +51,7 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
   name: "MenuPage",
   props: {
@@ -45,6 +60,38 @@ export default {
       required: true,
     },
   },
+  methods: {
+    handleEvent(event) {
+      this.$emit('close-menu');
+      switch (event) {
+        case "film":
+          if (this.$route.path !== "/film") {
+            this.$router.push("/film");
+          }
+          break;
+        case "ticket":
+          if (this.$route.path !== "/ticket") {
+            this.$router.push("/ticket");
+          }
+          break;
+        case "infor-ticket":
+          if (this.$route.path !== "/infor-ticket") {
+            this.$router.push("/infor-ticket");
+          }
+          break;
+        case "logout":
+          this.$router.push("/login");
+          Cookies.remove("accountId");
+          break;
+        default:
+          break;
+      }
+
+    },
+    isActive(route) {
+      return this.$route.path === route;
+    }
+  }
 };
 </script>
 
@@ -76,6 +123,19 @@ export default {
 
 }
 
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.icon-button:hover {
+  color: #1db4f0;
+
+}
+
+
 .menu-logo {
   width: 30%;
   height: auto;
@@ -86,23 +146,15 @@ export default {
   color: rgb(0, 157, 255) !important;
 }
 
-.exact-active-link {
-  color: #1db4f0 !important;
-}
+
 
 .active-link i,
 .exact-active-link i {
   color: #1db4f0 !important;
 }
 
-.menu ul li a {
-  text-decoration: none;
-  color: black;
-}
 
-.menu ul li a:hover {
-  color: #1db4f0;
-}
+
 
 .menu ul li {
   text-decoration: none;

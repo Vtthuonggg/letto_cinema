@@ -40,7 +40,7 @@ const routes = [
     component: AdminPage,
   },
   {
-    path: "/infor-tiket",
+    path: "/infor-ticket",
     name: "InforTicket",
     meta: { title: "Chi tiết vé" },
     component: InforTicket,

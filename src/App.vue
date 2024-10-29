@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="{ 'menu-open': isMenuOpen }" data-app>
     <Navbar v-if="showNavbar" @toggle-menu="toggleMenu" />
-    <Menu :isMenuOpen="isMenuOpen" @handle-logout="handleLogout" />
+    <Menu :isMenuOpen="isMenuOpen" @close-menu="toggleMenu" />
     <div class="main-content">
       <router-view />
     </div>
@@ -13,7 +13,6 @@
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 import Menu from "./components/Menu.vue";
-import Cookies from "js-cookie";
 export default {
   name: "App",
   components: {
@@ -38,11 +37,7 @@ export default {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
-    handleLogout() {
-      this.isMenuOpen = false;
-      this.$router.push("/login");
-      Cookies.remove("accountId");
-    },
+
   },
 };
 </script>
@@ -58,10 +53,13 @@ export default {
   flex-direction: column;
   min-height: 100vh;
 }
+
 .main-content {
   flex: 1;
 }
+
 .menu-open {
-  margin-right: 20%; /* Đẩy phần tử chính sang trái khi menu mở */
+  margin-right: 20%;
+  /* Đẩy phần tử chính sang trái khi menu mở */
 }
 </style>
