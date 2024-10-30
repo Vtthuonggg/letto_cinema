@@ -4,7 +4,6 @@
       <div class="loading-spinner"></div>
     </div>
     <div v-else>
-      <!-- Nội dung chi tiết phim -->
       <div v-if="videos.key">
         <iframe
             :src="'https://www.youtube.com/embed/' + videos.key + '?autoplay=1'"
