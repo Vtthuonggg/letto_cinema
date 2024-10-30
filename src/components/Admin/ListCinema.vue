@@ -21,7 +21,7 @@
               isShowEditCinema ? `Sửa rạp: ${newCinema.name}` : "Tạo rạp mới"
             }}
           </h3>
-          <v-form ref="form" v-model="formValid">
+          <v-form ref="form">
             <v-text-field
               v-model="newCinema.name"
               label="Tên rạp"
@@ -93,58 +93,7 @@ export default {
       isShowEditCinema: false,
       isShowDelete: false,
       selectedId: null,
-      rapList: [
-        {
-          id: 1,
-          name: "Rạp 1",
-          address: "123 Điện Biên Phủ, Quận 1, TP.HCM",
-        },
-        {
-          id: 2,
-          name: "Rạp 2",
-          address: "123 Điện Biên Phủ, Quận 2, TP.HCM",
-        },
-        {
-          id: 3,
-          name: "Rạp 3",
-          address: "123 Điện Biên Phủ, Quận 2, TP.HCM",
-        },
-        {
-          id: 4,
-          name: "Rạp 4",
-          address: "123 Điện Biên Phủ, Quận 2, TP.HCM",
-        },
-        {
-          id: 5,
-          name: "Rạp 5",
-          address: "123 Điện Biên Phủ, Quận 2, TP.HCM",
-        },
-        {
-          id: 6,
-          name: "Rạp 6",
-          address: "123 Điện Biên Phủ, Quận 2, TP.HCM",
-        },
-        {
-          id: 7,
-          name: "Rạp 7",
-          address: "123 Điện Biên Phủ, Quận 2, TP.HCM",
-        },
-        {
-          id: 8,
-          name: "Rạp 8",
-          address: "123 Điện Biên Phủ, Quận 2, TP.HCM",
-        },
-        {
-          id: 9,
-          name: "Rạp 9",
-          address: "123 Điện Biên Phủ, Quận 2, TP.HCM",
-        },
-        {
-          id: 10,
-          name: "Rạp 10",
-          address: "123 Điện Biên Phủ, Quận 3, TP.HCM",
-        },
-      ],
+      rapList: [],
       newCinema: {
         name: "",
         address: "",
@@ -172,6 +121,7 @@ export default {
       };
       try {
         if (type == 1) {
+          console.log(data);
           await createBranch(data);
           this.$toast.success("Thêm rạp thành công");
         } else {
@@ -242,6 +192,7 @@ export default {
         await deleteBranch(id);
         this.$toast.success("Xóa rạp thành công");
         this.fetchBranch();
+        this.showDelete();
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
       }

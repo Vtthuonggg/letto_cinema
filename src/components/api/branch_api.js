@@ -38,9 +38,7 @@ export const deleteBranch = async (id) => {
 };
 export const createBranch = async (data) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/branch/add`, {
-            data: data
-        });
+        const response = await axios.post(`${API_BASE_URL}/branch/add`, data);
         return response.data.results;
     } catch (error) {
         console.error("Có lỗi xảy ra");
