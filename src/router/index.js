@@ -12,6 +12,7 @@ import UpcomingFilm from "@/components/UpcomingFilm.vue";
 import DetailFilm from "@/components/DetailFilm.vue";
 import AdminPage from "@/components/Admin/Admin.vue";
 import ListCinemaPage from "@/components/Admin/ListCinema.vue";
+import SelectBranch from "@/components/SelectBranch.vue";
 import ListServicePage from "@/components/Admin/ListService.vue";
 // import { component } from "vue/types/umd";
 
