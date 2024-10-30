@@ -27,17 +27,26 @@ export default {
   },
   computed: {
     showNavbar() {
-      return this.$route.path !== "/login" && this.$route.path !== "/register" && this.$route.path !== "/admin";
+      return (
+        this.$route.path !== "/login" &&
+        this.$route.path !== "/register" &&
+        this.$route.path !== "/admin" &&
+        this.$route.path !== "/list-cinema" &&
+        this.$route.path !== "/list-service"
+      );
     },
     showFooter() {
-      return this.$route.path !== "/admin";
+      return (
+        this.$route.path !== "/admin" &&
+        this.$route.path !== "/list-cinema" &&
+        this.$route.path !== "/list-service"
+      );
     },
   },
   methods: {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
-
   },
 };
 </script>
