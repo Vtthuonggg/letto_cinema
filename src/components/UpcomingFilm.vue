@@ -6,7 +6,7 @@
     <div v-else class="film-grid">
       <div v-for="film in films" :key="film.id" class="film-card">
         <div class="film-poster-container">
-          <img :src="'https://image.tmdb.org/t/p/w500' + film.poster_path" :alt="film.title" class="film-poster"/>
+          <img :src="film.posterPath? 'https://image.tmdb.org/t/p/original' + film.posterPath:require('../assets/logomenu.png') " :alt="film.title" class="film-poster"/>
           <div class="overlay">
             <button class="overlay-button" @click="toDetailFilm(film.id)">
               Chi tiết
@@ -18,8 +18,7 @@
         <div class="film-details">
 
           <p class="film-date">
-            <i class="fas fa-calendar-alt"></i>{{ formatDate(film.release_date) }}
-
+            <i class="fas fa-calendar-alt"></i>film.releaseDate?{{ formatDate(film.releaseDate) }}: Chưa cập nhật
           </p>
         </div>
       </div>
@@ -52,7 +51,7 @@ export default {
         var res = await getUpcomingMovies();
         this.films = res;
       } catch (err) {
-        this.$toast.eror(err);
+        this.$toast.error('Có lỗi xảy ra');
       } finally {
         this.loading = false;
       }

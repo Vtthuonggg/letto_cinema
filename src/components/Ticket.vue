@@ -44,21 +44,19 @@
 
 <script>
 import PopupTicket from "@/components/PopupTicket.vue";
+import {historyTicket} from "@/components/api/ticket_api.js";
 export default {
 
   name: "TicketPage",
   components: {
     PopupTicket,
   },
-  methods: {
-    handleCardClick(ticket) {
-      this.selectedTicket = ticket;
-    },
-    closeTicket() {
-      this.selectedTicket = null;
-    }
+  created() {
+    this.fetchTickets();
   },
+
   data() {
+
     return {
       selectedTicket: null,
       listTickets: [
@@ -110,6 +108,23 @@ export default {
 
       ]
     };
+  },
+  methods: {
+    handleCardClick(ticket) {
+      this.selectedTicket = ticket;
+    },
+    closeTicket() {
+      this.selectedTicket = null;
+    },
+   async fetchTickets(){
+      try{
+       const res= await historyTicket();
+        this.listTickets=res;
+    }catch (e) {
+        this.$toast.error("Có lỗi xảy ra");
+      }
+    }
+
   },
 }
 </script>

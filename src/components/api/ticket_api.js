@@ -1,4 +1,6 @@
 import axios from "axios";
+import Cookies from "js-cookie";
+
 import {API_BASE_URL} from "../../../BASE_URL.js";
 
 export const addTicket = async (data) => {
@@ -46,7 +48,8 @@ export const deleteTicket = async (id) => {
         throw error;
     }
 };
-export const historyTicket = async (userId) => {
+export const historyTicket = async () => {
+    const userId = Cookies.get("accountId");
     try {
         const response = await axios.get(`${API_BASE_URL}/ticket/history`, {
             headers: {

@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../../BASE_URL.js";
 export const getNowShowingMovies = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/movie/now_playing`);
-    return response.data.results;
+    return response.data;
   } catch (error) {
     console.error("Có lỗi xảy ra");
     throw error;
@@ -18,7 +18,7 @@ export const getUpcomingMovies = async () => {
         "ngrok-skip-browser-warning": "true",
       },
     });
-    return response.data.results;
+    return response.data;
   } catch (error) {
     console.error("Error fetching upcoming movies:", error);
     throw error;

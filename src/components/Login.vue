@@ -58,6 +58,7 @@ export default {
       this.loading = true;
       try {
         var res = await login(this.username, this.password);
+        console.log(res);
         Cookies.set("accountId", res.idAccount, {
           expires: 7,
           secure: true,

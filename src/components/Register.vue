@@ -7,15 +7,15 @@
       <h2>Đăng ký</h2>
       <form @submit.prevent="checkConfirmPassword">
         <div class="form-group">
-          <label for="email">Tài khoản:</label>
+          <label for="address">Họ và tên:</label>
+          <input type="text" id="name" v-model="name" required/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
           <input type="email" id="email" v-model="email" required/>
         </div>
         <div class="form-group">
-          <label for="username">Tên khách sạn:</label>
-          <input type="text" id="username" v-model="name" required/>
-        </div>
-        <div class="form-group">
-          <label for="phone">Hotline:</label>
+          <label for="phone">Số điện thoại:</label>
           <input type="text" id="phone" v-model="phone" required/>
         </div>
         <div class="form-group">
@@ -130,12 +130,10 @@ export default {
 
 .register-container {
   max-width: 400px;
-  margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 2%;
+  margin: 2% auto 0;
   border-radius: 12px;
 }
 
@@ -147,10 +145,8 @@ input:focus {
 
 .login-link {
   max-width: 400px;
-  margin: 0 auto;
   text-align: right;
-  margin-top: 10px;
-  margin-bottom: 50px;
+  margin: 10px auto 50px;
 }
 
 .login-link a {
