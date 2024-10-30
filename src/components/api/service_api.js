@@ -44,7 +44,7 @@ export const listService = async () => {
     }
 };export const deleteService = async (id) => {
     try {
-        const response = await axios.put(`${API_BASE_URL}/service/${id}`);
+        const response = await axios.delete(`${API_BASE_URL}/service/${id}`);
         return response.data.results;
     } catch (error) {
         console.error("Có lỗi xảy ra");

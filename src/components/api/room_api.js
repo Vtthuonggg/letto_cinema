@@ -42,7 +42,7 @@ export const createRoom = async (data) => {
 };
 export const deleteRoom = async (id) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/room/${id}`
+        const response = await axios.delete(`${API_BASE_URL}/room/${id}`
         );
         return response.data.results;
     } catch (error) {

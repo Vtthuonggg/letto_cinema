@@ -50,7 +50,7 @@ export const updateScreen = async (id, data) => {
 };
 export const deleteScreen = async (id) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/screen/${id}`);
+        const response = await axios.delete(`${API_BASE_URL}/screen/${id}`);
         return response.data.results;
     } catch (error) {
         console.error("Có lỗi xảy ra");
