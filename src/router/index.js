@@ -12,7 +12,10 @@ import UpcomingFilm from "@/components/UpcomingFilm.vue";
 import DetailFilm from "@/components/DetailFilm.vue";
 import AdminPage from "@/components/Admin/Admin.vue";
 import ListCinemaPage from "@/components/Admin/ListCinema.vue";
+import SelectBranch from "@/components/SelectBranch.vue";
 import ListServicePage from "@/components/Admin/ListService.vue";
+import SelectScreen from "@/components/SelectScreen.vue";
+
 // import { component } from "vue/types/umd";
 
 
@@ -65,6 +68,11 @@ const routes = [
     name: "Ticket",
     meta: { title: "Vé" },
     component: TicketPage,
+  },{
+    path: "/select-branch",
+    name: "Branch",
+    meta: { title: "Chọn rạp" },
+    component: SelectBranch,
   },
   {
     path: "/film",
@@ -96,6 +104,11 @@ const routes = [
     name: "DetailFilm",
     meta: { title: "Chi tiết phim" },
     component: DetailFilm,
+  },  {
+    path: "/film/:movieId/:branchId",
+    name: "SelectScreen",
+    meta: { title: "Chọn suất chiếu" },
+    component: SelectScreen,
   },
 ];
 
