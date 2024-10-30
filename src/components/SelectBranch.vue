@@ -1,55 +1,63 @@
-
-
 <template>
   <div>
-    <div v-for="(branch, index) in branches" :key="branch.id" class="branch-container">
+    <div
+      v-for="(branch, index) in branches"
+      :key="branch.id"
+      class="branch-container"
+    >
       <img :src="getImage(index)" alt="Branch Image" class="branch-image" />
-      <div class="branch-details">
+      <div class="branch-details" @click="handleClick(branch.id)">
         <h3>{{ branch.name }}</h3>
         <p>{{ branch.address }}</p>
       </div>
     </div>
   </div>
 </template>
-<script >
-import {getListBranch} from "@/components/api/branch_api";
+<script>
+import { getListBranch } from "@/components/api/branch_api";
 
 export default {
   computed: {
-    id() {
-      return this.$route.params.id;
+    film() {
+      return this.$route.params;
     },
   },
   data() {
     return {
       branches: [],
       images: [
-        require('@/assets/branch1.jpg'),
-        require('@/assets/branch2.jpeg'),
-        require('@/assets/branch3.jpg'),
-        require('@/assets/branch.jpg')
-      ]
-    }
+        require("@/assets/branch1.jpg"),
+        require("@/assets/branch2.jpeg"),
+        require("@/assets/branch3.jpg"),
+        require("@/assets/branch.jpg"),
+      ],
+    };
   },
   created() {
-    this.getBranches()
+    this.getBranches();
   },
-  methods:{
-    async getBranches(){
+  methods: {
+    handleClick(id){
+      this.$router.push({
+        name: 'SelectScreen',
+        params: { movieId: this.film.id, branchId: id }
+      });
+    },
+    async getBranches() {
+      console.log(this.film);
       try {
         const response = await getListBranch();
-
         this.branches = response;
       } catch (error) {
         console.log(error);
-        this.$toast.error('Có lỗi xảy ra')
+        this.$toast.error("Có lỗi xảy ra");
       }
     },
     getImage(index) {
       return this.images[index % this.images.length];
-    }
-  }
-}
+    },
+  },
+};
 </script>
 <style scoped>
 .branch-container {

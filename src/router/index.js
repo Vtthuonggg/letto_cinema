@@ -14,6 +14,8 @@ import AdminPage from "@/components/Admin/Admin.vue";
 import ListCinemaPage from "@/components/Admin/ListCinema.vue";
 import SelectBranch from "@/components/SelectBranch.vue";
 import ListServicePage from "@/components/Admin/ListService.vue";
+import SelectScreen from "@/components/SelectScreen.vue";
+
 // import { component } from "vue/types/umd";
 
 
@@ -102,6 +104,11 @@ const routes = [
     name: "DetailFilm",
     meta: { title: "Chi tiết phim" },
     component: DetailFilm,
+  },  {
+    path: "/film/:movieId/:branchId",
+    name: "SelectScreen",
+    meta: { title: "Chọn suất chiếu" },
+    component: SelectScreen,
   },
 ];
 

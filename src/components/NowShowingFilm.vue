@@ -6,18 +6,25 @@
     <div v-else class="film-grid">
       <div v-for="film in films" :key="film.id" class="film-card">
         <div class="film-poster-container">
-          <img :src="'https://image.tmdb.org/t/p/original' + film.posterPath" :alt="film.title" class="film-poster"/>
+          <img
+            :src="'https://image.tmdb.org/t/p/original' + film.posterPath"
+            :alt="film.title"
+            class="film-poster"
+          />
           <div class="overlay">
             <button class="overlay-button" @click="toDetailFilm(film.id)">
               Chi tiết
             </button>
-            <button class="overlay-button" @click="bookTicket(film)">Đặt vé</button>
+            <button class="overlay-button" @click="bookTicket(film)">
+              Đặt vé
+            </button>
           </div>
         </div>
         <h3 class="film-title">{{ film.title }}</h3>
         <div class="film-details">
           <p class="film-date" v-if="film.releaseDate">
-            <i class="fas fa-calendar-alt"></i>{{ formatDate(film.releaseDate) }}
+            <i class="fas fa-calendar-alt"></i
+            >{{ formatDate(film.releaseDate) }}
           </p>
         </div>
       </div>
@@ -26,7 +33,7 @@
 </template>
 
 <script>
-import {getNowShowingMovies} from "@/components/api/movie_api.js";
+import { getNowShowingMovies } from "@/components/api/movie_api.js";
 
 export default {
   name: "NowShowingFilm",
@@ -47,7 +54,7 @@ export default {
       this.loading = true;
       try {
         const res = await getNowShowingMovies();
-        console.log()
+        console.log();
         this.films = res;
       } catch (err) {
         this.$toast.error(err);
@@ -56,11 +63,11 @@ export default {
       }
     },
     formatDate(dateString) {
-      const options = {day: '2-digit', month: '2-digit', year: 'numeric'};
-      return new Date(dateString).toLocaleDateString('vi-VN', options);
+      const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+      return new Date(dateString).toLocaleDateString("vi-VN", options);
     },
     bookTicket(film) {
-      this.$router.push({name: 'Branch', params: {film}});
+      this.$router.push({ name: "Branch", params: film  });
     },
   },
 };
