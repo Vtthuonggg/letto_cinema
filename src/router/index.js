@@ -65,6 +65,11 @@ const routes = [
     name: "Ticket",
     meta: { title: "Vé" },
     component: TicketPage,
+  },{
+    path: "/select-branch",
+    name: "Branch",
+    meta: { title: "Chọn rạp" },
+    component: SelectBranch,
   },
   {
     path: "/film",

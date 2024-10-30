@@ -18,7 +18,7 @@
         <div class="film-details">
 
           <p class="film-date">
-            <i class="fas fa-calendar-alt"></i>film.releaseDate?{{ formatDate(film.releaseDate) }}: Chưa cập nhật
+            <i class="fas fa-calendar-alt"></i>{{film.releaseDate? formatDate(film.releaseDate) : 'Chưa cập nhật'}}
           </p>
         </div>
       </div>

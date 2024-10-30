@@ -11,15 +11,13 @@
             <button class="overlay-button" @click="toDetailFilm(film.id)">
               Chi tiết
             </button>
-            <button class="overlay-button">Đặt vé</button>
+            <button class="overlay-button" @click="bookTicket(film)">Đặt vé</button>
           </div>
         </div>
         <h3 class="film-title">{{ film.title }}</h3>
         <div class="film-details">
-
-          <p class="film-date">
+          <p class="film-date" v-if="film.releaseDate">
             <i class="fas fa-calendar-alt"></i>{{ formatDate(film.releaseDate) }}
-
           </p>
         </div>
       </div>
@@ -60,6 +58,9 @@ export default {
     formatDate(dateString) {
       const options = {day: '2-digit', month: '2-digit', year: 'numeric'};
       return new Date(dateString).toLocaleDateString('vi-VN', options);
+    },
+    bookTicket(film) {
+      this.$router.push({name: 'Branch', params: {film}});
     },
   },
 };

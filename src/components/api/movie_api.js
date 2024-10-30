@@ -3,7 +3,11 @@ import { API_BASE_URL } from "../../../BASE_URL.js";
 
 export const getNowShowingMovies = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/movie/now_playing`);
+    const response = await axios.get(`${API_BASE_URL}/movie/now_playing`,{
+      headers: {
+        "ngrok-skip-browser-warning": "true",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Có lỗi xảy ra");
