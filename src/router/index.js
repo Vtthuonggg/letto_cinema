@@ -11,6 +11,9 @@ import NowShowing from "@/components/NowShowingFilm.vue";
 import UpcomingFilm from "@/components/UpcomingFilm.vue";
 import DetailFilm from "@/components/DetailFilm.vue";
 import AdminPage from "@/components/Admin/Admin.vue";
+import ListCinemaPage from "@/components/Admin/ListCinema.vue";
+import ListServicePage from "@/components/Admin/ListService.vue";
+// import { component } from "vue/types/umd";
 
 
 Vue.use(Router);
@@ -19,6 +22,18 @@ const routes = [
   {
     path: "/",
     redirect: "/login",
+  },
+  {
+    path: "/list-cinema",
+    name: "ListCinemaPage",
+    meta: { title: "Quản lý rạp" },
+    component: ListCinemaPage,
+  },
+  {
+    path: "/list-service",
+    name: "ListServicePage",
+    meta: { title: "Quản lý dịch vụ" },
+    component: ListServicePage,
   },
 
   {
