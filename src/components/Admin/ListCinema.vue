@@ -1,19 +1,82 @@
 <template>
-  <div>
-    <h1>Quản lý rạp</h1>
-    <div class="admin-page">
-      <v-row class="row-title-item">
-        <v-btn
-          class="gradient-button"
-          @click="popupCreate"
-          style="color: white"
-        >
-          <v-icon style="color: red">mdi-plus</v-icon>
-          <span style="color: red">Thêm rạp</span>
-        </v-btn>
-      </v-row>
-
-      <!-- Pop-up cho Rạp -->
+  <div class="container">
+    <div class="cinema-page">
+      <div class="title">
+        <v-row class="row-title-item">
+          <h2>Danh sách rạp</h2>
+          <v-btn
+            class="gradient-button"
+            @click="popupCreate"
+            style="color: white"
+          >
+            <v-icon style="color: white">mdi-plus</v-icon>
+            <span style="color: white">Thêm rạp</span>
+          </v-btn>
+        </v-row>
+      </div>
+      <v-divider></v-divider>
+      <v-container v-if="rapList.length > 0">
+        <v-row>
+          <v-col
+            v-for="(cinema, index) in rapList"
+            :key="index"
+            cols="12"
+            sm="6"
+            md="6"
+            lg="6"
+          >
+            <v-card class="cinema-card">
+              <v-list-item>
+                <v-col>
+                  <div class="info-cinema">
+                    <div class="cinema-info">
+                      <router-link
+                        to="/list-room"
+                        active-class="active-link"
+                        exact-active-class="exact-active-link"
+                        style="text-decoration: none; color: black"
+                      >
+                        <span>{{ cinema.name }}</span>
+                      </router-link>
+                    </div>
+                    <div class="cinema-address">
+                      <span>{{ cinema.address }}</span>
+                    </div>
+                  </div>
+                  <v-divider></v-divider>
+                </v-col>
+                <v-menu offset-y bottom right>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn icon v-bind="attrs" v-on="on">
+                      <v-icon>mdi-dots-vertical</v-icon>
+                    </v-btn>
+                  </template>
+                  <v-list>
+                    <v-list-item
+                      style="font-weight: bold"
+                      @click="popupEdit(cinema)"
+                    >
+                      <v-list-item-icon>
+                        <v-icon>mdi-pencil</v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-title>Sửa</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item
+                      style="font-weight: bold"
+                      @click="popupDelete(cinema.id)"
+                    >
+                      <v-list-item-icon>
+                        <v-icon>mdi-delete</v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-title>Xóa</v-list-item-title>
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
+              </v-list-item>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
       <div v-if="isShowCreateCinema || isShowEditCinema" class="popup">
         <div class="popup-content">
           <h3>
@@ -46,13 +109,6 @@
           </v-form>
         </div>
       </div>
-      <div class="cinema-list">
-        <div v-for="cinema in rapList" :key="cinema.id" class="cinema-item">
-          <span>{{ cinema.name }} - {{ cinema.address }}</span>
-          <v-btn @click="popupEdit(cinema)">Sửa</v-btn>
-          <v-btn @click="popupDelete(cinema.id)">Xóa</v-btn>
-        </div>
-      </div>
       <div v-if="isShowDelete" class="popup">
         <div class="popup-content">
           <h3>Xác nhận xóa rạp</h3>
@@ -65,7 +121,7 @@
             >
             <v-btn
               class="gradient-button-confirm"
-              style="color: red"
+              style="color: white"
               @click="deleteRap(selectedId)"
               >Xác nhận</v-btn
             >
@@ -208,18 +264,94 @@ export default {
 </script>
 
 <style>
-.admin-page {
+.info-cinema {
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: bold;
+  width: 100%;
+}
+
+.cinema-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.delete-icon {
+  position: absolute !important;
+  top: 8px;
+  right: 8px;
+  font-size: 24px;
+  cursor: pointer;
+  background: white;
+  border-radius: 50%;
+}
+
+.gradient-button-cancel {
+  flex: 1;
+  border: none;
+  color: #ff0044;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 5px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.gradient-button-confirm {
+  flex: 1;
+  background: linear-gradient(45deg, #ff0044, #ff7070);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 5px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  width: 100%;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
 }
-button {
-  margin: 10px;
+
+.gradient-button {
+  background: linear-gradient(45deg, #ff0044, #ff7070);
+  border: none;
+  color: white;
   padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   font-size: 16px;
+  margin: 4px 2px;
   cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.3s ease;
 }
+
 .popup {
   position: fixed;
   top: 0;
@@ -230,33 +362,20 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 500;
 }
+
 .popup-content {
   background-color: white;
   padding: 20px;
-  border-radius: 5px;
-  text-align: center;
+  border-radius: 10px;
+  width: 350px;
 }
-.popup-content button {
-  margin: 5px;
-}
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-h1 {
-  color: #dc0004;
-}
-.admin-page button:hover {
-  color: #dc0004;
+
+.row-title-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 </style>

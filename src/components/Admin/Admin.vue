@@ -11,6 +11,7 @@
               to="/list-cinema"
               active-class="active-link"
               exact-active-class="exact-active-link"
+              style="text-decoration: none"
             >
               <h2>Quản lý rạp</h2>
             </router-link>
@@ -18,6 +19,7 @@
               to="/list-service"
               active-class="active-link"
               exact-active-class="exact-active-link"
+              style="text-decoration: none"
             >
               <h2>Quản lý dịch vụ</h2>
             </router-link>
@@ -35,4 +37,13 @@ export default {
 </script>
 
 <style>
+manage-cinema {
+  text-decoration: none;
+}
+h2 {
+  color: inherit;
+}
+h2:visited {
+  color: inherit;
+}
 </style>

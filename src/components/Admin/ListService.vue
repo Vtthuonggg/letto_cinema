@@ -3,9 +3,9 @@
     <v-row class="row-title-item">
       <h2>Danh sách dịch vụ</h2>
       <v-btn
-          class="gradient-button"
-          @click="showCreateService"
-          style="color: white"
+        class="gradient-button"
+        @click="showCreateService"
+        style="color: white"
       >
         <v-icon style="color: white">mdi-plus</v-icon>
         <span>Thêm dịch vụ</span>
@@ -15,20 +15,20 @@
     <v-container v-if="listSevices.length > 0">
       <v-row>
         <v-col
-            v-for="(item, index) in listSevices"
-            :key="index"
-            cols="12"
-            sm="6"
-            md="6"
-            lg="6"
+          v-for="(item, index) in listSevices"
+          :key="index"
+          cols="12"
+          sm="6"
+          md="6"
+          lg="6"
         >
           <v-card class="service-card">
             <v-list-item>
               <div class="image-container">
                 <v-img
-                    :src="item.image"
-                    class="service-image"
-                    aspect-ratio="1"
+                  :src="item.image"
+                  class="service-image"
+                  aspect-ratio="1"
                 ></v-img>
               </div>
               <v-col>
@@ -50,8 +50,8 @@
                 </template>
                 <v-list>
                   <v-list-item
-                      style="font-weight: bold"
-                      @click="editService(item)"
+                    style="font-weight: bold"
+                    @click="editService(item)"
                   >
                     <v-list-item-icon>
                       <v-icon>mdi-pencil</v-icon>
@@ -59,8 +59,8 @@
                     <v-list-item-title>Sửa</v-list-item-title>
                   </v-list-item>
                   <v-list-item
-                      style="font-weight: bold"
-                      @click="showDeletePop(item.id)"
+                    style="font-weight: bold"
+                    @click="showDeletePop(item.id)"
                   >
                     <v-list-item-icon>
                       <v-icon>mdi-delete</v-icon>
@@ -79,16 +79,16 @@
         <h3>Xác nhận xóa dịch vụ</h3>
         <div class="button-container">
           <v-btn
-              class="gradient-button-cancel"
-              style="color: #00bfff"
-              @click="isShowDelete = false"
-          >Hủy</v-btn
+            class="gradient-button-cancel"
+            style="color: #00bfff"
+            @click="isShowDelete = false"
+            >Hủy</v-btn
           >
           <v-btn
-              class="gradient-button-confirm"
-              style="color: white"
-              @click="deleteServiceEvent(serviceId)"
-          >Xác nhận</v-btn
+            class="gradient-button-confirm"
+            style="color: white"
+            @click="deleteServiceEvent(serviceId)"
+            >Xác nhận</v-btn
           >
         </div>
       </div>
@@ -97,54 +97,54 @@
       <div class="popup-content">
         <h3>{{ isShowCreateService ? "Tạo dịch vụ" : "Sửa dịch vụ" }}</h3>
         <v-text-field
-            :rules="[(v) => !!v.trim() || 'Tên không được để trống']"
-            v-model="newService.name"
-            label="Tên"
+          :rules="[(v) => !!v.trim() || 'Tên không được để trống']"
+          v-model="newService.name"
+          label="Tên"
         ></v-text-field>
         <v-text-field
-            v-model="formattedPrice"
-            label="Giá tiền"
-            append-outer="đ"
-            @keydown="filterInput"
-            :rules="[(v) => !!v.trim() || 'Giá tiền không được để trống']"
-        ><template v-slot:append>
-          <span>đ</span>
-        </template></v-text-field
+          v-model="formattedPrice"
+          label="Giá tiền"
+          append-outer="đ"
+          @keydown="filterInput"
+          :rules="[(v) => !!v.trim() || 'Giá tiền không được để trống']"
+          ><template v-slot:append>
+            <span>đ</span>
+          </template></v-text-field
         >
         <div class="image-upload-container">
           <input
-              type="file"
-              @change="onFileChange"
-              ref="fileInput"
-              style="display: none"
+            type="file"
+            @change="onFileChange"
+            ref="fileInput"
+            style="display: none"
           />
           <div v-if="newService.image" class="image-preview">
             <img
-                :src="newService.image"
-                alt="Service Image"
-                class="uploaded-image"
+              :src="newService.image"
+              alt="Service Image"
+              class="uploaded-image"
             />
             <v-icon class="delete-icon" @click="removeImage">mdi-close</v-icon>
           </div>
           <div v-else>
             <v-icon class="upload-icon" @click="triggerFileInput"
-            >mdi-upload</v-icon
+              >mdi-upload</v-icon
             >
             <p class="image-text">Tải ảnh lên</p>
           </div>
         </div>
         <div class="button-container">
           <v-btn
-              class="gradient-button-cancel"
-              style="color: #00bfff"
-              @click="hideCreateEditService"
-          >Hủy</v-btn
+            class="gradient-button-cancel"
+            style="color: #00bfff"
+            @click="hideCreateEditService"
+            >Hủy</v-btn
           >
           <v-btn
-              class="gradient-button-confirm"
-              style="color: white"
-              @click="submitService(isShowCreateService ? 1 : 2)"
-          >Xác nhận</v-btn
+            class="gradient-button-confirm"
+            style="color: white"
+            @click="submitService(isShowCreateService ? 1 : 2)"
+            >Xác nhận</v-btn
           >
         </div>
       </div>
@@ -187,8 +187,8 @@ export default {
     formattedPrice: {
       get() {
         return this.newService.price !== null
-            ? formatCurrency(this.newService.price)
-            : "";
+          ? formatCurrency(this.newService.price)
+          : "";
       },
       set(value) {
         if (typeof value === "string") {
@@ -317,7 +317,7 @@ export default {
       this.$refs.fileInput.value = null;
     },
     editService(item) {
-      this.newService = {...item};
+      this.newService = { ...item };
       this.isShowEditService = true;
     },
   },
@@ -372,7 +372,7 @@ export default {
 
 .upload-icon {
   font-size: 48px !important;
-  color: #00bfff !important;
+  color: #dc0004 !important;
 }
 
 .image-preview {
@@ -412,7 +412,7 @@ export default {
 
 .gradient-button-confirm {
   flex: 1;
-  background: linear-gradient(45deg, #007bff, #00d4ff);
+  background: linear-gradient(45deg, #ff0044, #ff7070);
   border: none;
   color: white;
   padding: 10px 20px;
@@ -438,7 +438,7 @@ export default {
 }
 
 .gradient-button {
-  background: linear-gradient(45deg, #007bff, #00d4ff);
+  background: linear-gradient(45deg, #ff0044, #ff7070);
   border: none;
   color: white;
   padding: 10px 20px;

@@ -15,6 +15,7 @@ import ListCinemaPage from "@/components/Admin/ListCinema.vue";
 import SelectBranch from "@/components/SelectBranch.vue";
 import ListServicePage from "@/components/Admin/ListService.vue";
 import SelectScreen from "@/components/SelectScreen.vue";
+import ListRoomPage from "@/components/Admin/ListRoom.vue";
 
 // import { component } from "vue/types/umd";
 
@@ -37,6 +38,12 @@ const routes = [
     name: "ListServicePage",
     meta: { title: "Quản lý dịch vụ" },
     component: ListServicePage,
+  },
+  {
+    path: "/list-room",
+    name: "ListRoomPage",
+    meta: { title: "Quản lý phòng chiếu" },
+    component: ListRoomPage,
   },
 
   {
@@ -68,7 +75,7 @@ const routes = [
     name: "Ticket",
     meta: { title: "Vé" },
     component: TicketPage,
-  },{
+  }, {
     path: "/select-branch",
     name: "Branch",
     meta: { title: "Chọn rạp" },
@@ -104,7 +111,7 @@ const routes = [
     name: "DetailFilm",
     meta: { title: "Chi tiết phim" },
     component: DetailFilm,
-  },  {
+  }, {
     path: "/film/:movieId/:branchId",
     name: "SelectScreen",
     meta: { title: "Chọn suất chiếu" },
