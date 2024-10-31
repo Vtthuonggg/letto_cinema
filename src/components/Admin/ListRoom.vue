@@ -43,15 +43,6 @@
                 <v-list>
                   <v-list-item
                     style="font-weight: bold"
-                    @click="popupEditRoom(room)"
-                  >
-                    <v-list-item-icon>
-                      <v-icon>mdi-pencil</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title>Sửa</v-list-item-title>
-                  </v-list-item>
-                  <v-list-item
-                    style="font-weight: bold"
                     @click="popupDeleteRoom(room.id)"
                   >
                     <v-list-item-icon>
@@ -113,18 +104,12 @@
 </template>
 
 <script>
-import {
-  createRoom,
-  deleteRoom,
-  getListRoom,
-  updateRoom,
-} from "@/components/api/room_api.js";
+import { createRoom, deleteRoom, listRoom } from "@/components/api/room_api.js";
 export default {
   name: "ListRoomPage",
   data() {
     return {
       isShowCreateRoom: false,
-      isShowEditRoom: false,
       isShowDeleteRoom: false,
       newRoom: {
         name: "",
@@ -140,7 +125,7 @@ export default {
   methods: {
     async fetchRoom() {
       try {
-        var res = await getListRoom();
+        var res = await listRoom();
         this.roomList = res;
         console.log(res);
       } catch (err) {
@@ -157,8 +142,7 @@ export default {
           await createRoom(data);
           this.$toast.success("Thêm phòng chiếu thành công");
         } else {
-          await updateRoom(this.selectedId, data);
-          this.$toast.success("Sửa phòng chiếu thành công");
+          this.$toast.success("Hãy nhập tên phòng chiếu");
         }
         this.fetchRoom();
         this.closeRoom();
@@ -178,11 +162,6 @@ export default {
     },
     popupCreateRoom() {
       this.isShowCreateRoom = true;
-    },
-    popupEditRoom(room) {
-      this.isShowEditRoom = true;
-      this.newRoom = { ...room };
-      this.selectedId = room.id;
     },
     popupDeleteRoom(id) {
       this.isShowDeleteRoom = true;

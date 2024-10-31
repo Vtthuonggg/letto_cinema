@@ -237,7 +237,7 @@ export default {
       this.rapList.push({ id: newId, name: `Rạp ${newId}` });
     },
     editRap(id) {
-      const rap = this.rspList.find((rap) => rap.id === id);
+      const rap = this.rapList.find((rap) => rap.id === id);
       if (rap) {
         rap.name = prompt("Nhập tên rạp mới", rap.name) || rap.name;
       }
