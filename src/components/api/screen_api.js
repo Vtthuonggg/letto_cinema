@@ -24,7 +24,8 @@ export const listScreen = async (idMovie) => {
                 id: idMovie,
             },
         });
-        return response.data.results;
+        console.log(response.data);
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;

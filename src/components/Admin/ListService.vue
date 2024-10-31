@@ -271,7 +271,7 @@ export default {
           await createService(data);
           this.$toast.success("Thêm dịch vụ thành công");
         } else {
-          await updateService(data, this.newService.id);
+          await updateService( this.newService.id,data);
           this.$toast.success("Sửa dịch vụ thành công");
         }
         this.newService = {};
