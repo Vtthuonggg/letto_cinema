@@ -57,11 +57,9 @@
         </v-col>
       </v-row>
     </v-container>
-    <div v-if="isShowCreateRoom || isShowEditRoom" class="popup">
+    <div v-if="isShowCreateRoom" class="popup">
       <div class="popup-content">
-        <h3>
-          {{ isShowEditRoom ? `Sửa rạp: ${newRoom.name}` : "Tạo rạp mới" }}
-        </h3>
+        <h3>Tạo phòng chiếu</h3>
         <v-form ref="form">
           <v-text-field
             v-model="newRoom.name"
@@ -74,9 +72,9 @@
             >Hủy</v-btn
           >
           <v-btn
-            @click="submitRoom(isShowEditRoom ? 2 : 1)"
+            @click="submitRoom(1)"
             style="background-color: #dc0004; color: white"
-            >{{ isShowEditCinema ? `Sửa` : "Thêm" }}</v-btn
+            >Thêm</v-btn
           >
         </v-form>
       </div>
