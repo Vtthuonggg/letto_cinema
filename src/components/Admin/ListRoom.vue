@@ -208,4 +208,118 @@ export default {
 </script>
 
 <style>
+.info-cinema {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: bold;
+  width: 100%;
+}
+
+.cinema-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.delete-icon {
+  position: absolute !important;
+  top: 8px;
+  right: 8px;
+  font-size: 24px;
+  cursor: pointer;
+  background: white;
+  border-radius: 50%;
+}
+
+.gradient-button-cancel {
+  flex: 1;
+  border: none;
+  color: #ff0044;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 5px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.gradient-button-confirm {
+  flex: 1;
+  background: linear-gradient(45deg, #ff0044, #ff7070);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 5px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gradient-button {
+  background: linear-gradient(45deg, #ff0044, #ff7070);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+}
+
+.row-title-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 </style>
