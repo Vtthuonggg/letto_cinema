@@ -4,53 +4,77 @@
       <div class="loading-spinner"></div>
     </div>
     <div v-else>
-      <div v-if="videos.key">
+      <div v-if="video_key">
         <iframe
-            :src="'https://www.youtube.com/embed/' + videos.key + '?autoplay=1'"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            class="trailer-video"
+          :src="'https://www.youtube.com/embed/' + video_key + '?autoplay=1'"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          class="trailer-video"
         ></iframe>
       </div>
       <div v-else>
-        <img class="trailer-video"
-             :src="'https://image.tmdb.org/t/p/original' + film.backdrop_path"
-             :alt="film.title"
+        <img
+          class="trailer-video"
+          :src="'https://image.tmdb.org/t/p/original' + film.backdrop_path"
+          :alt="film.title"
         />
       </div>
       <div class="title-container">
         <img
-            :src="'https://image.tmdb.org/t/p/original' + film.poster_path"
-            :alt="film.title"
+          :src="'https://image.tmdb.org/t/p/original' + film.poster_path"
+          :alt="film.title"
         />
         <div class="infor">
           <h2>{{ film.title }}</h2>
-          <p style="margin-top: 10px;"><b>Ngày phát hành: </b>{{ formatDate(film.release_date) }}</p>
+          <p style="margin-top: 10px">
+            <b>Ngày phát hành: </b>{{ formatDate(film.release_date) }}
+          </p>
           <div class="rate-movie">
-            <p style="margin-top: 10px;"><b>Đánh giá: </b></p>
-            <span style="margin-top: 10px;margin-left: 5px" v-for="star in fullStars" :key="star"
-                  class="fa fa-star checked"></span>
-            <span style="margin-top: 10px;margin-left: 5px" v-for="star in emptyStars" :key="star"
-                  class="fa fa-star"></span>
+            <p style="margin-top: 10px"><b>Đánh giá: </b></p>
+            <span
+              style="margin-top: 10px; margin-left: 5px"
+              v-for="star in fullStars"
+              :key="star"
+              class="fa fa-star checked"
+            ></span>
+            <span
+              style="margin-top: 10px; margin-left: 5px"
+              v-for="star in emptyStars"
+              :key="star"
+              class="fa fa-star"
+            ></span>
           </div>
-          <p style="margin-top: 10px;"><b>Thời lượng: </b>{{ film.runtime }} phút</p>
-          <p style="margin-top: 10px;"><b>Thể
-            loại: </b>{{ film.genres && film.genres.map((genre) => genre.name).join(", ") }}</p>
-          <button class="book-ticket" @click="bookTicket"><span style="margin-right: 5px;"
-                                                                class="fa-solid fa-ticket"></span>Đặt vé
+          <!-- <p style="margin-top: 10px">
+            <b>Thời lượng: </b>{{ film.runtime }} phút
+          </p>
+          <p style="margin-top: 10px">
+            <b>Thể loại: </b
+            >{{
+              film.genres && film.genres.map((genre) => genre.name).join(", ")
+            }}
+          </p> -->
+          <button class="book-ticket" @click="bookTicket">
+            <span style="margin-right: 5px" class="fa-solid fa-ticket"></span
+            >Đặt vé
           </button>
         </div>
       </div>
-      <div v-if="film.overview" class="overview"><h2>Tóm tắt</h2><br>
-        <p>{{ film.overview }}</p></div>
-      <div v-else class="overview"><h2>Tóm tắt</h2><br>
-        <p>Tạm thời chưa cập nhật</p></div>
+      <!-- <div v-if="film.overview" class="overview">
+        <h2>Tóm tắt</h2>
+        <br />
+        <p>{{ film.overview }}</p>
+      </div>
+      <div v-else class="overview">
+        <h2>Tóm tắt</h2>
+        <br />
+        <p>Tạm thời chưa cập nhật</p>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-import {getDetailMovie, getTrailerMovie} from "@/components/api/movie_api.js";
+import { getDetailMovie, getTrailerMovie } from "@/components/api/movie_api.js";
 
 export default {
   name: "DetailFilm",
@@ -59,7 +83,25 @@ export default {
       loading: false,
       film: {},
       videos: {},
-
+      video_key: "",
+      relatedFilms: [
+        {
+          adult: false,
+          backdrop_path: "/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
+          genre_ids: [878, 28, 12],
+          id: 912649,
+          original_language: "en",
+          original_title: "Venom: The Last Dance",
+          overview: "",
+          popularity: 5691.793,
+          poster_path: "/sE2NqRxsbAehUGW6EklvzUAHLAe.jpg",
+          release_date: "2024-10-22",
+          title: "Venom: Kèo Cuối",
+          video: false,
+          vote_average: 6.731,
+          vote_count: 362,
+        },
+      ],
     };
   },
   computed: {
@@ -74,6 +116,7 @@ export default {
     const id = this.$route.params.id;
     await this.fetchDetailFilm(id);
     await this.fetchTrailerFilm(id);
+    await this.fetchRelatedFilms(id);
     window.scrollTo(0, 0);
   },
   methods: {
@@ -94,8 +137,10 @@ export default {
         const res = await getTrailerMovie(id);
         if (res.results.length > 0) {
           this.videos = res.results[0];
+          this.video_key = res.results[0].key;
         } else {
           this.videos = {};
+          this.video_key = "";
         }
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
@@ -104,11 +149,10 @@ export default {
       }
     },
     formatDate(dateString) {
-      const options = {day: '2-digit', month: '2-digit', year: 'numeric'};
-      return new Date(dateString).toLocaleDateString('vi-VN', options);
+      const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+      return new Date(dateString).toLocaleDateString("vi-VN", options);
     },
-    bookTicket() {
-    },
+    bookTicket() {},
   },
 };
 </script>
