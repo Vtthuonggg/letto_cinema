@@ -6,7 +6,10 @@
     <div v-else class="film-grid">
       <div v-for="film in films" :key="film.id" class="film-card">
         <div class="film-poster-container">
-          <img :src="'https://image.tmdb.org/t/p/original' + film.posterPath" :alt="film.title" class="film-poster" />
+          <img
+            :src="film.posterPath ? 'https://image.tmdb.org/t/p/original' + film.posterPath : require('../assets/logo32.jpg')"
+            :alt="film.title" class="film-poster" />
+
           <div class="overlay">
             <button class="overlay-button" @click="toDetailFilm(film)">
               Chi tiết

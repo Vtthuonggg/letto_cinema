@@ -85,6 +85,9 @@
         </div>
       </div>
     </div>
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
@@ -104,6 +107,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       popupType: null,
       popupService: false,
       isShowCreateCinema: false,
@@ -123,11 +127,14 @@ export default {
   },
   methods: {
     async fetchBranch() {
+      this.loading = true;
       try {
         var res = await getListBranch();
         this.rapList = res;
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
+      } finally {
+        this.loading = false;
       }
     },
     async submitBranch(type) {
@@ -135,6 +142,7 @@ export default {
         name: this.newCinema.name,
         address: this.newCinema.address,
       };
+      this.loading = true;
       try {
         if (type == 1) {
           await createBranch(data);
@@ -147,6 +155,8 @@ export default {
         this.closeBranch();
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
+      } finally {
+        this.loading = false;
       }
     },
     showDelete() {
@@ -201,6 +211,7 @@ export default {
       }
     },
     async deleteRap(id) {
+      this.loading = true;
       try {
         await deleteBranch(id);
         this.$toast.success("Xóa rạp thành công");
@@ -208,6 +219,8 @@ export default {
         this.showDelete();
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
+      } finally {
+        this.loading = false;
       }
     },
     openService() {

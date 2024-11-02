@@ -3,6 +3,9 @@
     <div v-for="screen in listScreen" :key="screen.id" @click="selectSeat(screen.idRoom)">
       <p>Giờ chiếu: {{ new Date(screen.time).toLocaleString() }}</p>
     </div>
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
@@ -24,12 +27,19 @@ export default {
   },
   data() {
     return {
+      loading: false,
       listScreen: [],
     }
   },
   methods: {
+    selectSeat(idRoom) {
+      this.$router.push({
+        name: 'SelectSeat',
+        params: { movieId: this.payload.movieId, branchId: this.payload.branchId, roomId: idRoom }
+      });
+    },
     async fetchScreen() {
-      console.log(`paljkasdjajsd ${this.payload.movieId}`);
+      this.loading = true;
       try {
         var screens = await listScreen(this.payload.movieId);
         var rooms = await listRoom(this.payload.branchId);
@@ -38,6 +48,8 @@ export default {
       } catch (e) {
         console.log(e);
         this.$toast.error('Lỗi có lỗi xảy ra');
+      } finally {
+        this.loading = false;
       }
     },
 

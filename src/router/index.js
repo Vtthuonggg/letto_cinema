@@ -17,7 +17,7 @@ import ListServicePage from "@/components/Admin/ListService.vue";
 import SelectScreen from "@/components/SelectScreen.vue";
 import ListRoomPage from "@/components/Admin/ListRoom.vue";
 import Cookies from "js-cookie";
-
+import SelectSeat from "@/components/SelectSeat.vue";
 // import { component } from "vue/types/umd";
 
 
@@ -26,7 +26,10 @@ Vue.use(Router);
 const routes = [
   {
     path: "/",
-    redirect: "/login",
+    redirect: () => {
+      const haveUser = Cookies.get("accountId") != null;
+      return haveUser ? "/film" : "/login";
+    },
   },
   {
     path: "/list-cinema",
@@ -112,11 +115,18 @@ const routes = [
     name: "DetailFilm",
     meta: { title: "Chi tiết phim" },
     component: DetailFilm,
-  }, {
+  },
+  {
     path: "/film/:movieId/:branchId",
     name: "SelectScreen",
     meta: { title: "Chọn suất chiếu" },
     component: SelectScreen,
+  },
+  {
+    path: "/film/select-seat",
+    name: "SelectSeat",
+    meta: { title: "Chọn ghế" },
+    component: SelectSeat,
   },
 ];
 
@@ -126,9 +136,19 @@ const router = new Router({
   routes,
 });
 router.beforeEach((to, from, next) => {
+  const isLoggedIn = Cookies.get("accountId");
+  console.log('idididididdi', isLoggedIn);
+  if (!isLoggedIn && to.path !== "/login" && to.path !== "/register") {
+    Vue.prototype.$toast.error("Vui lòng đăng nhập");
+    next("/login");
+  } else {
+    next();
+  }
+});
+router.beforeEach((to, from, next) => {
   document.title = to.meta.title || "Letto Cinema ";
   const restrictedPaths = ["/list-cinema", "/list-service", "/list-room"];
-  const idAccount = Cookies.get("idAccount");
+  const idAccount = Cookies.get("accountId");
 
   if (restrictedPaths.includes(to.path) && idAccount != 2) {
     Vue.prototype.$toast.error("Bạn không có quyền truy cập trang này");
@@ -137,14 +157,6 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-router.beforeEach((to, from, next) => {
-  const isLoggedIn = Cookies.get("accountId");
-  if (!isLoggedIn && to.path !== "/login" && to.path !== "/register") {
-    Vue.prototype.$toast.error("Vui lòng đăng nhập");
-    next("/login");
-  } else {
-    next();
-  }
-});
+
 
 export default router;

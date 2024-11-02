@@ -2,11 +2,7 @@
   <div class="container">
     <v-row class="row-title-item">
       <h2>Danh sách dịch vụ</h2>
-      <v-btn
-        class="gradient-button"
-        @click="showCreateService"
-        style="color: white"
-      >
+      <v-btn class="gradient-button" @click="showCreateService" style="color: white">
         <v-icon style="color: white">mdi-plus</v-icon>
         <span>Thêm dịch vụ</span>
       </v-btn>
@@ -14,22 +10,11 @@
     <v-divider></v-divider>
     <v-container v-if="listSevices.length > 0">
       <v-row>
-        <v-col
-          v-for="(item, index) in listSevices"
-          :key="index"
-          cols="12"
-          sm="6"
-          md="6"
-          lg="6"
-        >
+        <v-col v-for="(item, index) in listSevices" :key="index" cols="12" sm="6" md="6" lg="6">
           <v-card class="service-card">
             <v-list-item>
               <div class="image-container">
-                <v-img
-                  :src="item.image"
-                  class="service-image"
-                  aspect-ratio="1"
-                ></v-img>
+                <v-img :src="item.image" class="service-image" aspect-ratio="1"></v-img>
               </div>
               <v-col>
                 <div class="info-service">
@@ -49,19 +34,13 @@
                   </v-btn>
                 </template>
                 <v-list>
-                  <v-list-item
-                    style="font-weight: bold"
-                    @click="editService(item)"
-                  >
+                  <v-list-item style="font-weight: bold" @click="editService(item)">
                     <v-list-item-icon>
                       <v-icon>mdi-pencil</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>Sửa</v-list-item-title>
                   </v-list-item>
-                  <v-list-item
-                    style="font-weight: bold"
-                    @click="showDeletePop(item.id)"
-                  >
+                  <v-list-item style="font-weight: bold" @click="showDeletePop(item.id)">
                     <v-list-item-icon>
                       <v-icon>mdi-delete</v-icon>
                     </v-list-item-icon>
@@ -78,74 +57,36 @@
       <div class="popup-content">
         <h3>Xác nhận xóa dịch vụ</h3>
         <div class="button-container">
-          <v-btn
-            class="gradient-button-cancel"
-            style="color: #00bfff"
-            @click="isShowDelete = false"
-            >Hủy</v-btn
-          >
-          <v-btn
-            class="gradient-button-confirm"
-            style="color: white"
-            @click="deleteServiceEvent(serviceId)"
-            >Xác nhận</v-btn
-          >
+          <v-btn class="gradient-button-cancel" style="color: #00bfff" @click="isShowDelete = false">Hủy</v-btn>
+          <v-btn class="gradient-button-confirm" style="color: white" @click="deleteServiceEvent(serviceId)">Xác
+            nhận</v-btn>
         </div>
       </div>
     </div>
     <div v-if="isShowCreateService || isShowEditService" class="popup">
       <div class="popup-content">
         <h3>{{ isShowCreateService ? "Tạo dịch vụ" : "Sửa dịch vụ" }}</h3>
-        <v-text-field
-          :rules="[(v) => !!v.trim() || 'Tên không được để trống']"
-          v-model="newService.name"
-          label="Tên"
-        ></v-text-field>
-        <v-text-field
-          v-model="formattedPrice"
-          label="Giá tiền"
-          append-outer="đ"
-          @keydown="filterInput"
-          :rules="[(v) => !!v.trim() || 'Giá tiền không được để trống']"
-          ><template v-slot:append>
+        <v-text-field :rules="[(v) => !!v.trim() || 'Tên không được để trống']" v-model="newService.name"
+          label="Tên"></v-text-field>
+        <v-text-field v-model="formattedPrice" label="Giá tiền" append-outer="đ" @keydown="filterInput"
+          :rules="[(v) => !!v.trim() || 'Giá tiền không được để trống']"><template v-slot:append>
             <span>đ</span>
-          </template></v-text-field
-        >
+          </template></v-text-field>
         <div class="image-upload-container">
-          <input
-            type="file"
-            @change="onFileChange"
-            ref="fileInput"
-            style="display: none"
-          />
+          <input type="file" @change="onFileChange" ref="fileInput" style="display: none" />
           <div v-if="newService.image" class="image-preview">
-            <img
-              :src="newService.image"
-              alt="Service Image"
-              class="uploaded-image"
-            />
+            <img :src="newService.image" alt="Service Image" class="uploaded-image" />
             <v-icon class="delete-icon" @click="removeImage">mdi-close</v-icon>
           </div>
           <div v-else>
-            <v-icon class="upload-icon" @click="triggerFileInput"
-              >mdi-upload</v-icon
-            >
+            <v-icon class="upload-icon" @click="triggerFileInput">mdi-upload</v-icon>
             <p class="image-text">Tải ảnh lên</p>
           </div>
         </div>
         <div class="button-container">
-          <v-btn
-            class="gradient-button-cancel"
-            style="color: #00bfff"
-            @click="hideCreateEditService"
-            >Hủy</v-btn
-          >
-          <v-btn
-            class="gradient-button-confirm"
-            style="color: white"
-            @click="submitService(isShowCreateService ? 1 : 2)"
-            >Xác nhận</v-btn
-          >
+          <v-btn class="gradient-button-cancel" style="color: #00bfff" @click="hideCreateEditService">Hủy</v-btn>
+          <v-btn class="gradient-button-confirm" style="color: white"
+            @click="submitService(isShowCreateService ? 1 : 2)">Xác nhận</v-btn>
         </div>
       </div>
     </div>
@@ -271,7 +212,7 @@ export default {
           await createService(data);
           this.$toast.success("Thêm dịch vụ thành công");
         } else {
-          await updateService( this.newService.id,data);
+          await updateService(this.newService.id, data);
           this.$toast.success("Sửa dịch vụ thành công");
         }
         this.newService = {};

@@ -6,9 +6,11 @@
     <div v-else class="film-grid">
       <div v-for="film in films" :key="film.id" class="film-card">
         <div class="film-poster-container">
-          <img :src="film.posterPath? 'https://image.tmdb.org/t/p/original' + film.posterPath:require('../assets/logomenu.png') " :alt="film.title" class="film-poster"/>
+          <img
+            :src="film.posterPath ? 'https://image.tmdb.org/t/p/original' + film.posterPath : require('../assets/logo32.jpg')"
+            :alt="film.title" class="film-poster" />
           <div class="overlay">
-            <button class="overlay-button" @click="toDetailFilm(film.id)">
+            <button class="overlay-button" @click="toDetailFilm(film)">
               Chi tiết
             </button>
 
@@ -18,7 +20,7 @@
         <div class="film-details">
 
           <p class="film-date">
-            <i class="fas fa-calendar-alt"></i>{{film.releaseDate? formatDate(film.releaseDate) : 'Chưa cập nhật'}}
+            <i class="fas fa-calendar-alt"></i>{{ film.releaseDate ? formatDate(film.releaseDate) : 'Chưa cập nhật' }}
           </p>
         </div>
       </div>
@@ -27,7 +29,7 @@
 </template>
 
 <script>
-import {getUpcomingMovies} from "@/components/api/movie_api.js";
+import { getUpcomingMovies } from "@/components/api/movie_api.js";
 
 export default {
   name: "UpcomingFilm",
@@ -41,8 +43,8 @@ export default {
     this.fetchNowShowing();
   },
   methods: {
-    toDetailFilm(id) {
-      this.$router.push(`/film/${id}`);
+    toDetailFilm(film) {
+      this.$router.push({ name: "DetailFilm", params: { film } });
     },
     async fetchNowShowing() {
       this.loading = true;
@@ -57,7 +59,7 @@ export default {
       }
     },
     formatDate(dateString) {
-      const options = {day: '2-digit', month: '2-digit', year: 'numeric'};
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
       return new Date(dateString).toLocaleDateString('vi-VN', options);
     },
   },

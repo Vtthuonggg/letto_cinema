@@ -64,6 +64,9 @@
         </div>
       </div>
     </div>
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
@@ -78,6 +81,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       isShowCreateRoom: false,
       isShowDeleteRoom: false,
       newRoom: {
@@ -98,12 +102,14 @@ export default {
       this.$router.go(-1); // Quay lại màn hình trước đó
     },
     async fetchRoom() {
-
+      this.loading = true;
       try {
         var res = await listRoom(this.idBranch);
         this.roomList = res;
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
+      } finally {
+        this.loading = false;
       }
     },
     async submitRoom(type) {
@@ -111,6 +117,7 @@ export default {
         name: this.newRoom.name,
         idBranch: this.idBranch,
       };
+      this.loading = true;
       try {
         if (type == 1) {
           await createRoom(data);
@@ -122,9 +129,12 @@ export default {
         this.closeRoom();
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
+      } finally {
+        this.loading = false;
       }
     },
     async deleteRoom(id) {
+      this.loading = true;
       try {
         await deleteRoom(id);
         this.$toast.success("Xóa phòng chiếu thành công");
@@ -132,6 +142,8 @@ export default {
         this.closeRoom();
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
+      } finally {
+        this.loading = false;
       }
     },
     popupCreateRoom() {
