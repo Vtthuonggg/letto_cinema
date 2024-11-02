@@ -16,6 +16,7 @@ import SelectBranch from "@/components/SelectBranch.vue";
 import ListServicePage from "@/components/Admin/ListService.vue";
 import SelectScreen from "@/components/SelectScreen.vue";
 import ListRoomPage from "@/components/Admin/ListRoom.vue";
+import Cookies from "js-cookie";
 
 // import { component } from "vue/types/umd";
 
@@ -137,4 +138,17 @@ router.beforeEach((to, from, next) => {
 //     next();
 //   }
 // });
+router.beforeEach((to, from, next) => {
+  const isAdmin = checkIfUserIsAdmin();
+
+  if (to.path.startsWith("/admin") && !isAdmin) {
+    next(from.fullPath);
+  } else {
+    next();
+  }
+  function checkIfUserIsAdmin() {
+    const accountId = Cookies.get("accountId");
+    return accountId === "2";
+  }
+});
 export default router;

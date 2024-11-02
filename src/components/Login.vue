@@ -1,27 +1,27 @@
 <template>
   <div class="page-container">
     <div class="content-wrap">
-      <img alt="Vue logo" src="../assets/logo.png" class="logo"/>
+      <img alt="Vue logo" src="../assets/logo.png" class="logo" />
       <h3 class="name-group">Đặt vé xem phim</h3>
       <div class="login-container">
         <h2>Đăng nhập</h2>
         <form @submit.prevent="handleLogin">
           <div class="form-group">
             <label for="username">Tài khoản:</label>
-            <input type="text" id="username" v-model="username" required/>
+            <input type="text" id="username" v-model="username" required />
           </div>
           <div class="form-group">
             <label for="password">Mật khẩu:</label>
             <v-text-field
-                outlined
-                :type="showPassword ? 'text' : 'password'"
-                id="password"
-                v-model="password"
-                required
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="togglePasswordVisibility"
-                dense
-                class="password-field"
+              outlined
+              :type="showPassword ? 'text' : 'password'"
+              id="password"
+              v-model="password"
+              required
+              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="togglePasswordVisibility"
+              dense
+              class="password-field"
             ></v-text-field>
           </div>
           <button type="submit" class="gradient-button">Đăng nhập</button>
@@ -40,7 +40,7 @@
 
 <script>
 import Cookies from "js-cookie";
-import {login} from "@/components/api/account_api.js";
+import { login } from "@/components/api/account_api.js";
 
 export default {
   name: "LoginPage",
@@ -64,8 +64,13 @@ export default {
           secure: true,
           sameSite: "Lax",
         });
-        this.$toast.success("Đăng nhập thành công");
-        this.$router.push("/film");
+        if (res.idAccount == 2) {
+          this.$toast.success("Đăng nhập dưới quyền admin");
+          this.$router.push("/admin");
+        } else {
+          this.$toast.success("Đăng nhập thành công");
+          this.$router.push("/film");
+        }
       } catch (error) {
         this.$toast.error("Tài khoản mật khẩu không chính xác");
       } finally {
