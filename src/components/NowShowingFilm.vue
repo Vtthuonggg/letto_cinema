@@ -6,13 +6,9 @@
     <div v-else class="film-grid">
       <div v-for="film in films" :key="film.id" class="film-card">
         <div class="film-poster-container">
-          <img
-            :src="'https://image.tmdb.org/t/p/original' + film.posterPath"
-            :alt="film.title"
-            class="film-poster"
-          />
+          <img :src="'https://image.tmdb.org/t/p/original' + film.posterPath" :alt="film.title" class="film-poster" />
           <div class="overlay">
-            <button class="overlay-button" @click="toDetailFilm(film.id)">
+            <button class="overlay-button" @click="toDetailFilm(film)">
               Chi tiết
             </button>
             <button class="overlay-button" @click="bookTicket(film)">
@@ -23,8 +19,7 @@
         <h3 class="film-title">{{ film.title }}</h3>
         <div class="film-details">
           <p class="film-date" v-if="film.releaseDate">
-            <i class="fas fa-calendar-alt"></i
-            >{{ formatDate(film.releaseDate) }}
+            <i class="fas fa-calendar-alt"></i>{{ formatDate(film.releaseDate) }}
           </p>
         </div>
       </div>
@@ -47,8 +42,8 @@ export default {
     this.fetchNowShowing();
   },
   methods: {
-    toDetailFilm(id) {
-      this.$router.push(`/film/${id}`);
+    toDetailFilm(film) {
+      this.$router.push({ name: "DetailFilm", params: { film } });
     },
     async fetchNowShowing() {
       this.loading = true;
@@ -67,7 +62,7 @@ export default {
       return new Date(dateString).toLocaleDateString("vi-VN", options);
     },
     bookTicket(film) {
-      this.$router.push({ name: "Branch", params: film  });
+      this.$router.push({ name: "Branch", params: film });
     },
   },
 };

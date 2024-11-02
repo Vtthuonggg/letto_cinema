@@ -4,45 +4,27 @@
       <div class="loading-spinner"></div>
     </div>
     <div v-else>
-      <div v-if="video_key">
-        <iframe
-          :src="'https://www.youtube.com/embed/' + video_key + '?autoplay=1'"
+      <div v-if="film.videoKey">
+        <iframe :src="'https://www.youtube.com/embed/' + film.videoKey + '?autoplay=1'"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          class="trailer-video"
-        ></iframe>
+          allowfullscreen class="trailer-video"></iframe>
       </div>
       <div v-else>
-        <img
-          class="trailer-video"
-          :src="'https://image.tmdb.org/t/p/original' + film.backdrop_path"
-          :alt="film.title"
-        />
+        <img class="trailer-video" :src="'https://image.tmdb.org/t/p/original' + film.backdropPath" :alt="film.title" />
       </div>
       <div class="title-container">
-        <img
-          :src="'https://image.tmdb.org/t/p/original' + film.poster_path"
-          :alt="film.title"
-        />
+        <img :src="'https://image.tmdb.org/t/p/original' + film.posterPath" :alt="film.title" />
         <div class="infor">
           <h2>{{ film.title }}</h2>
           <p style="margin-top: 10px">
-            <b>Ngày phát hành: </b>{{ formatDate(film.release_date) }}
+            <b>Ngày phát hành: </b>{{ formatDate(film.releaseDate) }}
           </p>
           <div class="rate-movie">
             <p style="margin-top: 10px"><b>Đánh giá: </b></p>
-            <span
-              style="margin-top: 10px; margin-left: 5px"
-              v-for="star in fullStars"
-              :key="star"
-              class="fa fa-star checked"
-            ></span>
-            <span
-              style="margin-top: 10px; margin-left: 5px"
-              v-for="star in emptyStars"
-              :key="star"
-              class="fa fa-star"
-            ></span>
+            <span style="margin-top: 10px; margin-left: 5px" v-for="star in fullStars" :key="star"
+              class="fa fa-star checked"></span>
+            <span style="margin-top: 10px; margin-left: 5px" v-for="star in emptyStars" :key="star"
+              class="fa fa-star"></span>
           </div>
           <!-- <p style="margin-top: 10px">
             <b>Thời lượng: </b>{{ film.runtime }} phút
@@ -54,8 +36,7 @@
             }}
           </p> -->
           <button class="book-ticket" @click="bookTicket">
-            <span style="margin-right: 5px" class="fa-solid fa-ticket"></span
-            >Đặt vé
+            <span style="margin-right: 5px" class="fa-solid fa-ticket"></span>Đặt vé
           </button>
         </div>
       </div>
@@ -74,85 +55,40 @@
 </template>
 
 <script>
-import { getDetailMovie, getTrailerMovie } from "@/components/api/movie_api.js";
 
 export default {
   name: "DetailFilm",
+
+  created() {
+    this.film = this.filmInfo.film;
+    window.scrollTo(0, 0);
+  },
   data() {
     return {
       loading: false,
       film: {},
-      videos: {},
-      video_key: "",
-      relatedFilms: [
-        {
-          adult: false,
-          backdrop_path: "/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
-          genre_ids: [878, 28, 12],
-          id: 912649,
-          original_language: "en",
-          original_title: "Venom: The Last Dance",
-          overview: "",
-          popularity: 5691.793,
-          poster_path: "/sE2NqRxsbAehUGW6EklvzUAHLAe.jpg",
-          release_date: "2024-10-22",
-          title: "Venom: Kèo Cuối",
-          video: false,
-          vote_average: 6.731,
-          vote_count: 362,
-        },
-      ],
     };
   },
   computed: {
+    filmInfo() {
+      console.log('dataaaaa', this.$route.params);
+      return this.$route.params;
+    },
     fullStars() {
-      return Math.floor((this.film.vote_average / 10) * 5);
+      console.log('point', this.film.voteAverage);
+      return Math.floor((this.film.voteAverage / 10) * 5);
     },
     emptyStars() {
       return 5 - this.fullStars;
     },
   },
-  async created() {
-    const id = this.$route.params.id;
-    await this.fetchDetailFilm(id);
-    await this.fetchTrailerFilm(id);
-    await this.fetchRelatedFilms(id);
-    window.scrollTo(0, 0);
-  },
+
   methods: {
-    async fetchDetailFilm(id) {
-      this.loading = true;
-      try {
-        const res = await getDetailMovie(id);
-        this.film = res;
-      } catch (err) {
-        this.$toast.error("Có lỗi xảy ra");
-      } finally {
-        this.loading = false;
-      }
-    },
-    async fetchTrailerFilm(id) {
-      this.loading = true;
-      try {
-        const res = await getTrailerMovie(id);
-        if (res.results.length > 0) {
-          this.videos = res.results[0];
-          this.video_key = res.results[0].key;
-        } else {
-          this.videos = {};
-          this.video_key = "";
-        }
-      } catch (err) {
-        this.$toast.error("Có lỗi xảy ra");
-      } finally {
-        this.loading = false;
-      }
-    },
     formatDate(dateString) {
       const options = { day: "2-digit", month: "2-digit", year: "numeric" };
       return new Date(dateString).toLocaleDateString("vi-VN", options);
     },
-    bookTicket() {},
+    bookTicket() { this.$router.push({ name: "Branch", params: this.filmInfo }); },
   },
 };
 </script>
@@ -237,6 +173,7 @@ export default {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

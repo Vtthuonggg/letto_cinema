@@ -107,7 +107,7 @@ const routes = [
     component: CinemaPage,
   },
   {
-    path: "/film/:id",
+    path: "/film/detail",
     name: "DetailFilm",
     meta: { title: "Chi tiết phim" },
     component: DetailFilm,
