@@ -6,6 +6,7 @@ export const login = async (username, password) => {
       email: username,
       password: password,
     });
+    console.log("Login response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Login error:", error);
@@ -31,10 +32,10 @@ export const listUser = async () => {
     });
     return response.data;
   } catch (error) {
-    console.error( error);
+    console.error(error);
     throw error;
   }
-};export const detailUser = async (id) => {
+}; export const detailUser = async (id) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/user/${id}`, {
       headers: {
@@ -43,7 +44,7 @@ export const listUser = async () => {
     });
     return response.data;
   } catch (error) {
-    console.error( error);
+    console.error(error);
     throw error;
   }
 };

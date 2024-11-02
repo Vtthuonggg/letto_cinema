@@ -40,7 +40,7 @@
           </button>
         </div>
       </div>
-      <!-- <div v-if="film.overview" class="overview">
+      <div v-if="film.overview" class="overview">
         <h2>Tóm tắt</h2>
         <br />
         <p>{{ film.overview }}</p>
@@ -49,7 +49,7 @@
         <h2>Tóm tắt</h2>
         <br />
         <p>Tạm thời chưa cập nhật</p>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
