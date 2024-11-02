@@ -48,9 +48,9 @@ export const updatePlace = async (id, data) => {
         throw error;
     }
 };
-export const deletePlace = async (id, data) => {
+export const deletePlace = async (id) => {
     try {
-        const response = await axios.delete(`${API_BASE_URL}/place/${id}`, data);
+        const response = await axios.delete(`${API_BASE_URL}/place/${id}`);
         return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");

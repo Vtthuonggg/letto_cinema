@@ -55,7 +55,7 @@ export default {
         console.log();
         this.films = res;
       } catch (err) {
-        this.$toast.error(err);
+        this.$toast.error('Có lỗi xảy ra');
       } finally {
         this.loading = false;
       }
@@ -153,7 +153,7 @@ export default {
 
 .overlay-button {
   width: 60%;
-  height: 10%;
+  height: 13%;
   border: 2px solid #f5dc99;
   background-color: transparent;
   color: #f5dc99;

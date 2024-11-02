@@ -10,8 +10,10 @@
             <p>Giá vé: {{ data.price }} VNĐ</p>
         </div> -->
         <div class="seat-grid">
-            <div v-for="(seat, index) in seats" :key="index" class="seat" @click="handleSeatClick(seat)">
-                {{ seat }}
+            <div v-for="(seat, index) in seats" :key="index"
+                :class="['seat', { 'selected-seat': isSelected(seat), 'unavailable-seat': isNotAvailable(seat) }]"
+                @click="handleSeatClick(seat)">
+                {{ seat.name }}
             </div>
         </div>
         <v-overlay :value="loading">
@@ -20,7 +22,7 @@
     </div>
 </template>
 <script>
-import { listPlaceRoom } from "@/components/api/place_api";
+import { listPlaceRoom, addPlaceRoom, deletePlace } from "@/components/api/place_api";
 export default {
     name: 'SelectSeat',
     computed: {
@@ -31,19 +33,28 @@ export default {
     data() {
         return {
             loading: false,
+            initSeat: [],
             seats: [],
+            selectedSeats: [],
         }
     },
     created() {
         this.generateSeats();
-        // this.getSeat();
+        this.getSeat();
     },
     methods: {
+        isSelected(seat) {
+            return this.selectedSeats.some(selectedSeat => selectedSeat.name === seat.name);
+        },
         async getSeat() {
             this.loading = true;
             try {
-                const response = await listPlaceRoom(this.data.roomId);
-                this.rooms = response;
+                console.log(this.data.roomId);//idRoom ==3
+                const response = await listPlaceRoom(3);
+                this.initSeat = response;
+                console.log('thành công', response);
+                this.selectedSeats = this.initSeat.filter(init => this.seats.some(seat => seat.name == init.name));
+                console.log('sleectasda', this.selectedSeats);
             } catch (error) {
                 console.log(error);
                 this.$toast.error("Có lỗi xảy ra");
@@ -59,31 +70,65 @@ export default {
 
             for (let j = 0; j < cols; j++) {
                 for (let i = 1; i <= rows; i++) {
-                    seats.push(`${alphabet[j]}${i}`);
+                    seats.push({ "name": `${alphabet[j]}${i}` });
                 }
             }
             this.seats = seats;
         },
-        handleSeatClick(seat) {
+        isNotAvailable(seat) {
+
+            return this.selectedSeats.some(selectedSeat => selectedSeat.isAvailable == false && selectedSeat.name === seat.name);
+        },
+        async handleSeatClick(seat) {
+            if (this.isNotAvailable(seat)) return;
+            const index = this.selectedSeats.findIndex(selectedSeat => selectedSeat.name === seat.name);
             console.log(`Seat clicked: ${seat}`);
-            // Xử lý sự kiện click vào ghế ở đây
+            if (index === -1) {
+                this.loading = false;
+                try {
+                    var payload = {
+                        idRoom: 3,
+                        name: seat.name,
+                    }
+                    console.log(payload);
+                    await addPlaceRoom(payload);
+                    this.getSeat();
+                } catch (e) {
+                    console.log(e);
+
+                } finally {
+                    this.loading = false;
+                }
+            } else {
+                this.loading = true;
+                try {
+                    const selectedSeat = this.selectedSeats[index];
+                    console.log('delete', selectedSeat);
+                    await deletePlace(selectedSeat.id);
+                    this.getSeat();
+                } catch (e) {
+                    console.log(e);
+                    this.$toast.error("Có lỗi xảy ra");
+                } finally {
+                    this.loading = false;
+                }
+            }
         },
     },
-
-
 }
 </script>
 
 
 <style scoped>
-.seat-grid {
+.unavailable-seat {
+    background-color: orange !important;
+    cursor: not-allowed;
+}
 
-    width: 70%;
-    height: auto;
+.seat-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 10px;
-    margin: auto;
     padding: 20px;
 }
 
@@ -100,6 +145,11 @@ export default {
 }
 
 .seat:hover {
+    background-color: #dc0004;
+    color: white;
+}
+
+.selected-seat {
     background-color: #dc0004;
     color: white;
 }

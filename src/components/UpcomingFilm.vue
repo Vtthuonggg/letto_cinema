@@ -147,7 +147,7 @@ export default {
 
 .overlay-button {
   width: 60%;
-  height: 10%;
+  height: 13%;
   border: 2px solid #f5dc99;
   background-color: transparent;
   color: #f5dc99;
