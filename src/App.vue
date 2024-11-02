@@ -32,14 +32,16 @@ export default {
         this.$route.path !== "/register" &&
         this.$route.path !== "/admin" &&
         this.$route.path !== "/list-cinema" &&
-        this.$route.path !== "/list-service"
+        this.$route.path !== "/list-service" &&
+        this.$route.path !== "/list-room"
       );
     },
     showFooter() {
       return (
         this.$route.path !== "/admin" &&
         this.$route.path !== "/list-cinema" &&
-        this.$route.path !== "/list-service"
+        this.$route.path !== "/list-service" &&
+        this.$route.path !== "/list-room"
       );
     },
   },
