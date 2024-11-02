@@ -3,11 +3,7 @@
     <div class="title">
       <v-row class="row-title-item">
         <h2>Danh sách phòng chiếu</h2>
-        <v-btn
-          class="gradient-button"
-          @click="popupCreateRoom"
-          style="color: white"
-        >
+        <v-btn class="gradient-button" @click="popupCreateRoom" style="color: white">
           <v-icon style="color: white">mdi-plus</v-icon>
           <span style="color: white">Thêm phòng chiếu</span>
         </v-btn>
@@ -16,14 +12,7 @@
     <v-divider></v-divider>
     <v-container v-if="roomList.length > 0">
       <v-row>
-        <v-col
-          v-for="(room, index) in roomList"
-          :key="index"
-          cols="12"
-          sm="6"
-          md="6"
-          lg="6"
-        >
+        <v-col v-for="(room, index) in roomList" :key="index" cols="12" sm="6" md="6" lg="6">
           <v-card class="cinema-card">
             <v-list-item>
               <v-col>
@@ -41,10 +30,7 @@
                   </v-btn>
                 </template>
                 <v-list>
-                  <v-list-item
-                    style="font-weight: bold"
-                    @click="popupDeleteRoom(room.id)"
-                  >
+                  <v-list-item style="font-weight: bold" @click="popupDeleteRoom(room.id)">
                     <v-list-item-icon>
                       <v-icon>mdi-delete</v-icon>
                     </v-list-item-icon>
@@ -61,21 +47,10 @@
       <div class="popup-content">
         <h3>Tạo phòng chiếu</h3>
         <v-form ref="form">
-          <v-text-field
-            v-model="newRoom.name"
-            label="Tên phòng chiếu"
-            :rules="[(v) => !!v || 'Tên phòng không được để trống']"
-          ></v-text-field>
-          <v-btn
-            @click="closeRoom"
-            style="background-color: white; color: #dc0004"
-            >Hủy</v-btn
-          >
-          <v-btn
-            @click="submitRoom(1)"
-            style="background-color: #dc0004; color: white"
-            >Thêm</v-btn
-          >
+          <v-text-field v-model="newRoom.name" label="Tên phòng chiếu"
+            :rules="[(v) => !!v || 'Tên phòng không được để trống']"></v-text-field>
+          <v-btn @click="closeRoom" style="background-color: white; color: #dc0004">Hủy</v-btn>
+          <v-btn @click="submitRoom(1)" style="background-color: #dc0004; color: white">Thêm</v-btn>
         </v-form>
       </div>
     </div>
@@ -83,18 +58,8 @@
       <div class="popup-content">
         <h3>Xác nhận xóa phòng chiếu</h3>
         <div class="button-container">
-          <v-btn
-            class="gradient-button-cancel"
-            style="color: #00bfff"
-            @click="showDeleteRoom"
-            >Hủy</v-btn
-          >
-          <v-btn
-            class="gradient-button-confirm"
-            style="color: white"
-            @click="deleteRoom(selectedId)"
-            >Xác nhận</v-btn
-          >
+          <v-btn class="gradient-button-cancel" style="color: #00bfff" @click="showDeleteRoom">Hủy</v-btn>
+          <v-btn class="gradient-button-confirm" style="color: white" @click="deleteRoom(selectedId)">Xác nhận</v-btn>
         </div>
       </div>
     </div>
@@ -105,6 +70,11 @@
 import { createRoom, deleteRoom, listRoom } from "@/components/api/room_api.js";
 export default {
   name: "ListRoomPage",
+  computed: {
+    id() {
+      return this.$route.params;
+    },
+  },
   data() {
     return {
       isShowCreateRoom: false,
@@ -117,17 +87,17 @@ export default {
       roomList: [],
     };
   },
-  comments: {},
+
   created() {
     this.idBranch = this.id.id;
     this.fetchRoom();
   },
   methods: {
     async fetchRoom() {
+
       try {
         var res = await listRoom(this.idBranch);
         this.roomList = res;
-        console.log(res);
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");
       }
@@ -135,11 +105,10 @@ export default {
     async submitRoom(type) {
       var data = {
         name: this.newRoom.name,
-        idBranch: this.id,
+        idBranch: this.idBranch,
       };
       try {
         if (type == 1) {
-          console.log(data);
           await createRoom(data);
           this.$toast.success("Thêm phòng chiếu thành công");
         } else {
@@ -195,7 +164,6 @@ export default {
       }
     },
     handleAction(action, type, id) {
-      console.log(`Action: ${action}, Type: ${type}, ID: ${id}`);
       if (type === "room") {
         if (action === "add") {
           this.addRoom();

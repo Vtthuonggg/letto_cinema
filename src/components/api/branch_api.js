@@ -21,7 +21,7 @@ export const detailBranch = async (id) => {
                 "ngrok-skip-browser-warning": "true",
             },
         });
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -30,7 +30,7 @@ export const detailBranch = async (id) => {
 export const deleteBranch = async (id) => {
     try {
         const response = await axios.delete(`${API_BASE_URL}/branch/${id}`, {});
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -39,7 +39,7 @@ export const deleteBranch = async (id) => {
 export const createBranch = async (data) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/branch/add`, data);
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -50,7 +50,7 @@ export const updateBranch = async (id, data) => {
         const response = await axios.put(`${API_BASE_URL}/branch/${id}`,
             data
         );
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;

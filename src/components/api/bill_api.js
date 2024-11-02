@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_BASE_URL} from "../../../BASE_URL.js";
+import { API_BASE_URL } from "../../../BASE_URL.js";
 
 export const getBillInfo = async (idBill) => {
     try {
@@ -13,7 +13,7 @@ export const getBillInfo = async (idBill) => {
                 id: idBill,
             },
         });
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -22,7 +22,7 @@ export const getBillInfo = async (idBill) => {
 export const createBill = async (data) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/bill/add`, data);
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -30,8 +30,8 @@ export const createBill = async (data) => {
 };
 export const updateBill = async (id, isPaid) => {
     try {
-        const response = await axios.put(`${API_BASE_URL}/bill/update/${id}`, {'isPaid': isPaid});
-        return response.data.results;
+        const response = await axios.put(`${API_BASE_URL}/bill/update/${id}`, { 'isPaid': isPaid });
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -40,7 +40,7 @@ export const updateBill = async (id, isPaid) => {
 export const addBillService = async (data) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/bill_service`, data);
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -49,7 +49,7 @@ export const addBillService = async (data) => {
 export const addBillTicket = async (data) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/bill_ticket`, data);
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;

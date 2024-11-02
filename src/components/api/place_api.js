@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_BASE_URL} from "../../../BASE_URL.js";
+import { API_BASE_URL } from "../../../BASE_URL.js";
 
 export const detailPlace = async (id) => {
     try {
@@ -8,7 +8,7 @@ export const detailPlace = async (id) => {
                 "ngrok-skip-browser-warning": "true",
             },
         });
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -24,7 +24,7 @@ export const listPlaceRoom = async (roomId) => {
                 id: roomId,
             },
         });
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -33,7 +33,7 @@ export const listPlaceRoom = async (roomId) => {
 export const addPlaceRoom = async (data) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/place/add`, data);
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -42,7 +42,7 @@ export const addPlaceRoom = async (data) => {
 export const updatePlace = async (id, data) => {
     try {
         const response = await axios.put(`${API_BASE_URL}/place/update/${id}`, data);
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
@@ -51,7 +51,7 @@ export const updatePlace = async (id, data) => {
 export const deletePlace = async (id, data) => {
     try {
         const response = await axios.delete(`${API_BASE_URL}/place/${id}`, data);
-        return response.data.results;
+        return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
         throw error;
