@@ -30,14 +30,14 @@
                 <v-col>
                   <div class="info-cinema">
                     <div class="cinema-info">
-                      <router-link
-                        to="/list-room"
+                      <v-btn
+                        @click="popToListRoom(cinema.id)"
                         active-class="active-link"
                         exact-active-class="exact-active-link"
                         style="text-decoration: none; color: black"
                       >
                         <span>{{ cinema.name }}</span>
-                      </router-link>
+                      </v-btn>
                     </div>
                     <div class="cinema-address">
                       <span>{{ cinema.address }}</span>
@@ -141,6 +141,11 @@ import {
 } from "@/components/api/branch_api.js";
 export default {
   name: "ListCinemaPage",
+  computed: {
+    id() {
+      return this.$route.params;
+    },
+  },
   data() {
     return {
       popupType: null,
@@ -258,6 +263,10 @@ export default {
     },
     closeService() {
       this.popupService = false;
+    },
+    popToListRoom(id) {
+      this.$router.push({ name: "ListRoomPage", params: id });
+      console.log(`id ======== ${id}`);
     },
   },
 };

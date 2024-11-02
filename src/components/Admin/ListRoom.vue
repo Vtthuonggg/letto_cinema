@@ -113,17 +113,19 @@ export default {
         name: "",
       },
       selectedId: null,
+      idBranch: null,
       roomList: [],
     };
   },
   comments: {},
   created() {
+    this.idBranch = this.id.id;
     this.fetchRoom();
   },
   methods: {
     async fetchRoom() {
       try {
-        var res = await listRoom();
+        var res = await listRoom(this.idBranch);
         this.roomList = res;
         console.log(res);
       } catch (err) {
@@ -133,6 +135,7 @@ export default {
     async submitRoom(type) {
       var data = {
         name: this.newRoom.name,
+        idBranch: this.id,
       };
       try {
         if (type == 1) {
