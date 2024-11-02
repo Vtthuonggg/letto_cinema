@@ -12,17 +12,9 @@
           </div>
           <div class="form-group">
             <label for="password">Mật khẩu:</label>
-            <v-text-field
-              outlined
-              :type="showPassword ? 'text' : 'password'"
-              id="password"
-              v-model="password"
-              required
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              @click:append="togglePasswordVisibility"
-              dense
-              class="password-field"
-            ></v-text-field>
+            <v-text-field outlined :type="showPassword ? 'text' : 'password'" id="password" v-model="password" required
+              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" @click:append="togglePasswordVisibility" dense
+              class="password-field"></v-text-field>
           </div>
           <button type="submit" class="gradient-button">Đăng nhập</button>
         </form>
@@ -59,12 +51,12 @@ export default {
       try {
         var res = await login(this.username, this.password);
         console.log(res);
-        Cookies.set("accountId", res.idAccount, {
+        Cookies.set("accountId", res, {
           expires: 7,
           secure: true,
           sameSite: "Lax",
         });
-        if (res.idAccount == 2) {
+        if (res == 2) {
           this.$toast.success("Đăng nhập dưới quyền admin");
           this.$router.push("/admin");
         } else {
@@ -182,7 +174,8 @@ input {
 input[type="password"],
 input[type="text"] {
   width: 100%;
-  padding-right: 40px; /* Thêm khoảng trống cho icon */
+  padding-right: 40px;
+  /* Thêm khoảng trống cho icon */
 }
 
 .password-field {

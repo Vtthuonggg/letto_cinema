@@ -127,28 +127,24 @@ const router = new Router({
 });
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || "Letto Cinema ";
-  next();
-});
-// router.beforeEach((to, from, next) => {
-//   const isLoggedIn = Cookies.get("accountId");
-//   if (!isLoggedIn && to.path !== "/login" && to.path !== "/register") {
-//     Vue.prototype.$toast.error("Vui lòng đăng nhập");
-//     next("/login");
-//   } else {
-//     next();
-//   }
-// });
-router.beforeEach((to, from, next) => {
-  const isAdmin = checkIfUserIsAdmin();
+  const restrictedPaths = ["/list-cinema", "/list-service", "/list-room"];
+  const idAccount = Cookies.get("idAccount");
 
-  if (to.path.startsWith("/admin") && !isAdmin) {
-    next(from.fullPath);
+  if (restrictedPaths.includes(to.path) && idAccount != 2) {
+    Vue.prototype.$toast.error("Bạn không có quyền truy cập trang này");
+    next(false);
   } else {
     next();
   }
-  function checkIfUserIsAdmin() {
-    const accountId = Cookies.get("accountId");
-    return accountId === "2";
+});
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = Cookies.get("accountId");
+  if (!isLoggedIn && to.path !== "/login" && to.path !== "/register") {
+    Vue.prototype.$toast.error("Vui lòng đăng nhập");
+    next("/login");
+  } else {
+    next();
   }
 });
+
 export default router;
