@@ -1,11 +1,15 @@
 <template>
-  <div></div>
+  <div>
+    <div v-for="screen in listScreen" :key="screen.id" @click="selectSeat(screen.idRoom)">
+      <p>Giờ chiếu: {{ new Date(screen.time).toLocaleString() }}</p>
+    </div>
+  </div>
 </template>
 
 
 <script>
-import {listScreen} from "@/components/api/screen_api";
-import {listRoom} from "@/components/api/room_api";
+import { listScreen } from "@/components/api/screen_api";
+import { listRoom } from "@/components/api/room_api";
 
 export default {
   name: 'SelectScreen',
@@ -17,33 +21,29 @@ export default {
   },
   created() {
     this.fetchScreen();
-    this.getBranchInfo();
   },
   data() {
     return {
-      screens: [],
-      screenBranch: [],
+      listScreen: [],
     }
   },
   methods: {
     async fetchScreen() {
       console.log(`paljkasdjajsd ${this.payload.movieId}`);
       try {
-        this.screens = await listScreen(this.payload.movieId);
+        var screens = await listScreen(this.payload.movieId);
+        var rooms = await listRoom(this.payload.branchId);
+        const roomIds = rooms.map(room => room.id);
+        this.listScreen = screens.filter(screen => roomIds.includes(screen.idRoom));
       } catch (e) {
         console.log(e);
         this.$toast.error('Lỗi có lỗi xảy ra');
       }
     },
-    async getBranchInfo() {
-      const res = await listRoom(this.payload.branchId);
-      console.log(res);
-    },
+
   }
 }
 </script>
 
 
-<style scoped>
-
-</style>
+<style scoped></style>
