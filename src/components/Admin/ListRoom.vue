@@ -2,6 +2,7 @@
   <div class="container">
     <div class="title">
       <v-row class="row-title-item">
+        <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
         <h2>Danh sách phòng chiếu</h2>
         <v-btn class="gradient-button" @click="popupCreateRoom" style="color: white">
           <v-icon style="color: white">mdi-plus</v-icon>
@@ -93,6 +94,9 @@ export default {
     this.fetchRoom();
   },
   methods: {
+    goBack() {
+      this.$router.go(-1); // Quay lại màn hình trước đó
+    },
     async fetchRoom() {
 
       try {
