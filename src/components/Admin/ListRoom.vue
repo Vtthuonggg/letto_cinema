@@ -55,7 +55,7 @@
                 <v-list>
                   <v-list-item
                     style="font-weight: bold"
-                    @click="viewScreenings(room.id)"
+                    @click="popToListScreen(room.id)"
                   >
                     <v-list-item-icon>
                       <v-icon>mdi-eye</v-icon>
@@ -224,12 +224,6 @@ export default {
       this.selectedRoomId = id;
       this.openPopupScreen = true;
     },
-    viewScreenings(roomId) {
-      this.$router.push({
-        name: "ListScreenUpdatePage",
-        params: { roomId },
-      });
-    },
     showDeleteRoom() {
       this.isShowDeleteRoom = false;
     },
@@ -269,6 +263,12 @@ export default {
           this.deleteRoom(id);
         }
       }
+    },
+    popToListScreen(id) {
+      this.$router.push({
+        name: "ListScreenUpdatePage",
+        params: { idRoom: id },
+      });
     },
   },
 };

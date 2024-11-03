@@ -58,3 +58,18 @@ export const deleteScreen = async (id) => {
         throw error;
     }
 };
+export const listScreenAll = async () => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/screen`, {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            },
+
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Có lỗi xảy ra");
+        throw error;
+    }
+};
