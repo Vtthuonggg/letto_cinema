@@ -9,11 +9,26 @@
             <p>Ngày: {{ data.date }}</p>
             <p>Giá vé: {{ data.price }} VNĐ</p>
         </div> -->
+        <div class="seat-legend">
+            <div class="legend-item">
+                <div class="legend-box empty-seat"></div>
+                <span>Ghế trống</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box selected-seat"></div>
+                <span>Ghế đang chọn</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box unavailable-seat"></div>
+                <span>Ghế đã được mua</span>
+            </div>
+        </div>
         <div class="seat-grid">
             <div v-for="(seat, index) in seats" :key="index"
                 :class="['seat', { 'selected-seat': isSelected(seat), 'unavailable-seat': isNotAvailable(seat) }]"
                 @click="handleSeatClick(seat)">
-                {{ seat.name }}
+                <v-icon>mdi-sofa-single-outline</v-icon>
+                <span class="seat-name">{{ seat.name }}</span>
             </div>
         </div>
         <v-btn @click="confirmSeat">Xác nhận</v-btn>
@@ -140,12 +155,33 @@ export default {
 
 
 <style scoped>
+.seat-legend {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.legend-box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    margin-right: 5px;
+}
+
 .unavailable-seat {
     background-color: orange !important;
     cursor: not-allowed;
 }
 
 .seat-grid {
+    width: 70%;
+    margin: auto;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 10px;
@@ -156,12 +192,15 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
     padding: 10px;
     transition: background-color 0.3s;
+    font-weight: bold;
+
 }
 
 .seat:hover {

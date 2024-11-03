@@ -2,31 +2,17 @@
   <nav class="navbar">
     <ul class="navbar-list">
       <li class="nav-image">
-        <router-link to="/film"
-        ><img src="../assets/logo.png" alt="Letto logo" class="logo"
-        /></router-link>
+        <router-link to="/film"><img src="../assets/logo.png" alt="Letto logo" class="logo" /></router-link>
       </li>
 
       <li class="nav-block">
         <div class="nav-film">
-          <router-link
-              to="/film"
-              active-class="active-link"
-              exact-active-class="exact-active-link"
-          >
+          <router-link to="/film" active-class="active-link" exact-active-class="exact-active-link">
             <span class="fa-solid fa-film"></span>Phim
           </router-link>
         </div>
 
-        <div class="nav-cine">
-          <router-link
-              to="/cinema"
-              active-class="active-link"
-              exact-active-class="exact-active-link"
-          >
-            <span class="fa-solid fa-video"></span>Rạp
-          </router-link>
-        </div>
+
       </li>
 
       <li class="nav-toggle">
