@@ -16,13 +16,14 @@
                 {{ seat.name }}
             </div>
         </div>
+        <v-btn @click="confirmSeat">Xác nhận</v-btn>
         <v-overlay :value="loading">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
     </div>
 </template>
 <script>
-import { listPlaceRoom, addPlaceRoom, deletePlace } from "@/components/api/place_api";
+import { listPlaceRoom, addPlaceRoom, deletePlace, updatePlace } from "@/components/api/place_api";
 export default {
     name: 'SelectSeat',
     computed: {
@@ -43,6 +44,25 @@ export default {
         this.getSeat();
     },
     methods: {
+        async confirmSeat() {
+            try {
+                for (const seat of this.selectedSeats) {
+                    if (seat.isAvailable) {
+                        var payload = {
+                            id: seat.id,
+                            isAvailable: false,
+                            name: seat.name,
+                        }
+                        await updatePlace(payload, seat.id);
+                    }
+                }
+                this.$toast.success("Xác nhận ghế thành công");
+                this.getSeat();
+            } catch (error) {
+                console.log(error);
+                this.$toast.error("Có lỗi xảy ra khi xác nhận ghế");
+            }
+        },
         isSelected(seat) {
             return this.selectedSeats.some(selectedSeat => selectedSeat.name === seat.name);
         },

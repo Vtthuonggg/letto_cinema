@@ -137,7 +137,6 @@ const router = new Router({
 });
 router.beforeEach((to, from, next) => {
   const isLoggedIn = Cookies.get("accountId");
-  console.log('idididididdi', isLoggedIn);
   if (!isLoggedIn && to.path !== "/login" && to.path !== "/register") {
     Vue.prototype.$toast.error("Vui lòng đăng nhập");
     next("/login");

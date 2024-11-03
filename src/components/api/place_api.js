@@ -39,7 +39,7 @@ export const addPlaceRoom = async (data) => {
         throw error;
     }
 };
-export const updatePlace = async (id, data) => {
+export const updatePlace = async (data, id) => {
     try {
         const response = await axios.put(`${API_BASE_URL}/place/update/${id}`, data);
         return response.data;
