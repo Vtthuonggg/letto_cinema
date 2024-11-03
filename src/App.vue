@@ -34,7 +34,8 @@ export default {
         this.$route.path !== "/list-cinema" &&
         this.$route.path !== "/list-service" &&
         this.$route.path !== "/list-room" &&
-        this.$route.path !== "/list-screen"
+        this.$route.path !== "/list-screen" &&
+        this.$route.path !== "/list-screenupdate"
       );
     },
     showFooter() {
@@ -43,7 +44,8 @@ export default {
         this.$route.path !== "/list-cinema" &&
         this.$route.path !== "/list-service" &&
         this.$route.path !== "/list-room" &&
-        this.$route.path !== "/list-screen"
+        this.$route.path !== "/list-screen" &&
+        this.$route.path !== "/list-screenupdate"
       );
     },
   },

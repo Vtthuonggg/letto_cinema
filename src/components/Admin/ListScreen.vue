@@ -49,16 +49,21 @@
           </v-card-actions>
         </v-card>
       </v-menu>
-      <v-card-actions>
+      <v-card-actions class="button-container">
         <v-spacer></v-spacer>
         <v-btn
-          text
-          color="primary"
+          style="color: white"
+          class="gradient-button-confirm"
           @click="confirmSelection"
           :disabled="!isSelectionComplete"
           >Xác nhận</v-btn
         >
-        <v-btn text color="secondary" @click="cancelSelection">Hủy</v-btn>
+        <v-btn
+          style="color: red"
+          class="gradient-button-cancel"
+          @click="cancelSelection"
+          >Hủy</v-btn
+        >
       </v-card-actions>
     </div>
   </div>
@@ -138,6 +143,36 @@ export default {
 </script>
 
 <style>
+.gradient-button-cancel {
+  flex: 1;
+  border: none;
+  color: #ff0044;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 5px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.gradient-button-confirm {
+  flex: 1;
+  background: linear-gradient(45deg, #ff0044, #ff7070);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 5px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
 .popup {
   width: 100%;
   height: 100%;
@@ -150,5 +185,9 @@ export default {
   padding: 30px;
   max-height: 90vh;
   overflow: auto;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

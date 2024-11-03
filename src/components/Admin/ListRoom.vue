@@ -55,6 +55,17 @@
                 <v-list>
                   <v-list-item
                     style="font-weight: bold"
+                    @click="viewScreenings(room.id)"
+                  >
+                    <v-list-item-icon>
+                      <v-icon>mdi-eye</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Xem suất chiếu</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+                <v-list>
+                  <v-list-item
+                    style="font-weight: bold"
                     @click="popupDeleteRoom(room.id)"
                   >
                     <v-list-item-icon>
@@ -212,6 +223,12 @@ export default {
     popupCreateScreen(id) {
       this.selectedRoomId = id;
       this.openPopupScreen = true;
+    },
+    viewScreenings(roomId) {
+      this.$router.push({
+        name: "ListScreenUpdatePage",
+        params: { roomId },
+      });
     },
     showDeleteRoom() {
       this.isShowDeleteRoom = false;

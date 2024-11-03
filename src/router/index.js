@@ -19,6 +19,7 @@ import ListRoomPage from "@/components/Admin/ListRoom.vue";
 import Cookies from "js-cookie";
 import SelectSeat from "@/components/SelectSeat.vue";
 import ListScreenPage from "@/components/Admin/ListScreen.vue";
+import ListScreenUpdatePage from "@/components/Admin/ListScreenUpdate.vue";
 // import { component } from "vue/types/umd";
 
 
@@ -43,6 +44,12 @@ const routes = [
     name: "ListScreenPage",
     meta: { title: "Quản lý suất chiếu" },
     component: ListScreenPage,
+  },
+  {
+    path: "/list-screenupdate",
+    name: "ListScreenUpdatePage",
+    meta: { title: "Danh sách suất chiếu" },
+    component: ListScreenUpdatePage,
   },
   {
     path: "/list-service",
