@@ -18,6 +18,7 @@ import SelectScreen from "@/components/SelectScreen.vue";
 import ListRoomPage from "@/components/Admin/ListRoom.vue";
 import Cookies from "js-cookie";
 import SelectSeat from "@/components/SelectSeat.vue";
+import ListScreenPage from "@/components/Admin/ListScreen.vue";
 // import { component } from "vue/types/umd";
 
 
@@ -36,6 +37,12 @@ const routes = [
     name: "ListCinemaPage",
     meta: { title: "Quản lý rạp" },
     component: ListCinemaPage,
+  },
+  {
+    path: "/list-screen",
+    name: "ListScreenPage",
+    meta: { title: "Quản lý suất chiếu" },
+    component: ListScreenPage,
   },
   {
     path: "/list-service",
