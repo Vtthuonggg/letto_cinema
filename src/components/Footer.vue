@@ -3,7 +3,11 @@
     <v-divider></v-divider>
     <div class="footer-content">
       <div class="footer-left">
-        <img alt="Footer logo" src="../assets/logofooter.png" class="footer-logo"/>
+        <img
+          alt="Footer logo"
+          src="../assets/logofooter.png"
+          class="footer-logo"
+        />
         <ul>
           <li>
             <i class="fa fa-angle-right"></i>
@@ -38,30 +42,26 @@
             <a href="#"> Liên hệ quảng cáo</a>
           </li>
         </ul>
-
       </div>
       <div class="footer-right">
         <h3>CỤM RẠP LETTO</h3>
         <ul>
-          <li>
-            <i class="fa fa-angle-right"></i>
-            <a href="https://www.google.com/maps?q=21.02835181224695, 105.79078616420756" target="_blank"> Letto Cinema
-              Cầu Giấy</a>
-          </li>
-          <li>
-            <i class="fa fa-angle-right"></i>
-            <a href="https://www.google.com/maps?q=20.980567551476092, 105.78915435964907" target="_blank"> Letto Cinema
-              Văn Quán</a>
-          </li>
-          <li>
-            <i class="fa fa-angle-right"></i>
-            <a href="https://www.google.com/maps?q=21.021502143947313, 105.81784377132139" target="_blank"> Letto Cinema
-              Đống Đa</a>
-          </li>
-          <li>
-            <i class="fa fa-angle-right"></i>
-            <a href="https://www.google.com/maps?q=21.02136902682523, 105.87785989114556" target="_blank"> Letto Cinema
-              Long Biên</a>
+          <li
+            v-for="cinema in cinemas"
+            :key="cinema.id"
+            @click="selectCinema(cinema)"
+          >
+            <i
+              class="fa"
+              :class="{
+                'fa-angle-right': selectedCinema !== cinema,
+                'fa-angle-down': selectedCinema === cinema,
+              }"
+            ></i>
+            <span class="name-cinema">{{ cinema.name }}</span>
+            <div class="address-cinema" v-if="selectedCinema === cinema">
+              <span>Địa chỉ: {{ selectedCinema.address }}</span>
+            </div>
           </li>
         </ul>
       </div>
@@ -87,23 +87,47 @@
         </p>
         <p>
           <span class="fa-solid fa-phone"></span>
-          <a href="tel:+0123445567">0865202584
-          </a>
+          <a href="tel:+0123445567">0865202584 </a>
         </p>
         <p>
           <span class="fa-solid fa-envelope"></span>
           <a href="mailto:lettocinema@gmail.com">lettocinema@gmail.com</a>
         </p>
-
       </div>
     </div>
-    <p style="text-align: center;">&copy; 2024 Letto Cinema. All rights reserved.</p>
+    <p style="text-align: center">
+      &copy; 2024 Letto Cinema. All rights reserved.
+    </p>
   </footer>
 </template>
 
 <script>
+import { getListBranch } from "./api/branch_api";
+
 export default {
   name: "FooterPage",
+  data() {
+    return {
+      cinemas: [],
+      selectedCinema: null,
+    };
+  },
+  mounted() {
+    this.fetchCinemas();
+  },
+  methods: {
+    async fetchCinemas() {
+      try {
+        var res = await getListBranch();
+        this.cinemas = res;
+      } catch (err) {
+        this.$toast.error("Có lỗi xảy ra");
+      }
+    },
+    selectCinema(cinema) {
+      this.selectedCinema = this.selectedCinema === cinema ? null : cinema;
+    },
+  },
 };
 </script>
 
@@ -172,7 +196,7 @@ export default {
 
 h3 {
   margin-bottom: 20px;
-  color: #dc0004
+  color: #dc0004;
 }
 
 .footer-right p {
@@ -181,5 +205,21 @@ h3 {
 
 .footer-right p a {
   margin-left: 5px;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+.name-cinema {
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+.name-cinema:hover {
+  color: #1db4f0;
+  text-decoration: underline;
+}
+.address-cinema {
+  margin: 10px;
 }
 </style>
