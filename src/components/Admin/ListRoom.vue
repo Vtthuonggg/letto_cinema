@@ -4,7 +4,11 @@
       <v-row class="row-title-item">
         <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
         <h2>Danh sách phòng chiếu</h2>
-        <v-btn class="gradient-button" @click="popupCreateRoom" style="color: white">
+        <v-btn
+          class="gradient-button"
+          @click="popupCreateRoom"
+          style="color: white"
+        >
           <v-icon style="color: white">mdi-plus</v-icon>
           <span style="color: white">Thêm phòng chiếu</span>
         </v-btn>
@@ -13,7 +17,14 @@
     <v-divider></v-divider>
     <v-container v-if="roomList.length > 0">
       <v-row>
-        <v-col v-for="(room, index) in roomList" :key="index" cols="12" sm="6" md="6" lg="6">
+        <v-col
+          v-for="(room, index) in roomList"
+          :key="index"
+          cols="12"
+          sm="6"
+          md="6"
+          lg="6"
+        >
           <v-card class="cinema-card">
             <v-list-item>
               <v-col>
@@ -31,7 +42,32 @@
                   </v-btn>
                 </template>
                 <v-list>
-                  <v-list-item style="font-weight: bold" @click="popupDeleteRoom(room.id)">
+                  <v-list-item
+                    style="font-weight: bold"
+                    @click="popupCreateScreen(room.id)"
+                  >
+                    <v-list-item-icon>
+                      <v-icon>mdi-plus</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Thêm suất chiếu</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+                <v-list>
+                  <v-list-item
+                    style="font-weight: bold"
+                    @click="popToListScreen(room.id)"
+                  >
+                    <v-list-item-icon>
+                      <v-icon>mdi-eye</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Xem suất chiếu</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+                <v-list>
+                  <v-list-item
+                    style="font-weight: bold"
+                    @click="popupDeleteRoom(room.id)"
+                  >
                     <v-list-item-icon>
                       <v-icon>mdi-delete</v-icon>
                     </v-list-item-icon>
@@ -48,10 +84,21 @@
       <div class="popup-content">
         <h3>Tạo phòng chiếu</h3>
         <v-form ref="form">
-          <v-text-field v-model="newRoom.name" label="Tên phòng chiếu"
-            :rules="[(v) => !!v || 'Tên phòng không được để trống']"></v-text-field>
-          <v-btn @click="closeRoom" style="background-color: white; color: #dc0004">Hủy</v-btn>
-          <v-btn @click="submitRoom(1)" style="background-color: #dc0004; color: white">Thêm</v-btn>
+          <v-text-field
+            v-model="newRoom.name"
+            label="Tên phòng chiếu"
+            :rules="[(v) => !!v || 'Tên phòng không được để trống']"
+          ></v-text-field>
+          <v-btn
+            @click="closeRoom"
+            style="background-color: white; color: #dc0004"
+            >Hủy</v-btn
+          >
+          <v-btn
+            @click="submitRoom(1)"
+            style="background-color: #dc0004; color: white"
+            >Thêm</v-btn
+          >
         </v-form>
       </div>
     </div>
@@ -59,21 +106,39 @@
       <div class="popup-content">
         <h3>Xác nhận xóa phòng chiếu</h3>
         <div class="button-container">
-          <v-btn class="gradient-button-cancel" style="color: #00bfff" @click="showDeleteRoom">Hủy</v-btn>
-          <v-btn class="gradient-button-confirm" style="color: white" @click="deleteRoom(selectedId)">Xác nhận</v-btn>
+          <v-btn
+            class="gradient-button-cancel"
+            style="color: #00bfff"
+            @click="showDeleteRoom"
+            >Hủy</v-btn
+          >
+          <v-btn
+            class="gradient-button-confirm"
+            style="color: white"
+            @click="deleteRoom(selectedId)"
+            >Xác nhận</v-btn
+          >
         </div>
       </div>
     </div>
     <v-overlay :value="loading">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
+    <div v-if="this.openPopupScreen">
+      <ListScreenPage :idRoom="selectedRoomId" @closeScreen="closeScreen">
+      </ListScreenPage>
+    </div>
   </div>
 </template>
 
 <script>
+import ListScreenPage from "@/components/Admin/ListScreen.vue";
 import { createRoom, deleteRoom, listRoom } from "@/components/api/room_api.js";
 export default {
   name: "ListRoomPage",
+  components: {
+    ListScreenPage,
+  },
   computed: {
     id() {
       return this.$route.params;
@@ -84,6 +149,8 @@ export default {
       loading: false,
       isShowCreateRoom: false,
       isShowDeleteRoom: false,
+      selectedRoomId: null,
+      openPopupScreen: false,
       newRoom: {
         name: "",
       },
@@ -153,6 +220,10 @@ export default {
       this.isShowDeleteRoom = true;
       this.selectedId = id;
     },
+    popupCreateScreen(id) {
+      this.selectedRoomId = id;
+      this.openPopupScreen = true;
+    },
     showDeleteRoom() {
       this.isShowDeleteRoom = false;
     },
@@ -163,6 +234,9 @@ export default {
       this.newRoom = {
         name: "",
       };
+    },
+    closeScreen() {
+      this.openPopupScreen = false;
     },
     closePopup() {
       this.isShowCreateRoom = false;
@@ -189,6 +263,12 @@ export default {
           this.deleteRoom(id);
         }
       }
+    },
+    popToListScreen(id) {
+      this.$router.push({
+        name: "ListScreenUpdatePage",
+        params: { idRoom: id },
+      });
     },
   },
 };
