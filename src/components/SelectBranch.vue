@@ -1,8 +1,12 @@
 <template>
   <div>
-    <div v-for="(branch, index) in branches" :key="branch.id" class="branch-container">
+    <div
+      v-for="(branch, index) in branches"
+      :key="branch.id"
+      class="branch-container"
+    >
       <img :src="getImage(index)" alt="Branch Image" class="branch-image" />
-      <div class="branch-details" @click="handleClick(branch.id)">
+      <div class="branch-details" @click="handleClick(branch)">
         <h3>{{ branch.name }}</h3>
         <p>{{ branch.address }}</p>
       </div>
@@ -37,10 +41,11 @@ export default {
     this.getBranches();
   },
   methods: {
-    handleClick(id) {
+    handleClick(branch) {
+      console.log(this.film.id);
       this.$router.push({
-        name: 'SelectScreen',
-        params: { movieId: this.film.id, branchId: id }
+        name: "SelectScreen",
+        params: { movie: this.film, branch: branch },
       });
     },
     async getBranches() {

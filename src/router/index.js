@@ -22,7 +22,6 @@ import ListScreenPage from "@/components/Admin/ListScreen.vue";
 import ListScreenUpdatePage from "@/components/Admin/ListScreenUpdate.vue";
 // import { component } from "vue/types/umd";
 
-
 Vue.use(Router);
 
 const routes = [
@@ -93,7 +92,8 @@ const routes = [
     name: "Ticket",
     meta: { title: "Vé" },
     component: TicketPage,
-  }, {
+  },
+  {
     path: "/select-branch",
     name: "Branch",
     meta: { title: "Chọn rạp" },
@@ -131,7 +131,7 @@ const routes = [
     component: DetailFilm,
   },
   {
-    path: "/film/:movieId/:branchId",
+    path: "/film/select-screen",
     name: "SelectScreen",
     meta: { title: "Chọn suất chiếu" },
     component: SelectScreen,
@@ -170,6 +170,5 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-
 
 export default router;

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-for="screen in listScreen" :key="screen.id" @click="selectSeat(screen.idRoom)">
+    <div
+      v-for="screen in listScreen"
+      :key="screen.id"
+      @click="selectSeat(screen)"
+    >
       <p>Giờ chiếu: {{ new Date(screen.time).toLocaleString() }}</p>
     </div>
     <v-overlay :value="loading">
@@ -9,18 +13,16 @@
   </div>
 </template>
 
-
 <script>
 import { listScreen } from "@/components/api/screen_api";
 import { listRoom } from "@/components/api/room_api";
 
 export default {
-  name: 'SelectScreen',
+  name: "SelectScreen",
   computed: {
     payload() {
-      console.log(this.$route.params);
       return this.$route.params;
-    }
+    },
   },
   created() {
     this.fetchScreen();
@@ -29,33 +31,38 @@ export default {
     return {
       loading: false,
       listScreen: [],
-    }
+    };
   },
   methods: {
-    selectSeat(idRoom) {
+    selectSeat(screen) {
+      console.log("Suất chiếu được chọn", screen);
       this.$router.push({
-        name: 'SelectSeat',
-        params: { movieId: this.payload.movieId, branchId: this.payload.branchId, roomId: idRoom }
+        name: "SelectSeat",
+        params: {
+          movie: this.payload.movie,
+          branch: this.payload.branch,
+          screen: screen,
+        },
       });
     },
     async fetchScreen() {
       this.loading = true;
       try {
-        var screens = await listScreen(this.payload.movieId);
-        var rooms = await listRoom(this.payload.branchId);
-        const roomIds = rooms.map(room => room.id);
-        this.listScreen = screens.filter(screen => roomIds.includes(screen.idRoom));
+        var screens = await listScreen(this.payload.movie.id);
+        var rooms = await listRoom(this.payload.branch.id);
+        const roomIds = rooms.map((room) => room.id);
+        this.listScreen = screens.filter((screen) =>
+          roomIds.includes(screen.idRoom)
+        );
       } catch (e) {
         console.log(e);
-        this.$toast.error('Lỗi có lỗi xảy ra');
+        this.$toast.error("Lỗi có lỗi xảy ra");
       } finally {
         this.loading = false;
       }
     },
-
-  }
-}
+  },
+};
 </script>
-
 
 <style scoped></style>
