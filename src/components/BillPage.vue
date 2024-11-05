@@ -4,27 +4,27 @@
       <div>
         <span class="close" @click="closePopup">&times;</span>
 
-        <h1 style="color: #0056b3"> Hóa đơn thanh toán</h1>
+        <h1 style="color: #0056b3">Hóa đơn thanh toán</h1>
       </div>
 
-      <hr class="dashed-line">
+      <hr class="dashed-line" />
 
-      <img :src="qrCodeUrl" alt="QR Code" class="qr-img"/>
+      <img :src="qrCodeUrl" alt="QR Code" class="qr-img" />
 
-      <hr class="dashed-line">
-      <h2> Thông tin vé</h2>
+      <hr class="dashed-line" />
+      <h2>Thông tin vé</h2>
 
       <div class="ticket-info">
         <table>
           <thead>
-          <tr>
-            <th>STT</th>
-            <th>Phim</th>
-            <th>Phòng</th>
-            <th>Giờ chiếu</th>
-            <th>Ghế</th>
-            <th>Giá vé</th>
-          </tr>
+            <tr>
+              <th>STT</th>
+              <th>Phim</th>
+              <th>Phòng</th>
+              <th>Giờ chiếu</th>
+              <th>Ghế</th>
+              <th>Giá vé</th>
+            </tr>
           </thead>
           <tr v-for="(ticket, index) in bill.ticket" :key="index">
             <td>{{ index + 1 }}</td>
@@ -36,20 +36,19 @@
           </tr>
         </table>
       </div>
-      <hr class="dashed-line">
-      <h2> Thông dịch vụ</h2>
+      <hr class="dashed-line" />
+      <h2>Thông dịch vụ</h2>
 
       <div class="ticket-info">
         <table>
           <thead>
-          <tr>
-            <th>STT</th>
-            <th>Tên</th>
-            <th>Đơn giá</th>
-            <th>Số lượng</th>
-            <th>Tổng giá</th>
-
-          </tr>
+            <tr>
+              <th>STT</th>
+              <th>Tên</th>
+              <th>Đơn giá</th>
+              <th>Số lượng</th>
+              <th>Tổng giá</th>
+            </tr>
           </thead>
           <tr v-for="(service, index) in bill.service" :key="index">
             <td>{{ index + 1 }}</td>
@@ -60,24 +59,32 @@
           </tr>
         </table>
       </div>
-      <hr class="dashed-line">
-      <p>
-        <b>Chi nhánh rạp:</b> {{ bill.ticket[0].nameBranch }}
-      </p>
-      <p>
-        <b>Thời gian giao dịch:</b> {{ new Date(bill.time).toLocaleString() }}
-      </p>
-      <hr class="dashed-line">
-      <h2> Tổng tiền hóa đơn : {{ formatCurrency(bill.total) }} VNĐ</h2>
+      <hr class="dashed-line" />
+      <div class="info-container">
+        <p><b>Chi nhánh rạp:</b> {{ bill.ticket[0].nameBranch }}</p>
+        <p>
+          <b>Thời gian giao dịch:</b> {{ new Date(bill.time).toLocaleString() }}
+        </p>
+      </div>
+      <hr class="dashed-line" />
+      <h2>Tổng tiền hóa đơn : {{ formatCurrency(bill.total) }} VNĐ</h2>
+      <button @click="confirmPayment" class="confirm-button">
+        Xác nhận thanh toán
+      </button>
     </div>
   </div>
 </template>
 <script>
-import {formatCurrency} from "@/components/utils/format_currency";
+import { formatCurrency } from "@/components/utils/format_currency";
 
 export default {
   name: "BillPage",
-
+  props: {
+    bill: {
+      type: Object,
+      required: true,
+    },
+  },
   mounted() {
     this.qrCodeUrl = `https://img.vietqr.io/image/TCB-vtthuonggg-qr_only.png?amount=${this.bill.total}`;
   },
@@ -86,57 +93,38 @@ export default {
     closePopup() {
       this.$emit("closeBill");
     },
+    confirmPayment() {
+      this.$emit("confirmPayment");
+    },
   },
   data() {
     return {
-      bill: {
-        "id": 1,
-        "time": "2024-12-14T05:00:00.000+00:00",
-        "ticket": [
-          {
-            "id": 1,
-            "price": 85000.00,
-            "nameUser": "viet",
-            "email": "hqviet.51@gmail.com",
-            "phone": "1234567890",
-            "place": "K1",
-            "time": "2024-12-14T05:00:00.000+00:00",
-            "nameMovie": "Castle in the Sky",
-            "nameRoom": "R123",
-            "nameBranch": "Hoang Mai "
-          },
-          {
-            "id": 2,
-            "price": 100000.00,
-            "nameUser": "viet",
-            "email": "hqviet.51@gmail.com",
-            "phone": "1234567890",
-            "place": "K2",
-            "time": "2024-12-14T05:00:00.000+00:00",
-            "nameMovie": "Castle in the Sky",
-            "nameRoom": "R123",
-            "nameBranch": "Hoang Mai "
-          }
-        ],
-        "service": [
-          {
-            "id": 1,
-            "nameService": "coca",
-            "price": 15000.00,
-            "quantity": 8.00,
-            "amount": 120000.0000
-          }
-        ],
-        "total": 305000.0000
-      },
       qrCodeUrl: ``,
-
     };
   },
 };
 </script>
 <style scoped>
+.confirm-button {
+  background-color: #dc0004;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+.confirm-button:hover {
+  background-color: #dc0004;
+}
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.info-container p {
+  margin: 0;
+}
 .popup {
   width: 100%;
   height: 100%;
@@ -201,6 +189,5 @@ th {
 p {
   margin: 10px 0;
   text-align: left;
-
 }
 </style>

@@ -1,75 +1,53 @@
 <template>
   <div>
     <carousel
-        :autoplay="true"
-        :autoplay-timeout="2000"
-        :per-page="1"
-        :loop="true"
-        class="custom-carousel"
+      :autoplay="true"
+      :autoplay-timeout="2000"
+      :per-page="1"
+      :loop="true"
+      class="custom-carousel"
     >
       <slide>
-        <img src="../assets/slide1.png" alt="Banner 1" class="carousel-image"/>
+        <img src="../assets/slide1.png" alt="Banner 1" class="carousel-image" />
       </slide>
       <slide>
-        <img src="../assets/slide2.jpg" alt="Banner 2" class="carousel-image"/>
+        <img src="../assets/slide2.jpg" alt="Banner 2" class="carousel-image" />
       </slide>
       <slide>
-        <img src="../assets/slide3.jpg" alt="Banner 3" class="carousel-image"/>
+        <img src="../assets/slide3.jpg" alt="Banner 3" class="carousel-image" />
       </slide>
     </carousel>
-    <div class="button-group">
-      <button @click="showBill">
-        Hóa đơn
-      </button>
-    </div>
+
     <div class="button-group">
       <router-link
-          to="/film/now-showing"
-          class="button"
-          exact-active-class="active-button"
-      >Phim đang chiếu
-      </router-link
-      >
+        to="/film/now-showing"
+        class="button"
+        exact-active-class="active-button"
+        >Phim đang chiếu
+      </router-link>
       <router-link
-          to="/film/upcoming"
-          class="button"
-          exact-active-class="active-button"
-      >Phim sắp chiếu
-      </router-link
-      >
+        to="/film/upcoming"
+        class="button"
+        exact-active-class="active-button"
+        >Phim sắp chiếu
+      </router-link>
     </div>
     <router-view></router-view>
-    <div v-if="isBill">
-      <bill @closeBill="closeBill"/>
-    </div>
   </div>
 </template>
 
 <script>
-import {Carousel, Slide} from "vue-carousel";
-import Bill from "./BillPage.vue";
+import { Carousel, Slide } from "vue-carousel";
 export default {
   name: "FilmPage",
   components: {
     Carousel,
     Slide,
-    Bill,
   },
   mounted() {
     if (this.$route.path === "/film") {
       this.$router.push("/film/now-showing");
     }
-  },
-  data() {
-    return {isBill: false};
-  },
-  methods: {
-    showBill() {
-      this.isBill =true;
-    },
-    closeBill() {
-      this.isBill = false;
-    },
   },
 };
 </script>
@@ -78,7 +56,6 @@ export default {
 .custom-carousel {
   width: 100%;
   height: auto;
-
 }
 
 .carousel-image {

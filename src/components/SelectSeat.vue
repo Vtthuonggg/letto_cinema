@@ -2,13 +2,7 @@
   <div>
     <h1 style="margin: 15px 0">MÀN CHIẾU</h1>
     <v-divider style="width: 70%; margin: auto"></v-divider>
-    <div class="info-container">
-      <p>Phòng chiếu: {{ data.roomName }}</p>
-      <p>Phim: {{ data.movieName }}</p>
-      <p>Thời gian: {{ data.time }}</p>
-      <!-- <p>Ngày: {{ data.date }}</p> -->
-      <p>Giá vé: {{ 90.0 }} VNĐ</p>
-    </div>
+
     <div class="seat-legend">
       <div class="legend-item">
         <div class="legend-box empty-seat"></div>
@@ -24,13 +18,18 @@
       </div>
     </div>
     <div class="seat-grid">
-      <div v-for="(seat, index) in seats" :key="index" :class="[
-        'seat',
-        {
-          'selected-seat': isSelected(seat),
-          'unavailable-seat': isNotAvailable(seat),
-        },
-      ]" @click="handleSeatClick(seat)">
+      <div
+        v-for="(seat, index) in seats"
+        :key="index"
+        :class="[
+          'seat',
+          {
+            'selected-seat': isSelected(seat),
+            'unavailable-seat': isNotAvailable(seat),
+          },
+        ]"
+        @click="handleSeatClick(seat)"
+      >
         <v-icon>mdi-sofa-single-outline</v-icon>
         <span class="seat-name">{{ seat.name }}</span>
       </div>
@@ -46,10 +45,12 @@ import {
   listPlaceRoom,
   addPlaceRoom,
   deletePlace,
-  // updatePlace,
 } from "@/components/api/place_api";
 import { addTicket } from "@/components/api/ticket_api";
+import { uploadImage } from "@/components/api/cloud_dinary";
 import { addBillTicket, createBill } from "@/components/api/bill_api";
+import Cookies from "js-cookie";
+import JsBarcode from "jsbarcode";
 export default {
   name: "SelectSeat",
   computed: {
@@ -76,16 +77,26 @@ export default {
         const billId = await createBill();
         for (const seat of this.selectedSeats) {
           if (seat.isAvailable) {
-            // var payload = {
-            //   idRoom: this.data.screen.idRoom,
-            //   isAvailable: false,
-            //   name: seat.name,
-            // };
-            // await updatePlace(payload, seat.id);
             var data = {
+              idUser: Cookies.get("accountId"),
               idPlace: seat.id,
               idScreen: this.data.screen.id,
             };
+            const barcodeValue =
+              `${data.idUser}${data.idPlace}${data.idScreen}`.padStart(12, "0");
+
+            const canvas = document.createElement("canvas");
+
+            JsBarcode(canvas, barcodeValue, {
+              format: "CODE128",
+              displayValue: true,
+            });
+            const blob = await new Promise((resolve) => canvas.toBlob(resolve));
+
+            const barcodeUrl = await uploadImage(blob);
+
+            data.barcode = barcodeUrl;
+
             const resId = await addTicket(data);
             await addBillTicket({
               idBill: billId.id,
@@ -94,7 +105,7 @@ export default {
           }
         }
         this.$toast.success("Xác nhận ghế thành công");
-        this.$router.push({ name: 'SelectService', params: { id: billId.id } });
+        this.$router.push({ name: "SelectService", params: { id: billId.id } });
       } catch (error) {
         console.log(error);
         this.$toast.error("Có lỗi xảy ra khi xác nhận ghế");
@@ -108,10 +119,8 @@ export default {
     async getSeat() {
       this.loading = true;
       try {
-        console.log("AAAAAAAAAAAAAA", this.data.screen.idRoom);
         const response = await listPlaceRoom(this.data.screen.idRoom);
         this.initSeat = response;
-        console.log("thành công", response);
         this.selectedSeats = this.initSeat.filter((init) =>
           this.seats.some((seat) => seat.name == init.name)
         );
@@ -146,7 +155,6 @@ export default {
       const index = this.selectedSeats.findIndex(
         (selectedSeat) => selectedSeat.name === seat.name
       );
-      console.log(`Seat clicked: ${seat}`);
       if (index === -1) {
         this.loading = false;
         try {
@@ -166,7 +174,6 @@ export default {
         this.loading = true;
         try {
           const selectedSeat = this.selectedSeats[index];
-          console.log("delete", selectedSeat);
           await deletePlace(selectedSeat.id);
           this.getSeat();
         } catch (e) {
