@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 style="text-align: left; margin: 10px">Vé đã mua</h1>
+    <h1 style="text-align: left; margin: 10px 50px">Vé đã mua</h1>
     <v-divider></v-divider>
     <v-container v-if="listTickets.length > 0">
       <v-row>
@@ -12,7 +12,7 @@
                   <h2 style="color: #b50003">{{ ticket.nameMovie }}</h2>
                 </v-card-title>
                 <v-card-text style="text-align: left">
-                  <p>{{ new Date(ticket.time).toLocaleString() }}</p>
+                  <p>{{ formatTime(ticket.time).toLocaleString() }}</p>
                   <p>Letto {{ ticket.nameBranch }}</p>
                 </v-card-text>
               </div>
@@ -20,7 +20,7 @@
               <div class="right-section">
                 <v-card-text style="text-align: center">
                   <h2 style="color: #00519f; text-align: center">
-                    {{ ticket.price }} VNĐ
+                    {{ formatCurrency(ticket.price) }} VNĐ
                   </h2>
                 </v-card-text>
                 <v-card-text style="text-align: left">
@@ -60,59 +60,18 @@ export default {
     return {
       loading: false,
       selectedTicket: null,
-      listTickets: [
-        {
-          id: 1,
-          price: 85000.0,
-          nameUser: "viet",
-          email: "thuong2304203@gmail.com",
-          phone: "0865202584",
-          place: "K1",
-          time: "2024-12-14T05:00:00.000+00:00",
-          nameMovie: "Castle in the Sky",
-          nameRoom: "R123",
-          nameBranch: "Hoang Mai",
-        },
-        {
-          id: 2,
-          price: 85000.0,
-          nameUser: "viet",
-          email: "thuong2304203@gmail.com",
-          phone: "0865202584",
-          place: "K2",
-          time: "2024-12-14T05:00:00.000+00:00",
-          nameMovie: "Castle in the Sky",
-          nameRoom: "R123",
-          nameBranch: "Hoang Mai",
-        },
-        {
-          id: 3,
-          price: 85000.0,
-          nameUser: "viet",
-          email: "thuong2304203@gmail.com",
-          phone: "0865202584",
-          place: "K1",
-          time: "2024-12-14T05:00:00.000+00:00",
-          nameMovie: "Castle in the Sky",
-          nameRoom: "R123",
-          nameBranch: "Hoang Mai",
-        },
-        {
-          id: 3,
-          price: 85000.0,
-          nameUser: "viet",
-          email: "thuong2304203@gmail.com",
-          phone: "0865202584",
-          place: "K3",
-          time: "2024-12-14T05:00:00.000+00:00",
-          nameMovie: "Castle in the Sky",
-          nameRoom: "R123",
-          nameBranch: "Hoang Mai",
-        },
-      ],
+      listTickets: [],
     };
   },
   methods: {
+    formatCurrency(value) {
+      return new Intl.NumberFormat({
+        style: "currency",
+        currency: "VND",
+      })
+        .format(value)
+        .replace(/,/g, ".");
+    },
     handleCardClick(ticket) {
       this.selectedTicket = ticket;
     },
@@ -129,6 +88,15 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+    formatTime(time) {
+      const date = new Date(time);
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const year = date.getFullYear();
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      return `${day}/${month}/${year} ${hours}:${minutes}`;
     },
   },
 };
