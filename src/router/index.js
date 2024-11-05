@@ -20,6 +20,7 @@ import Cookies from "js-cookie";
 import SelectSeat from "@/components/SelectSeat.vue";
 import ListScreenPage from "@/components/Admin/ListScreen.vue";
 import ListScreenUpdatePage from "@/components/Admin/ListScreenUpdate.vue";
+import SelectService from "@/components/SelectService.vue";
 // import { component } from "vue/types/umd";
 
 Vue.use(Router);
@@ -141,6 +142,12 @@ const routes = [
     name: "SelectSeat",
     meta: { title: "Chọn ghế" },
     component: SelectSeat,
+  },
+  {
+    path: "/film/select-service",
+    name: "SelectService",
+    meta: { title: "Chọn dịch vụ" },
+    component: SelectService,
   },
 ];
 

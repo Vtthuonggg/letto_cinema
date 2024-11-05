@@ -46,8 +46,10 @@ import {
   listPlaceRoom,
   addPlaceRoom,
   deletePlace,
-  updatePlace,
+  // updatePlace,
 } from "@/components/api/place_api";
+import { addTicket } from "@/components/api/ticket_api";
+import { addBillTicket, createBill } from "@/components/api/bill_api";
 export default {
   name: "SelectSeat",
   computed: {
@@ -71,18 +73,28 @@ export default {
   methods: {
     async confirmSeat() {
       try {
+        const billId = await createBill();
         for (const seat of this.selectedSeats) {
           if (seat.isAvailable) {
-            var payload = {
-              idRoom: this.data.screen.idRoom,
-              isAvailable: false,
-              name: seat.name,
+            // var payload = {
+            //   idRoom: this.data.screen.idRoom,
+            //   isAvailable: false,
+            //   name: seat.name,
+            // };
+            // await updatePlace(payload, seat.id);
+            var data = {
+              idPlace: seat.id,
+              idScreen: this.data.screen.id,
             };
-            await updatePlace(payload, seat.id);
+            const resId = await addTicket(data);
+            await addBillTicket({
+              idBill: billId.id,
+              idTicket: resId.id,
+            });
           }
         }
         this.$toast.success("Xác nhận ghế thành công");
-        this.getSeat();
+        this.$router.push({ name: 'SelectService', params: { id: billId.id } });
       } catch (error) {
         console.log(error);
         this.$toast.error("Có lỗi xảy ra khi xác nhận ghế");

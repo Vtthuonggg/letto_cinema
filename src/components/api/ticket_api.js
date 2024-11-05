@@ -1,9 +1,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-import {API_BASE_URL} from "../../../BASE_URL.js";
+import { API_BASE_URL } from "../../../BASE_URL.js";
 
 export const addTicket = async (data) => {
+    data.idUser = Cookies.get("accountId");
+    console.log(data);
     try {
         const response = await axios.post(`${API_BASE_URL}/ticket/add`, data);
         return response.data;
@@ -31,7 +33,7 @@ export const detailTicket = async (idTicket) => {
             headers: {
                 "ngrok-skip-browser-warning": "true",
             },
-            params: {'id': idTicket}
+            params: { 'id': idTicket }
         });
         return response.data;
     } catch (error) {
@@ -55,7 +57,7 @@ export const historyTicket = async () => {
             headers: {
                 "ngrok-skip-browser-warning": "true",
             },
-            params: {'id': userId}
+            params: { 'id': userId }
         });
         return response.data;
     } catch (error) {

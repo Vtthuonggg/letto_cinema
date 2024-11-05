@@ -19,9 +19,9 @@ export const getBillInfo = async (idBill) => {
         throw error;
     }
 };
-export const createBill = async (data) => {
+export const createBill = async () => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/bill/add`, data);
+        const response = await axios.post(`${API_BASE_URL}/bill/add`);
         return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");
@@ -48,7 +48,7 @@ export const addBillService = async (data) => {
 };
 export const addBillTicket = async (data) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/bill_ticket`, data);
+        const response = await axios.post(`${API_BASE_URL}/bill_ticket/add`, data);
         return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");

@@ -67,7 +67,11 @@ import { addBillService } from "@/components/api/bill_api.js";
 import { formatCurrency } from "@/components/utils/format_currency";
 
 export default {
-
+    computed: {
+        idBill() {
+            return this.$route.params.id;
+        },
+    },
     created() {
         this.fetchServices();
     },
@@ -94,7 +98,7 @@ export default {
         },
         async confirmDetail() {
             var data = {
-                idBooking: this.idBooking,
+                idBill: this.idBill,
                 idService: this.selectedService.id,
                 quantity: this.selectedService.quantity,
             };
