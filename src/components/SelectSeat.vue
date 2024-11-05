@@ -159,7 +159,7 @@ export default {
         this.loading = false;
         try {
           var payload = {
-            idRoom: 3,
+            idRoom: this.data.screen.idRoom,
             name: seat.name,
           };
           console.log(payload);

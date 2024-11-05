@@ -1,12 +1,13 @@
 <template>
   <div>
     <div
+      @click="handleClick(branch)"
       v-for="(branch, index) in branches"
       :key="branch.id"
       class="branch-container"
     >
       <img :src="getImage(index)" alt="Branch Image" class="branch-image" />
-      <div class="branch-details" @click="handleClick(branch)">
+      <div class="branch-details">
         <h3>{{ branch.name }}</h3>
         <p>{{ branch.address }}</p>
       </div>
@@ -72,17 +73,40 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-top: 20px;
+}
+
+.branch-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .branch-image {
-  width: 100px;
-  height: 100px;
+  width: 15%;
+  height: 15%;
   object-fit: cover;
+  border-radius: 10px;
   margin-right: 20px;
 }
 
 .branch-details {
-  display: flex;
-  flex-direction: column;
+  flex: 1;
+  cursor: pointer;
+}
+
+.branch-details h3 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #2c3e50;
+}
+
+.branch-details p {
+  margin: 5px 0 0;
+  color: #7f8c8d;
 }
 </style>
