@@ -24,18 +24,13 @@
       </div>
     </div>
     <div class="seat-grid">
-      <div
-        v-for="(seat, index) in seats"
-        :key="index"
-        :class="[
-          'seat',
-          {
-            'selected-seat': isSelected(seat),
-            'unavailable-seat': isNotAvailable(seat),
-          },
-        ]"
-        @click="handleSeatClick(seat)"
-      >
+      <div v-for="(seat, index) in seats" :key="index" :class="[
+        'seat',
+        {
+          'selected-seat': isSelected(seat),
+          'unavailable-seat': isNotAvailable(seat),
+        },
+      ]" @click="handleSeatClick(seat)">
         <v-icon>mdi-sofa-single-outline</v-icon>
         <span class="seat-name">{{ seat.name }}</span>
       </div>
@@ -79,11 +74,11 @@ export default {
         for (const seat of this.selectedSeats) {
           if (seat.isAvailable) {
             var payload = {
-              id: seat.id,
+              idRoom: this.data.screen.idRoom,
               isAvailable: false,
               name: seat.name,
             };
-            await updatePlace(payload, this.data.screen.idRoom);
+            await updatePlace(payload, seat.id);
           }
         }
         this.$toast.success("Xác nhận ghế thành công");
