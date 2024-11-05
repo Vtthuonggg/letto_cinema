@@ -19,7 +19,9 @@
               <div class="separator"></div>
               <div class="right-section">
                 <v-card-text style="text-align: center">
-                  <h2 style="color: #00519f; text-align: center">{{ ticket.price }} VNĐ</h2>
+                  <h2 style="color: #00519f; text-align: center">
+                    {{ ticket.price }} VNĐ
+                  </h2>
                 </v-card-text>
                 <v-card-text style="text-align: left">
                   <p><b>Người mua:</b> {{ ticket.nameUser }}</p>
@@ -46,7 +48,6 @@
 import PopupTicket from "@/components/PopupTicket.vue";
 import { historyTicket } from "@/components/api/ticket_api.js";
 export default {
-
   name: "TicketPage",
   components: {
     PopupTicket,
@@ -56,58 +57,59 @@ export default {
   },
 
   data() {
-
     return {
       loading: false,
       selectedTicket: null,
       listTickets: [
         {
-          'id': 1,
-          'price': 85000.00,
-          'nameUser': 'viet',
-          'email': 'thuong2304203@gmail.com',
-          'phone': '0865202584',
-          'place': 'K1',
-          'time': '2024-12-14T05:00:00.000+00:00',
-          'nameMovie': 'Castle in the Sky',
-          'nameRoom': 'R123',
-          'nameBranch': 'Hoang Mai'
-        }, {
-          'id': 2,
-          'price': 85000.00,
-          'nameUser': 'viet',
-          'email': 'thuong2304203@gmail.com',
-          'phone': '0865202584',
-          'place': 'K2',
-          'time': '2024-12-14T05:00:00.000+00:00',
-          'nameMovie': 'Castle in the Sky',
-          'nameRoom': 'R123',
-          'nameBranch': 'Hoang Mai'
-        }, {
-          'id': 3,
-          'price': 85000.00,
-          'nameUser': 'viet',
-          'email': 'thuong2304203@gmail.com',
-          'phone': '0865202584',
-          'place': 'K1',
-          'time': '2024-12-14T05:00:00.000+00:00',
-          'nameMovie': 'Castle in the Sky',
-          'nameRoom': 'R123',
-          'nameBranch': 'Hoang Mai'
-        }, {
-          'id': 3,
-          'price': 85000.00,
-          'nameUser': 'viet',
-          'email': 'thuong2304203@gmail.com',
-          'phone': '0865202584',
-          'place': 'K3',
-          'time': '2024-12-14T05:00:00.000+00:00',
-          'nameMovie': 'Castle in the Sky',
-          'nameRoom': 'R123',
-          'nameBranch': 'Hoang Mai'
+          id: 1,
+          price: 85000.0,
+          nameUser: "viet",
+          email: "thuong2304203@gmail.com",
+          phone: "0865202584",
+          place: "K1",
+          time: "2024-12-14T05:00:00.000+00:00",
+          nameMovie: "Castle in the Sky",
+          nameRoom: "R123",
+          nameBranch: "Hoang Mai",
         },
-
-      ]
+        {
+          id: 2,
+          price: 85000.0,
+          nameUser: "viet",
+          email: "thuong2304203@gmail.com",
+          phone: "0865202584",
+          place: "K2",
+          time: "2024-12-14T05:00:00.000+00:00",
+          nameMovie: "Castle in the Sky",
+          nameRoom: "R123",
+          nameBranch: "Hoang Mai",
+        },
+        {
+          id: 3,
+          price: 85000.0,
+          nameUser: "viet",
+          email: "thuong2304203@gmail.com",
+          phone: "0865202584",
+          place: "K1",
+          time: "2024-12-14T05:00:00.000+00:00",
+          nameMovie: "Castle in the Sky",
+          nameRoom: "R123",
+          nameBranch: "Hoang Mai",
+        },
+        {
+          id: 3,
+          price: 85000.0,
+          nameUser: "viet",
+          email: "thuong2304203@gmail.com",
+          phone: "0865202584",
+          place: "K3",
+          time: "2024-12-14T05:00:00.000+00:00",
+          nameMovie: "Castle in the Sky",
+          nameRoom: "R123",
+          nameBranch: "Hoang Mai",
+        },
+      ],
     };
   },
   methods: {
@@ -127,10 +129,9 @@ export default {
       } finally {
         this.loading = false;
       }
-    }
-
+    },
   },
-}
+};
 </script>
 
 <style>
@@ -163,7 +164,6 @@ export default {
   width: 1px;
   background-color: #c4c4c4;
   margin: 0 10px;
-
 }
 
 .right-section {

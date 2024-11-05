@@ -4,7 +4,11 @@
       <div class="title">
         <v-row class="row-title-item">
           <h2>Danh sách rạp</h2>
-          <v-btn class="gradient-button" @click="popupCreate" style="color: white">
+          <v-btn
+            class="gradient-button"
+            @click="popupCreate"
+            style="color: white"
+          >
             <v-icon style="color: white">mdi-plus</v-icon>
             <span style="color: white">Thêm rạp</span>
           </v-btn>
@@ -13,15 +17,30 @@
       <v-divider></v-divider>
       <v-container v-if="rapList.length > 0">
         <v-row>
-          <v-col v-for="(cinema, index) in rapList" :key="index" cols="12" sm="6" md="6" lg="6">
+          <v-col
+            v-for="(cinema, index) in rapList"
+            :key="index"
+            cols="12"
+            sm="6"
+            md="6"
+            lg="6"
+          >
             <v-card class="cinema-card">
               <v-list-item>
                 <v-col>
                   <div class="info-cinema">
                     <div class="cinema-info">
-                      <v-btn @click="popToListRoom(cinema.id)" active-class="active-link"
-                        exact-active-class="exact-active-link" style="text-decoration: none; color: black">
-                        <span>{{ cinema.name }}</span>
+                      <v-btn
+                        class="cinema-name"
+                        @click="popToListRoom(cinema.id)"
+                        active-class="active-link"
+                        exact-active-class="exact-active-link"
+                        text
+                        style="text-decoration: none; color: black"
+                      >
+                        <span
+                          ><b>{{ cinema.name }}</b></span
+                        >
                       </v-btn>
                     </div>
                     <div class="cinema-address">
@@ -37,13 +56,19 @@
                     </v-btn>
                   </template>
                   <v-list>
-                    <v-list-item style="font-weight: bold" @click="popupEdit(cinema)">
+                    <v-list-item
+                      style="font-weight: bold"
+                      @click="popupEdit(cinema)"
+                    >
                       <v-list-item-icon>
                         <v-icon>mdi-pencil</v-icon>
                       </v-list-item-icon>
                       <v-list-item-title>Sửa</v-list-item-title>
                     </v-list-item>
-                    <v-list-item style="font-weight: bold" @click="popupDelete(cinema.id)">
+                    <v-list-item
+                      style="font-weight: bold"
+                      @click="popupDelete(cinema.id)"
+                    >
                       <v-list-item-icon>
                         <v-icon>mdi-delete</v-icon>
                       </v-list-item-icon>
@@ -64,14 +89,28 @@
             }}
           </h3>
           <v-form ref="form">
-            <v-text-field v-model="newCinema.name" label="Tên rạp"
-              :rules="[(v) => !!v || 'Tên rạp không được để trống']"></v-text-field>
-            <v-text-field v-model="newCinema.address" label="Địa chỉ rạp"
-              :rules="[(v) => !!v || 'Địa chỉ rạp không được để trống']"><template v-slot:append>
-              </template></v-text-field>
-            <v-btn @click="closeBranch" style="background-color: white; color: #dc0004">Hủy</v-btn>
-            <v-btn @click="submitBranch(isShowEditCinema ? 2 : 1)" style="background-color: #dc0004; color: white">{{
-              isShowEditCinema ? `Sửa` : "Thêm" }}</v-btn>
+            <v-text-field
+              v-model="newCinema.name"
+              label="Tên rạp"
+              :rules="[(v) => !!v || 'Tên rạp không được để trống']"
+            ></v-text-field>
+            <v-text-field
+              v-model="newCinema.address"
+              label="Địa chỉ rạp"
+              :rules="[(v) => !!v || 'Địa chỉ rạp không được để trống']"
+              ><template v-slot:append> </template
+            ></v-text-field>
+            <v-btn
+              @click="closeBranch"
+              class="cancel-button"
+              style="background-color: white; color: #dc0004"
+              >Hủy</v-btn
+            >
+            <v-btn
+              @click="submitBranch(isShowEditCinema ? 2 : 1)"
+              style="background-color: #dc0004; color: white"
+              >{{ isShowEditCinema ? `Sửa` : "Thêm" }}</v-btn
+            >
           </v-form>
         </div>
       </div>
@@ -79,8 +118,18 @@
         <div class="popup-content">
           <h3>Xác nhận xóa rạp</h3>
           <div class="button-container">
-            <v-btn class="gradient-button-cancel" style="color: #00bfff" @click="showDelete">Hủy</v-btn>
-            <v-btn class="gradient-button-confirm" style="color: white" @click="deleteRap(selectedId)">Xác nhận</v-btn>
+            <v-btn
+              class="gradient-button-cancel"
+              style="color: #00bfff"
+              @click="showDelete"
+              >Hủy</v-btn
+            >
+            <v-btn
+              class="gradient-button-confirm"
+              style="color: white"
+              @click="deleteRap(selectedId)"
+              >Xác nhận</v-btn
+            >
           </div>
         </div>
       </div>
@@ -230,7 +279,7 @@ export default {
       this.popupService = false;
     },
     popToListRoom(id) {
-      this.$router.push({ name: "ListRoomPage", params: { 'id': id } });
+      this.$router.push({ name: "ListRoomPage", params: { id: id } });
     },
   },
 };
@@ -277,7 +326,7 @@ export default {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 5px;
+  margin-right: 4px 5x;
   cursor: pointer;
   border-radius: 12px;
   transition: background 0.3s ease;
@@ -291,7 +340,7 @@ export default {
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 16px;
   margin: 4px 5px;
   cursor: pointer;
@@ -333,7 +382,7 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -350,5 +399,29 @@ export default {
   align-items: center;
   margin-bottom: 10px;
   margin-top: 10px;
+}
+.cancel-button {
+  margin-right: 50px;
+}
+.cinema-info {
+  margin-bottom: 10px;
+}
+.cinema-name {
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+}
+.cinema-name:hover {
+  color: white;
+  background: linear-gradient(45deg, #ff0044, #ff7070);
+}
+.cinema-name:hover span {
+  color: white;
+}
+.popup-content h3 {
+  margin-bottom: 20px;
+}
+.cinema-address {
+  margin-bottom: 15px;
 }
 </style>

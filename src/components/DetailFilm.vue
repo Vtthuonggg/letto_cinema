@@ -5,26 +5,46 @@
     </div>
     <div v-else>
       <div v-if="film.videoKey">
-        <iframe :src="'https://www.youtube.com/embed/' + film.videoKey + '?autoplay=1'"
+        <iframe
+          :src="
+            'https://www.youtube.com/embed/' + film.videoKey + '?autoplay=1'
+          "
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen class="trailer-video"></iframe>
+          allowfullscreen
+          class="trailer-video"
+        ></iframe>
       </div>
       <div v-else>
-        <img class="trailer-video" :src="'https://image.tmdb.org/t/p/original' + film.backdropPath" :alt="film.title" />
+        <img
+          class="trailer-video"
+          :src="'https://image.tmdb.org/t/p/original' + film.backdropPath"
+          :alt="film.title"
+        />
       </div>
       <div class="title-container">
-        <img :src="'https://image.tmdb.org/t/p/original' + film.posterPath" :alt="film.title" />
+        <img
+          :src="'https://image.tmdb.org/t/p/original' + film.posterPath"
+          :alt="film.title"
+        />
         <div class="infor">
           <h2>{{ film.title }}</h2>
-          <p style="margin-top: 10px">
+          <p style="margin-top: 20px">
             <b>Ngày phát hành: </b>{{ formatDate(film.releaseDate) }}
           </p>
           <div class="rate-movie">
             <p style="margin-top: 10px"><b>Đánh giá: </b></p>
-            <span style="margin-top: 10px; margin-left: 5px" v-for="star in fullStars" :key="star"
-              class="fa fa-star checked"></span>
-            <span style="margin-top: 10px; margin-left: 5px" v-for="star in emptyStars" :key="star"
-              class="fa fa-star"></span>
+            <span
+              style="margin-left: 5px"
+              v-for="star in fullStars"
+              :key="star"
+              class="fa fa-star checked"
+            ></span>
+            <span
+              style="margin-left: 5px"
+              v-for="star in emptyStars"
+              :key="star"
+              class="fa fa-star"
+            ></span>
           </div>
           <!-- <p style="margin-top: 10px">
             <b>Thời lượng: </b>{{ film.runtime }} phút
@@ -36,7 +56,8 @@
             }}
           </p> -->
           <button class="book-ticket" @click="bookTicket">
-            <span style="margin-right: 5px" class="fa-solid fa-ticket"></span>Đặt vé
+            <span style="margin-right: 5px" class="fa-solid fa-ticket"></span
+            >Đặt vé
           </button>
         </div>
       </div>
@@ -55,7 +76,6 @@
 </template>
 
 <script>
-
 export default {
   name: "DetailFilm",
 
@@ -71,11 +91,11 @@ export default {
   },
   computed: {
     filmInfo() {
-      console.log('dataaaaa', this.$route.params);
+      console.log("dataaaaa", this.$route.params);
       return this.$route.params;
     },
     fullStars() {
-      console.log('point', this.film.voteAverage);
+      console.log("point", this.film.voteAverage);
       return Math.floor((this.film.voteAverage / 10) * 5);
     },
     emptyStars() {
@@ -88,7 +108,9 @@ export default {
       const options = { day: "2-digit", month: "2-digit", year: "numeric" };
       return new Date(dateString).toLocaleDateString("vi-VN", options);
     },
-    bookTicket() { this.$router.push({ name: "Branch", params: this.filmInfo }); },
+    bookTicket() {
+      this.$router.push({ name: "Branch", params: this.filmInfo });
+    },
   },
 };
 </script>

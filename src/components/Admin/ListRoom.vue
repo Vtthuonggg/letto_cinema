@@ -91,6 +91,7 @@
           ></v-text-field>
           <v-btn
             @click="closeRoom"
+            class="cancel-button"
             style="background-color: white; color: #dc0004"
             >Hủy</v-btn
           >
@@ -388,5 +389,11 @@ export default {
   align-items: center;
   margin-bottom: 10px;
   margin-top: 10px;
+}
+.cancel-button {
+  margin-right: 50px;
+}
+.popup-content h3 {
+  margin-bottom: 20px;
 }
 </style>
