@@ -15,9 +15,9 @@ export const addTicket = async (data) => {
 export const listTicket = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/ticket`, {
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-      },
+      // headers: {
+      //   "ngrok-skip-browser-warning": "true",
+      // },
     });
     return response.data;
   } catch (error) {
@@ -28,9 +28,9 @@ export const listTicket = async () => {
 export const detailTicket = async (idTicket) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/ticket/get`, {
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-      },
+      // headers: {
+      //   "ngrok-skip-browser-warning": "true",
+      // },
       params: { id: idTicket },
     });
     return response.data;
@@ -52,9 +52,9 @@ export const historyTicket = async () => {
   const userId = Cookies.get("accountId");
   try {
     const response = await axios.get(`${API_BASE_URL}/ticket/history`, {
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-      },
+      // headers: {
+      //   "ngrok-skip-browser-warning": "true",
+      // },
       params: { id: userId },
     });
     return response.data;

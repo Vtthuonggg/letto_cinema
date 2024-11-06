@@ -4,9 +4,9 @@ import { API_BASE_URL } from "../../../BASE_URL.js";
 export const getBillInfo = async (idBill) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/bill`, {
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-      },
+      // headers: {
+      //   "ngrok-skip-browser-warning": "true",
+      // },
 
       params: {
         id: idBill,
