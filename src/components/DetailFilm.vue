@@ -113,7 +113,10 @@ export default {
       return new Date(dateString).toLocaleDateString("vi-VN", options);
     },
     bookTicket() {
-      this.$router.push({ name: "Branch", params: this.filmInfo });
+      this.$router.push({
+        name: "Branch",
+        params: { idMovie: this.film.id },
+      });
     },
   },
 };
@@ -125,6 +128,11 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+.fas {
+  display: flex;
+  justify-content: left !important;
+  margin: 20px;
 }
 
 .loading-spinner {
