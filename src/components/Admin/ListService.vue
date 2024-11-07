@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <v-row class="row-title-item">
+      <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
       <h2>Danh sách dịch vụ</h2>
       <v-btn
         class="gradient-button"
@@ -200,6 +201,9 @@ export default {
     },
   },
   methods: {
+    goBack() {
+      this.$router.go(-1); // Quay lại màn hình trước đó
+    },
     filterInput(event) {
       // Chỉ cho phép các phím số và các phím điều khiển
       const allowedKeys = [

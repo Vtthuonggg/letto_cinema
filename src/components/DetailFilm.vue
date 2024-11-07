@@ -1,5 +1,6 @@
 <template>
   <div>
+    <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
     <div v-if="loading" class="loading-container">
       <div class="loading-spinner"></div>
     </div>
@@ -104,6 +105,9 @@ export default {
   },
 
   methods: {
+    goBack() {
+      this.$router.go(-1); // Quay lại màn hình trước đó
+    },
     formatDate(dateString) {
       const options = { day: "2-digit", month: "2-digit", year: "numeric" };
       return new Date(dateString).toLocaleDateString("vi-VN", options);

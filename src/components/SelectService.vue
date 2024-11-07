@@ -2,9 +2,10 @@
   <div>
     <div class="pop-container">
       <div class="header">
+        <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
         <h1>Chọn dịch vụ</h1>
-        <v-divider></v-divider>
       </div>
+      <v-divider></v-divider>
       <div class="content">
         <v-container v-if="listService.length > 0">
           <v-row>
@@ -128,6 +129,9 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      this.$router.go(-1); // Quay lại màn hình trước đó
+    },
     async confirmPayment() {
       try {
         await updateBill(this.idBill, true);
@@ -166,6 +170,7 @@ export default {
       try {
         await addBillService(data);
         this.$toast.success("Thêm dịch vụ thành công");
+        this.selectedService = null;
       } catch (error) {
         this.$toast.error("Có lỗi xảy ra");
       } finally {
@@ -378,5 +383,13 @@ export default {
   cursor: pointer;
   border-radius: 12px;
   transition: background 0.3s ease;
+}
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.fas {
+  margin-right: 40vw;
 }
 </style>

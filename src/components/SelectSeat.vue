@@ -1,5 +1,6 @@
 <template>
   <div>
+    <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
     <h1 style="margin: 15px 0">MÀN CHIẾU</h1>
     <v-divider style="width: 70%; margin: auto"></v-divider>
 
@@ -72,6 +73,9 @@ export default {
     this.getSeat();
   },
   methods: {
+    goBack() {
+      this.$router.go(-1); // Quay lại màn hình trước đó
+    },
     async confirmSeat() {
       try {
         const billId = await createBill();
@@ -80,7 +84,7 @@ export default {
             var data = {
               idUser: Cookies.get("accountId"),
               idPlace: seat.id,
-              idScreen: this.data.screen.id,
+              idScreen: this.data.idScreen,
             };
             const barcodeValue =
               `${data.idUser}${data.idPlace}${data.idScreen}`.padStart(12, "0");
@@ -119,7 +123,7 @@ export default {
     async getSeat() {
       this.loading = true;
       try {
-        const response = await listPlaceRoom(this.data.screen.idRoom);
+        const response = await listPlaceRoom(this.data.idRoom);
         this.initSeat = response;
         this.selectedSeats = this.initSeat.filter((init) =>
           this.seats.some((seat) => seat.name == init.name)
@@ -159,7 +163,7 @@ export default {
         this.loading = false;
         try {
           var payload = {
-            idRoom: this.data.screen.idRoom,
+            idRoom: this.data.idRoom,
             name: seat.name,
           };
           console.log(payload);
@@ -244,5 +248,10 @@ export default {
 .selected-seat {
   background-color: #dc0004;
   color: white;
+}
+.fas {
+  display: flex;
+  justify-content: left !important;
+  margin: 20px;
 }
 </style>

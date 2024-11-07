@@ -27,25 +27,27 @@ export default {
   },
   computed: {
     showNavbar() {
+      const path = this.$route.path;
       return (
-        this.$route.path !== "/login" &&
-        this.$route.path !== "/register" &&
-        this.$route.path !== "/admin" &&
-        this.$route.path !== "/list-cinema" &&
-        this.$route.path !== "/list-service" &&
-        this.$route.path !== "/list-room" &&
-        this.$route.path !== "/list-screen" &&
-        this.$route.path !== "/list-screenupdate"
+        path !== "/login" &&
+        path !== "/register" &&
+        path !== "/admin" &&
+        path !== "/list-cinema" &&
+        path !== "/list-service" &&
+        !/^\/\d+\/list-room$/.test(path) &&
+        path !== "/list-screen" &&
+        !/^\/\d+\/list-screenupdate$/.test(path)
       );
     },
     showFooter() {
+      const path = this.$route.path;
       return (
-        this.$route.path !== "/admin" &&
-        this.$route.path !== "/list-cinema" &&
-        this.$route.path !== "/list-service" &&
-        this.$route.path !== "/list-room" &&
-        this.$route.path !== "/list-screen" &&
-        this.$route.path !== "/list-screenupdate"
+        path !== "/admin" &&
+        path !== "/list-cinema" &&
+        path !== "/list-service" &&
+        !/^\/\d+\/list-room$/.test(path) &&
+        path !== "/list-screen" &&
+        !/^\/\d+\/list-screenupdate$/.test(path)
       );
     },
   },

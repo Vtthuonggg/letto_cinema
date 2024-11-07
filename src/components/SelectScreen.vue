@@ -1,16 +1,21 @@
 <template>
-  <div class="select-screen">
-    <div
-      v-for="screen in listScreen"
-      :key="screen.id"
-      @click="selectSeat(screen)"
-      class="screen-item"
-    >
-      <p>Giờ chiếu: {{ formatTime(screen.time).toLocaleString() }}</p>
+  <div>
+    <div>
+      <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
     </div>
-    <v-overlay :value="loading">
-      <v-progress-circular indeterminate size="64"></v-progress-circular>
-    </v-overlay>
+    <div class="select-screen">
+      <div
+        v-for="screen in listScreen"
+        :key="screen.id"
+        @click="selectSeat(screen)"
+        class="screen-item"
+      >
+        <p>Giờ chiếu: {{ formatTime(screen.time).toLocaleString() }}</p>
+      </div>
+      <v-overlay :value="loading">
+        <v-progress-circular indeterminate size="64"></v-progress-circular>
+      </v-overlay>
+    </div>
   </div>
 </template>
 
@@ -35,22 +40,26 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      this.$router.go(-1); // Quay lại màn hình trước đó
+    },
     selectSeat(screen) {
       console.log("Suất chiếu được chọn", screen);
       this.$router.push({
         name: "SelectSeat",
         params: {
-          movie: this.payload.movie,
-          branch: this.payload.branch,
-          screen: screen,
+          idMovie: this.payload.idMovie,
+          idBranch: this.payload.idBranch,
+          idScreen: screen.id,
+          idRoom: screen.idRoom,
         },
       });
     },
     async fetchScreen() {
       this.loading = true;
       try {
-        var screens = await listScreen(this.payload.movie.id);
-        var rooms = await listRoom(this.payload.branch.id);
+        var screens = await listScreen(this.payload.idMovie);
+        var rooms = await listRoom(this.payload.idBranch);
         const roomIds = rooms.map((room) => room.id);
         this.listScreen = screens.filter((screen) =>
           roomIds.includes(screen.idRoom)
@@ -82,7 +91,6 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #f5f5f5;
   min-height: 100vh;
 }
 
@@ -113,5 +121,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.fas {
+  display: flex;
+  justify-content: left !important;
+  margin: 20px;
 }
 </style>

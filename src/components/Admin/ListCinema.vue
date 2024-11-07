@@ -3,6 +3,7 @@
     <div class="cinema-page">
       <div class="title">
         <v-row class="row-title-item">
+          <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
           <h2>Danh sách rạp</h2>
           <v-btn
             class="gradient-button"
@@ -175,6 +176,9 @@ export default {
     this.fetchBranch();
   },
   methods: {
+    goBack() {
+      this.$router.go(-1); // Quay lại màn hình trước đó
+    },
     async fetchBranch() {
       this.loading = true;
       try {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
     <div
       @click="handleClick(branch)"
       v-for="(branch, index) in branches"
@@ -42,11 +43,13 @@ export default {
     this.getBranches();
   },
   methods: {
+    goBack() {
+      this.$router.go(-1); // Quay lại màn hình trước đó
+    },
     handleClick(branch) {
-      console.log(this.film.id);
       this.$router.push({
         name: "SelectScreen",
-        params: { movie: this.film, branch: branch },
+        params: { idMovie: this.film.idMovie, idBranch: branch.id },
       });
     },
     async getBranches() {
@@ -108,5 +111,10 @@ export default {
 .branch-details p {
   margin: 5px 0 0;
   color: #7f8c8d;
+}
+.fas {
+  display: flex;
+  justify-content: left;
+  margin: 20px;
 }
 </style>

@@ -46,7 +46,7 @@ const routes = [
     component: ListScreenPage,
   },
   {
-    path: "/list-screenupdate",
+    path: "/:idRoom/list-screenupdate",
     name: "ListScreenUpdatePage",
     meta: { title: "Danh sách suất chiếu" },
     component: ListScreenUpdatePage,
@@ -58,7 +58,7 @@ const routes = [
     component: ListServicePage,
   },
   {
-    path: "/list-room",
+    path: "/:id/list-room",
     name: "ListRoomPage",
     meta: { title: "Quản lý phòng chiếu" },
     component: ListRoomPage,
@@ -95,12 +95,6 @@ const routes = [
     component: TicketPage,
   },
   {
-    path: "/select-branch",
-    name: "Branch",
-    meta: { title: "Chọn rạp" },
-    component: SelectBranch,
-  },
-  {
     path: "/film",
     name: "Film",
     component: FilmPage,
@@ -126,25 +120,31 @@ const routes = [
     component: CinemaPage,
   },
   {
+    path: "/:idMovie/select-branch",
+    name: "Branch",
+    meta: { title: "Chọn rạp" },
+    component: SelectBranch,
+  },
+  {
     path: "/film/detail",
     name: "DetailFilm",
     meta: { title: "Chi tiết phim" },
     component: DetailFilm,
   },
   {
-    path: "/film/select-screen",
+    path: "/film/:idMovie/:idBranch/select-screen",
     name: "SelectScreen",
     meta: { title: "Chọn suất chiếu" },
     component: SelectScreen,
   },
   {
-    path: "/film/select-seat",
+    path: "/film/:idMovie/:idBranch/:idScreen/:idRoom/select-seat",
     name: "SelectSeat",
     meta: { title: "Chọn ghế" },
     component: SelectSeat,
   },
   {
-    path: "/film/select-service",
+    path: "/film/:id/select-service",
     name: "SelectService",
     meta: { title: "Chọn dịch vụ" },
     component: SelectService,

@@ -35,13 +35,25 @@
           </div>
         </li>
       </ul>
+      <div class="log-out">
+        <button @click="handleEvent('logout')">
+          <h2>Đăng xuất</h2>
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Cookies from "js-cookie";
 export default {
   name: "AdminPage",
+  methods: {
+    handleEvent() {
+      this.$router.push("/login");
+      Cookies.remove("accountId");
+    },
+  },
 };
 </script>
 
@@ -103,5 +115,23 @@ h1 {
 .image-admin img {
   width: 15%;
   margin: 20px 0;
+}
+.log-out {
+  background: linear-gradient(135deg, #ff0044, #ff7070);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, background-color 0.3s;
+  width: 20%;
+  margin: 20px auto;
+}
+.log-out:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #ff7070, #ff0044);
+}
+.log-out h2 {
+  color: white;
+  margin: 0;
+  text-align: center;
 }
 </style>

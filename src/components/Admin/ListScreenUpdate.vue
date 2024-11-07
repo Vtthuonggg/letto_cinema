@@ -3,7 +3,8 @@
     <div class="screen-page">
       <div class="title">
         <v-row class="row-title-item">
-          <h2>Danh sách suất chiếu</h2>
+          <i class="fas fa-arrow-left back-icon" @click="goBack"></i>
+          <h2 class="name">Danh sách suất chiếu</h2>
         </v-row>
       </div>
       <v-divider></v-divider>
@@ -155,6 +156,9 @@ export default {
     },
   },
   methods: {
+    goBack() {
+      this.$router.go(-1); // Quay lại màn hình trước đó
+    },
     formatTime(time) {
       const date = new Date(time);
       const hours = date.getHours().toString().padStart(2, "0");

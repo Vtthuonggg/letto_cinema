@@ -72,6 +72,9 @@
         Xác nhận thanh toán
       </button>
     </div>
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 <script>
@@ -94,12 +97,15 @@ export default {
       this.$emit("closeBill");
     },
     confirmPayment() {
+      this.loading = true;
       this.$emit("confirmPayment");
+      this.loading = false;
     },
   },
   data() {
     return {
       qrCodeUrl: ``,
+      loading: false,
     };
   },
 };

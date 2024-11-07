@@ -7,8 +7,14 @@
       <div v-for="film in films" :key="film.id" class="film-card">
         <div class="film-poster-container">
           <img
-            :src="film.posterPath ? 'https://image.tmdb.org/t/p/original' + film.posterPath : require('../assets/logo32.jpg')"
-            :alt="film.title" class="film-poster" />
+            :src="
+              film.posterPath
+                ? 'https://image.tmdb.org/t/p/original' + film.posterPath
+                : require('../assets/logo32.jpg')
+            "
+            :alt="film.title"
+            class="film-poster"
+          />
 
           <div class="overlay">
             <button class="overlay-button" @click="toDetailFilm(film)">
@@ -22,7 +28,8 @@
         <h3 class="film-title">{{ film.title }}</h3>
         <div class="film-details">
           <p class="film-date" v-if="film.releaseDate">
-            <i class="fas fa-calendar-alt"></i>{{ formatDate(film.releaseDate) }}
+            <i class="fas fa-calendar-alt"></i
+            >{{ formatDate(film.releaseDate) }}
           </p>
         </div>
       </div>
@@ -55,7 +62,7 @@ export default {
         console.log();
         this.films = res;
       } catch (err) {
-        this.$toast.error('Có lỗi xảy ra');
+        this.$toast.error("Có lỗi xảy ra");
       } finally {
         this.loading = false;
       }
@@ -65,7 +72,7 @@ export default {
       return new Date(dateString).toLocaleDateString("vi-VN", options);
     },
     bookTicket(film) {
-      this.$router.push({ name: "Branch", params: film });
+      this.$router.push({ name: "Branch", params: { idMovie: film.id } });
     },
   },
 };
