@@ -44,7 +44,6 @@ export default {
       this.$router.go(-1); // Quay lại màn hình trước đó
     },
     selectSeat(screen) {
-      console.log("Suất chiếu được chọn", screen);
       this.$router.push({
         name: "SelectSeat",
         params: {
@@ -66,7 +65,6 @@ export default {
         );
         this.listScreen.sort((a, b) => new Date(a.time) - new Date(b.time));
       } catch (e) {
-        console.log(e);
         this.$toast.error("Lỗi có lỗi xảy ra");
       } finally {
         this.loading = false;

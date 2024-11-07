@@ -2,7 +2,6 @@ import axios from "axios";
 import { API_BASE_URL } from "../../../BASE_URL.js";
 
 export const getListBranch = async () => {
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     try {
         const response = await axios.get(`${API_BASE_URL}/branch`, {
             // headers: {

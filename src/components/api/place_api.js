@@ -40,8 +40,6 @@ export const addPlaceRoom = async (data) => {
   }
 };
 export const updatePlace = async (data, id) => {
-  console.log(data);
-  console.log(id);
   try {
     const response = await axios.put(
       `${API_BASE_URL}/place/update/${id}`,

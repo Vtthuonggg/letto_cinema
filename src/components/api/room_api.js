@@ -25,7 +25,6 @@ export const listRoom = async (branchId) => {
                 id: branchId,
             },
         });
-        console.log('phòngggggg', response.data);
         return response.data;
     } catch (error) {
         console.error("Có lỗi xảy ra");

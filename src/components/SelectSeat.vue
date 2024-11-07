@@ -56,7 +56,6 @@ export default {
   name: "SelectSeat",
   computed: {
     data() {
-      console.log(this.$route.params);
       return this.$route.params;
     },
   },
@@ -112,7 +111,6 @@ export default {
         this.$toast.success("Xác nhận ghế thành công");
         this.$router.push({ name: "SelectService", params: { id: billId.id } });
       } catch (error) {
-        console.log(error);
         this.$toast.error("Có lỗi xảy ra khi xác nhận ghế");
       } finally {
         this.loading = false;
@@ -132,7 +130,6 @@ export default {
           this.seats.some((seat) => seat.name == init.name)
         );
       } catch (error) {
-        console.log(error);
         this.$toast.error("Có lỗi xảy ra");
       } finally {
         this.loading = false;
@@ -169,11 +166,9 @@ export default {
             idRoom: this.data.idRoom,
             name: seat.name,
           };
-          console.log(payload);
           await addPlaceRoom(payload);
           this.getSeat();
         } catch (e) {
-          console.log(e);
         } finally {
           this.loading = false;
         }
@@ -184,7 +179,6 @@ export default {
           await deletePlace(selectedSeat.id);
           this.getSeat();
         } catch (e) {
-          console.log(e);
           this.$toast.error("Có lỗi xảy ra");
         } finally {
           this.loading = false;

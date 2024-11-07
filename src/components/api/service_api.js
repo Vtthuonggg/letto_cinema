@@ -35,7 +35,6 @@ export const listService = async () => {
         throw error;
     }
 }; export const updateService = async (id, data) => {
-    console.log(data);
     try {
         const response = await axios.put(`${API_BASE_URL}/service/update/${id}`, data);
         return response.data;

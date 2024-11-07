@@ -53,13 +53,11 @@ export default {
       });
     },
     async getBranches() {
-      console.log(this.film);
       this.loading = true;
       try {
         const response = await getListBranch();
         this.branches = response;
       } catch (error) {
-        console.log(error);
         this.$toast.error("Có lỗi xảy ra");
       } finally {
         this.loading = false;

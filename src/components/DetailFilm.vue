@@ -92,11 +92,9 @@ export default {
   },
   computed: {
     filmInfo() {
-      console.log("dataaaaa", this.$route.params);
       return this.$route.params;
     },
     fullStars() {
-      console.log("point", this.film.voteAverage);
       return Math.floor((this.film.voteAverage / 10) * 5);
     },
     emptyStars() {

@@ -12,9 +12,17 @@
           </div>
           <div class="form-group">
             <label for="password">Mật khẩu:</label>
-            <v-text-field outlined :type="showPassword ? 'text' : 'password'" id="password" v-model="password" required
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" @click:append="togglePasswordVisibility" dense
-              class="password-field"></v-text-field>
+            <v-text-field
+              outlined
+              :type="showPassword ? 'text' : 'password'"
+              id="password"
+              v-model="password"
+              required
+              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="togglePasswordVisibility"
+              dense
+              class="password-field"
+            ></v-text-field>
           </div>
           <button type="submit" class="gradient-button">Đăng nhập</button>
         </form>
@@ -50,7 +58,6 @@ export default {
       this.loading = true;
       try {
         var res = await login(this.username, this.password);
-        console.log(res);
         Cookies.set("accountId", res, {
           expires: 7,
           secure: true,

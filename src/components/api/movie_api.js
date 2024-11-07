@@ -35,7 +35,6 @@ export const getDetailMovie = async (id) => {
       //   "ngrok-skip-browser-warning": "true",
       // },
     });
-    console.log("response", response);
     return response.data;
   } catch (error) {
     console.error("Error fetching upcoming movies:", error);

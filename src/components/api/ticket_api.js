@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import { API_BASE_URL } from "../../../BASE_URL.js";
 
 export const addTicket = async (data) => {
-  console.log("addđtickett", data);
   try {
     const response = await axios.post(`${API_BASE_URL}/ticket/add`, data);
     return response.data;

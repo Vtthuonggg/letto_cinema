@@ -59,7 +59,6 @@ export default {
       this.loading = true;
       try {
         const res = await getNowShowingMovies();
-        console.log();
         this.films = res;
       } catch (err) {
         this.$toast.error("Có lỗi xảy ra");

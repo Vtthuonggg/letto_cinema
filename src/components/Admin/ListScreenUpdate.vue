@@ -172,7 +172,6 @@ export default {
       this.loading = true;
       try {
         var res = await listScreenAll();
-        console.log(this.payload.idRoom);
         this.screenList = res.filter(
           (screen) => screen.idRoom == this.payload.idRoom
         );
