@@ -41,7 +41,7 @@
                     </v-btn>
                   </template>
                   <v-list>
-                    <v-list-item
+                    <!-- <v-list-item
                       style="font-weight: bold"
                       @click="popupEditScreen(screen)"
                     >
@@ -49,7 +49,7 @@
                         <v-icon>mdi-pencil</v-icon>
                       </v-list-item-icon>
                       <v-list-item-title>Sửa</v-list-item-title>
-                    </v-list-item>
+                    </v-list-item> -->
                     <v-list-item
                       style="font-weight: bold"
                       @click="popupDeleteScreen(screen.id)"

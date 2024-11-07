@@ -4,9 +4,9 @@ import { API_BASE_URL } from "../../../BASE_URL.js";
 export const detailPlace = async (id) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/place/${id}`, {
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-      },
+      // headers: {
+      //   "ngrok-skip-browser-warning": "true",
+      // },
     });
     return response.data;
   } catch (error) {
@@ -17,9 +17,9 @@ export const detailPlace = async (id) => {
 export const listPlaceRoom = async (roomId) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/place/list`, {
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-      },
+      // headers: {
+      //   "ngrok-skip-browser-warning": "true",
+      // },
       params: {
         id: roomId,
       },

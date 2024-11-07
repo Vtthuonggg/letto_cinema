@@ -26,9 +26,9 @@ export const register = async (data) => {
 export const listUser = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/user`, {
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-      },
+      // headers: {
+      //   "ngrok-skip-browser-warning": "true",
+      // },
     });
     return response.data;
   } catch (error) {
@@ -38,9 +38,9 @@ export const listUser = async () => {
 }; export const detailUser = async (id) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/user/${id}`, {
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-      },
+      // headers: {
+      //   "ngrok-skip-browser-warning": "true",
+      // },
     });
     return response.data;
   } catch (error) {

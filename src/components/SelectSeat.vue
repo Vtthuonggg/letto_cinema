@@ -36,7 +36,7 @@
       </div>
     </div>
     <v-btn @click="confirmSeat">Xác nhận</v-btn>
-    <v-overlay :value="loading">
+    <v-overlay style="z-index: 500" :value="loading">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
   </div>
@@ -77,6 +77,7 @@ export default {
       this.$router.go(-1); // Quay lại màn hình trước đó
     },
     async confirmSeat() {
+      this.loading = true;
       try {
         const billId = await createBill();
         for (const seat of this.selectedSeats) {
@@ -113,6 +114,8 @@ export default {
       } catch (error) {
         console.log(error);
         this.$toast.error("Có lỗi xảy ra khi xác nhận ghế");
+      } finally {
+        this.loading = false;
       }
     },
     isSelected(seat) {

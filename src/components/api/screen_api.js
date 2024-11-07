@@ -4,9 +4,9 @@ import { API_BASE_URL } from "../../../BASE_URL.js";
 export const detailRoom = async (id) => {
     try {
         const response = await axios.get(`${API_BASE_URL}/screen/${id}`, {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-            },
+            // headers: {
+            //   "ngrok-skip-browser-warning": "true",
+            // },
         });
         return response.data;
     } catch (error) {
@@ -17,9 +17,9 @@ export const detailRoom = async (id) => {
 export const listScreen = async (idMovie) => {
     try {
         const response = await axios.get(`${API_BASE_URL}/screen/list`, {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-            },
+            // headers: {
+            //   "ngrok-skip-browser-warning": "true",
+            // },
             params: {
                 id: idMovie,
             },
@@ -61,9 +61,9 @@ export const deleteScreen = async (id) => {
 export const listScreenAll = async () => {
     try {
         const response = await axios.get(`${API_BASE_URL}/screen`, {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-            },
+            // headers: {
+            //   "ngrok-skip-browser-warning": "true",
+            // },
 
         });
 

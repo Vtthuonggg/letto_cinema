@@ -5,9 +5,9 @@ import { API_BASE_URL, CLOUDINARY_URL, UPLOAD_PRESET } from "../../../BASE_URL.j
 export const listService = async () => {
     try {
         const response = await axios.get(`${API_BASE_URL}/service`, {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-            },
+            // headers: {
+            //   "ngrok-skip-browser-warning": "true",
+            // },
         });
         return response.data;
     } catch (error) {
@@ -17,9 +17,9 @@ export const listService = async () => {
 }; export const detailService = async (id) => {
     try {
         const response = await axios.get(`${API_BASE_URL}/service/${id}`, {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-            },
+            // headers: {
+            //   "ngrok-skip-browser-warning": "true",
+            // },
         });
         return response.data;
     } catch (error) {

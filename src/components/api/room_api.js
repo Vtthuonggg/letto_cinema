@@ -4,9 +4,9 @@ import { API_BASE_URL } from "../../../BASE_URL.js";
 export const detailRoom = async (id) => {
     try {
         const response = await axios.get(`${API_BASE_URL}/room/${id}`, {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-            },
+            // headers: {
+            //   "ngrok-skip-browser-warning": "true",
+            // },
         });
 
         return response.data;
@@ -18,9 +18,9 @@ export const detailRoom = async (id) => {
 export const listRoom = async (branchId) => {
     try {
         const response = await axios.get(`${API_BASE_URL}/room/list`, {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-            },
+            // headers: {
+            //   "ngrok-skip-browser-warning": "true",
+            // },
             params: {
                 id: branchId,
             },
