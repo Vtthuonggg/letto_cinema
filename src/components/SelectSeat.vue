@@ -168,7 +168,8 @@ export default {
           };
           await addPlaceRoom(payload);
           this.getSeat();
-        } catch (e) {
+        } catch {
+          this.$toast.error("");
         } finally {
           this.loading = false;
         }

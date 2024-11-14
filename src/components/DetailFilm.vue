@@ -5,23 +5,23 @@
       <div class="loading-spinner"></div>
     </div>
     <div v-else>
-      <div v-if="film.videoKey">
+      <div>
         <iframe
           :src="
-            'https://www.youtube.com/embed/' + film.videoKey + '?autoplay=1'
+            'https://www.youtube.com/embed/' + 'HyIyd9joTTc' + '?autoplay=1'
           "
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
           class="trailer-video"
         ></iframe>
       </div>
-      <div v-else>
+      <!-- <div v-else>
         <img
           class="trailer-video"
           :src="'https://image.tmdb.org/t/p/original' + film.backdropPath"
           :alt="film.title"
         />
-      </div>
+      </div> -->
       <div class="title-container">
         <img
           :src="'https://image.tmdb.org/t/p/original' + film.posterPath"
