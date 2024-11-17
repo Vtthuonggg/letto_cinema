@@ -176,7 +176,7 @@ input:focus {
 }
 
 .gradient-button:hover {
-  background: linear-gradient(45deg, #ff0044, #ff7070);
+  background: linear-gradient(45deg, #ff0000, #ff7070);
 }
 
 input {

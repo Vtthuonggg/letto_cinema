@@ -76,7 +76,6 @@ export default {
         this.loading = false;
       }
     },
-
     togglePasswordVisibility() {
       this.showPassword = !this.showPassword;
     },
